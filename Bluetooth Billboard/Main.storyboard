@@ -29,6 +29,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type of Post" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6Z-I7-5og">
+                                <rect key="frame" x="92" y="269" width="212" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="touchUpType:" destination="ePG-Zd-00p" eventType="editingDidBegin" id="N2j-VL-vJk"/>
+                                    <action selector="touchUpType:" destination="ePG-Zd-00p" eventType="touchUpInside" id="zGJ-zJ-nvi"/>
+                                </connections>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Host" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9f-dh-EvJ">
                                 <rect key="frame" x="47" y="76" width="37" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -72,51 +82,77 @@
                                 <rect key="frame" x="92" y="224" width="212" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="touchUpDate:" destination="ePG-Zd-00p" eventType="editingDidBegin" id="B71-m1-QA1"/>
+                                    <action selector="touchUpDate:" destination="ePG-Zd-00p" eventType="touchUpInside" id="bT1-wX-Kip"/>
+                                </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaZ-eU-rcv">
-                                <rect key="frame" x="42" y="227" width="36" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaZ-eU-rcv">
+                                <rect key="frame" x="48" y="227" width="36" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XL1-d1-Psc">
-                                <rect key="frame" x="31" y="266" width="53" height="21"/>
+                                <rect key="frame" x="31" y="337" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrv-dI-SYV">
+                                <rect key="frame" x="31" y="273" width="53" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xG9-Di-bSY">
-                                <rect key="frame" x="136" y="358" width="49" height="30"/>
+                                <rect key="frame" x="136" y="401" width="49" height="30"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wo2-z3-U7Z">
-                                <rect key="frame" x="0.0" y="391" width="320" height="128"/>
+                                <rect key="frame" x="0.0" y="439" width="320" height="80"/>
                             </containerView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gu4-rS-Nyr">
-                                <rect key="frame" x="92" y="260" width="212" height="90"/>
+                                <rect key="frame" x="92" y="303" width="212" height="90"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5r-hI-Qte">
+                                <rect key="frame" x="92" y="203" width="212" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ePG-Zd-00p" id="kye-TW-Ok2"/>
+                                    <outlet property="delegate" destination="ePG-Zd-00p" id="XI9-91-bUY"/>
+                                </connections>
+                            </pickerView>
+                            <datePicker hidden="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-GM-De7">
+                                <rect key="frame" x="92" y="157" width="212" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="449866548.11312503">
+                                    <!--2015-04-04 18:55:48 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Post" id="CCE-oQ-RcG"/>
                     <connections>
                         <outlet property="btnSubmit" destination="xG9-Di-bSY" id="VxZ-fD-dT6"/>
+                        <outlet property="dpvDate" destination="ahm-GM-De7" id="6en-vP-r7q"/>
                         <outlet property="imgPost" destination="wo2-z3-U7Z" id="yGU-c2-Soa"/>
+                        <outlet property="pkvPostType" destination="S5r-hI-Qte" id="MZA-Fg-Zg2"/>
                         <outlet property="txtAddress" destination="6Xf-ZG-pNQ" id="bzg-Ph-wEV"/>
                         <outlet property="txtDate" destination="Gas-ud-Fg9" id="ZtS-GN-ikk"/>
                         <outlet property="txtEmail" destination="hug-OP-aPP" id="ZrI-gK-5VP"/>
                         <outlet property="txtHost" destination="FpU-Xx-QNa" id="Wgn-5o-aiR"/>
                         <outlet property="txtPhone" destination="Dn1-VR-WRV" id="pbB-Uq-zlj"/>
+                        <outlet property="txtPostType" destination="s6Z-I7-5og" id="kPF-X9-rVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbx-eA-Pog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="586" y="355"/>
+            <point key="canvasLocation" x="586" y="360"/>
         </scene>
         <!--SavedBoardsListScreen-->
         <scene sceneID="NvW-oh-9tA">
@@ -242,9 +278,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="View Board" id="nqa-b1-yaM">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="26n-R6-2yt"/>
-                                    </navigationItem>
+                                    <navigationItem id="nqa-b1-yaM"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xDt-Ms-zym">

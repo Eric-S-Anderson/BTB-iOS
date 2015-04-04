@@ -15,8 +15,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (weak, nonatomic) IBOutlet UITextField *txtInformation;
+@property (weak, nonatomic) IBOutlet UITextField *txtPostType;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (weak, nonatomic) IBOutlet UIView *imgPost;
+@property (weak, nonatomic) IBOutlet UIPickerView *pkvPostType;
+@property (weak, nonatomic) IBOutlet UIDatePicker *dpvDate;
+@property NSArray *types;
+- (IBAction)touchUpType:(id)sender;
+- (IBAction)touchUpDate:(id)sender;
 
 @end
 
@@ -25,11 +31,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //picker data
+    self.types = [[NSArray alloc] initWithObjects:@"Event", @"Announcement", @"Employment", @"Coupon", @"Sales", @"Services", @"Other", nil];
+    
+    //picker gesture initialization
+    self.pkvPostType.userInteractionEnabled = YES;
+    self.pkvPostType.multipleTouchEnabled = YES;
+    UITapGestureRecognizer *tapGesture =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(tappedPicker:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    tapGesture.delegate = self;
+    [self.pkvPostType addGestureRecognizer:tapGesture];
+    
+    //date picker gesture initialization
+    self.dpvDate.userInteractionEnabled = YES;
+    self.dpvDate.multipleTouchEnabled = YES;
+    UITapGestureRecognizer *tapDateGesture =[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(tappedDate:)];
+    tapDateGesture.numberOfTapsRequired = 1;
+    tapDateGesture.numberOfTouchesRequired = 1;
+    tapDateGesture.delegate = self;
+    [self.dpvDate addGestureRecognizer:tapDateGesture];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    //One column
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    //set number of rows
+    return [self.types count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    //set item per row
+    return [self.types objectAtIndex:row];
 }
 
 /*
@@ -42,4 +90,48 @@
 }
 */
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    //confirms gestures
+    return YES;
+}
+
+
+-(void)tappedPicker:(UIGestureRecognizer *)sender{
+    //called when the picker is tapped
+    self.txtPostType.hidden = !self.txtPostType.hidden;  //hide text, pop picker
+    self.pkvPostType.hidden = !self.pkvPostType.hidden;
+    NSInteger currentRow = [self.pkvPostType selectedRowInComponent:0];   //get selected row
+    self.txtPostType.text = [self.types objectAtIndex:currentRow];      //set text field
+    self.txtPostType.enabled = false;  //ends editing
+    self.txtPostType.enabled = true;   //re-enables
+
+}
+
+-(void)tappedDate:(UIGestureRecognizer *)sender{
+    //called when the date picker is tapped
+    self.txtDate.hidden = !self.txtDate.hidden;  //hide text,  pop date picker
+    self.dpvDate.hidden = !self.dpvDate.hidden;
+    NSDate *chosenDate = [self.dpvDate date];       //get selected date
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];        //format date to string
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
+    NSString *stringFromDate = [formatter stringFromDate:chosenDate];
+    self.txtDate.text = stringFromDate;
+    self.txtDate.enabled = false;  //ends editing
+    self.txtDate.enabled = true;   //re-enables
+    
+}
+
+- (IBAction)touchUpType:(id)sender {
+    //called when the postype textfield is selected
+    self.txtPostType.hidden = !self.txtPostType.hidden;  //hide text, pop picker
+    self.pkvPostType.hidden = !self.pkvPostType.hidden;
+    
+}
+
+- (IBAction)touchUpDate:(id)sender {
+    //called when the date textfield is selected
+    self.txtDate.hidden = !self.txtDate.hidden;     //hide text, pop date picker
+    self.dpvDate.hidden = !self.dpvDate.hidden;
+}
 @end
