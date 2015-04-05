@@ -11,12 +11,25 @@
 
 @implementation Post
 
-+ (NSString *)dynamoDBTableName {
-    return @"Board776655";
+NSString *TableName;
+NSString *HashKey;
+
++(void)setTableName:(NSString*)Name{
+    TableName = Name;
 }
 
-+ (NSString *)hashKeyAttribute {
-    return @"Post_ID";
++(void)setHashKey:(NSString*)Key{
+    HashKey = Key;
+}
+
++(NSString *)dynamoDBTableName{
+    
+    return TableName;
+}
+
++(NSString *)hashKeyAttribute {
+    
+    return HashKey;
 }
 
 -(void)populate:(int)ident{
@@ -32,6 +45,7 @@
     NSNumber *recasted = [NSNumber numberWithInt:(ident)];
     
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    
     
     [[dynamoDBObjectMapper load:[Post class] hashKey:recasted rangeKey:nil]
      continueWithBlock:^id(BFTask *task) {

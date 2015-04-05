@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    if (self.post != nil){
     self.txtHost.text = self.post.Host;
     self.txtAddress.text = self.post.Address;
     self.txtPhone.text = [NSString stringWithFormat:@"%d",self.post.Phone];
@@ -39,6 +40,7 @@
     
     [self.btnBlockHost setTitle:(blkHost) forState:UIControlStateNormal];
     [self.btnBlockType setTitle:(blkType) forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,11 +12,11 @@
 #import <AWSDynamoDB/AWSDynamoDB.h>
 #import <AWSCore/AWSCore.h>
 #import <AWSCognito/AWSCognito.h>
+#import "AppDelegate.h"
 
 @interface Post : AWSDynamoDBObjectModel <AWSDynamoDBModeling>
 
 @property int Post_ID;
-//@property int Board_ID;
 @property int Phone;
 @property int End_Date;
 @property NSString *Host;
@@ -27,6 +27,8 @@
 @property NSString *Post_Status;
 
 -(void)populate:(int)ident;
++(void)setTableName:(NSString*)Name;
++(void)setHashKey:(NSString*)Key;
 
 @end
 

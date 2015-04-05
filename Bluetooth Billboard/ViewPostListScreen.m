@@ -34,7 +34,11 @@ Board *brd;
     
     brd = [Board new];
     NSString *brdid = @"Board776655";
+    [Post setTableName:brdid];
+    [Post setHashKey:@"Post_ID"];
     [brd populate:brdid];
+    
+    
     
     while (brd.Posts == nil || brd.Posts.count == 0) {
     }

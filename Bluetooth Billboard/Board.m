@@ -10,13 +10,6 @@
 
 @implementation Board
 
-+ (NSString *)dynamoDBTableName {
-    return @"Board776655";
-}
-
-+ (NSString *)hashKeyAttribute {
-    return @"Post_ID";
-}
 
 -(void)populate:(NSString *)ident{
     

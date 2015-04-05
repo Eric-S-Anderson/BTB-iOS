@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <stdlib.h>
+#import "Post.h"
 
 @interface PostScreen : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, 
 UIGestureRecognizerDelegate>

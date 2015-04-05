@@ -7,6 +7,7 @@
 //
 
 #import "PostScreen.h"
+#import "PreviewPostScreen.h"
 
 @interface PostScreen ()
 @property (weak, nonatomic) IBOutlet UITextField *txtHost;
@@ -14,15 +15,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
-@property (weak, nonatomic) IBOutlet UITextField *txtInformation;
 @property (weak, nonatomic) IBOutlet UITextField *txtPostType;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (weak, nonatomic) IBOutlet UIView *imgPost;
 @property (weak, nonatomic) IBOutlet UIPickerView *pkvPostType;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dpvDate;
+@property (weak, nonatomic) IBOutlet UITextView *txvInformation;
 @property NSArray *types;
 - (IBAction)touchUpType:(id)sender;
 - (IBAction)touchUpDate:(id)sender;
+- (IBAction)touchSubmit:(id)sender;
 
 @end
 
@@ -80,21 +82,10 @@
     return [self.types objectAtIndex:row];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     //confirms gestures
     return YES;
 }
-
 
 -(void)tappedPicker:(UIGestureRecognizer *)sender{
     //called when the picker is tapped
@@ -134,4 +125,66 @@
     self.txtDate.hidden = !self.txtDate.hidden;     //hide text, pop date picker
     self.dpvDate.hidden = !self.dpvDate.hidden;
 }
+
+- (IBAction)touchSubmit:(id)sender {
+    
+    Post *post = [Post new];
+    post.Host = self.txtHost.text;
+    post.Address = self.txtAddress.text;
+    post.Phone = [self.txtPhone.text intValue];
+    post.Email = self.txtEmail.text;
+    post.End_Date = [self.txtDate.text intValue];
+    post.Post_Type = self.txtPostType.text;
+    post.Information = self.txvInformation.text;
+    post.Post_ID = arc4random_uniform(99999999);  //easy auto-id, possible collisions
+    post.Post_Status = @"Queued";
+    
+    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    
+    [Post setTableName:@"Board213411"];
+    [Post setHashKey:@"Post_ID"];
+    
+    [[dynamoDBObjectMapper save:post]
+     continueWithBlock:^id(BFTask *task) {
+         if (task.error) {
+             NSLog(@"The request failed. Error: [%@]", task.error);
+         }
+         if (task.exception) {
+             NSLog(@"The request failed. Exception: [%@]", task.exception);
+         }
+         if (task.result) {
+             //Do something with the result.
+         }
+         return nil;
+     }];
+    
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"previewPostSegue"]) {
+        
+        PreviewPostScreen *destViewController = segue.destinationViewController;
+        
+        //create a populate post from viewcontroller input
+        Post *post = [Post new];
+        post.Host = self.txtHost.text;
+        post.Address = self.txtAddress.text;
+        post.Phone = [self.txtPhone.text intValue];
+        post.Email = self.txtEmail.text;
+        post.End_Date = [self.txtDate.text intValue];
+        post.Post_Type = self.txtPostType.text;
+        post.Information = self.txvInformation.text;
+        post.Post_ID = arc4random_uniform(99999999);  //easy auto-id, possible collisions
+        post.Post_Status = @"Queued";
+        
+        destViewController.post = post;
+    }
+}
+
 @end
