@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1418FB641AD1C6BF00EFA727 /* ViewQueueListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB631AD1C6BF00EFA727 /* ViewQueueListScreen.m */; };
+		1418FB671AD1C87300EFA727 /* ViewQueueScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB661AD1C87300EFA727 /* ViewQueueScreen.m */; };
+		1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB691AD1CABB00EFA727 /* ModeratorLoginScreen.m */; };
+		1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */; };
 		14287B001AC483D3007FC7B1 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 14287AFF1AC483D3007FC7B1 /* Post.m */; };
 		144FB0781AC878A4004008E0 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144FB0771AC878A4004008E0 /* Images-2.xcassets */; };
 		1463FBAA1AC7ACA40029E340 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */; };
@@ -76,6 +80,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1418FB621AD1C6BF00EFA727 /* ViewQueueListScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewQueueListScreen.h; sourceTree = "<group>"; };
+		1418FB631AD1C6BF00EFA727 /* ViewQueueListScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewQueueListScreen.m; sourceTree = "<group>"; };
+		1418FB651AD1C87300EFA727 /* ViewQueueScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewQueueScreen.h; sourceTree = "<group>"; };
+		1418FB661AD1C87300EFA727 /* ViewQueueScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewQueueScreen.m; sourceTree = "<group>"; };
+		1418FB681AD1CABB00EFA727 /* ModeratorLoginScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeratorLoginScreen.h; sourceTree = "<group>"; };
+		1418FB691AD1CABB00EFA727 /* ModeratorLoginScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModeratorLoginScreen.m; sourceTree = "<group>"; };
+		1418FB6B1AD1CDE000EFA727 /* ViewBoardListScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewBoardListScreen.h; sourceTree = "<group>"; };
+		1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewBoardListScreen.m; sourceTree = "<group>"; };
 		14287AFE1AC47E65007FC7B1 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		14287AFF1AC483D3007FC7B1 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		144FB0771AC878A4004008E0 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
@@ -262,6 +274,14 @@
 				14B60AB01AC38A2C0081D55A /* ModelController.m */,
 				14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */,
 				14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */,
+				1418FB6B1AD1CDE000EFA727 /* ViewBoardListScreen.h */,
+				1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */,
+				1418FB681AD1CABB00EFA727 /* ModeratorLoginScreen.h */,
+				1418FB691AD1CABB00EFA727 /* ModeratorLoginScreen.m */,
+				1418FB651AD1C87300EFA727 /* ViewQueueScreen.h */,
+				1418FB661AD1C87300EFA727 /* ViewQueueScreen.m */,
+				1418FB621AD1C6BF00EFA727 /* ViewQueueListScreen.h */,
+				1418FB631AD1C6BF00EFA727 /* ViewQueueListScreen.m */,
 				14E379C71AD07A4800929A6F /* PreviewPostScreen.h */,
 				14E379C81AD07A4800929A6F /* PreviewPostScreen.m */,
 				14A6AF731ACF2A3800EB4486 /* SearchScreen.h */,
@@ -430,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A6AF781ACF2DD200EB4486 /* Board.m in Sources */,
+				1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */,
 				14A6AF661ACF26AB00EB4486 /* PostScreen.m in Sources */,
 				14B60AAE1AC38A2C0081D55A /* DataViewController.m in Sources */,
 				14A6AF751ACF2A3800EB4486 /* SearchScreen.m in Sources */,
@@ -437,13 +458,16 @@
 				14287B001AC483D3007FC7B1 /* Post.m in Sources */,
 				14A6AF6C1ACF295200EB4486 /* ViewPostScreen.m in Sources */,
 				14B60AA81AC38A2C0081D55A /* AppDelegate.m in Sources */,
+				1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */,
 				14A6AF691ACF291100EB4486 /* ViewPostListScreen.m in Sources */,
 				14B60AB11AC38A2C0081D55A /* ModelController.m in Sources */,
 				14A6AF721ACF29C900EB4486 /* SavedBoardsListScreen.m in Sources */,
 				14B60AA51AC38A2C0081D55A /* main.m in Sources */,
+				1418FB641AD1C6BF00EFA727 /* ViewQueueListScreen.m in Sources */,
 				14B60AAB1AC38A2C0081D55A /* RootViewController.m in Sources */,
 				14A6AF6F1ACF299800EB4486 /* SavedPostsListScreen.m in Sources */,
 				14E379C91AD07A4800929A6F /* PreviewPostScreen.m in Sources */,
+				1418FB671AD1C87300EFA727 /* ViewQueueScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

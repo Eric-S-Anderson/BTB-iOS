@@ -26,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //populate ui fields with the passed post
     if (self.post != nil){
         self.txtHost.text = self.post.Host;
         self.txtAddress.text = self.post.Address;
@@ -53,6 +54,7 @@
 
 - (IBAction)touchUpSubmit:(id)sender {
     
+    //submit the already populated post to the db
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
     
     [Post setTableName:@"Board213411"];
