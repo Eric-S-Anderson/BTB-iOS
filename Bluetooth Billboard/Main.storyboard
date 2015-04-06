@@ -296,21 +296,11 @@
                                 <items>
                                     <navigationItem title="View Board" id="nqa-b1-yaM">
                                         <barButtonItem key="backBarButtonItem" title="Back" id="fIg-sr-E7Q"/>
-                                        <barButtonItem key="leftBarButtonItem" title="Boards" id="4Ig-Qp-XNl">
-                                            <connections>
-                                                <segue destination="Wsh-J8-f60" kind="push" id="mU5-Vm-0j9"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Login" id="ycj-b1-LVQ">
-                                            <connections>
-                                                <segue destination="7Oc-pg-XP8" kind="push" id="QO4-um-tHS"/>
-                                            </connections>
-                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xDt-Ms-zym">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="458"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="prototypeCell" textLabel="4RL-Un-17X" style="IBUITableViewCellStyleDefault" id="jZ3-Ba-KBw">
@@ -332,6 +322,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxi-Yb-e75">
+                                <rect key="frame" x="27" y="530" width="75" height="30"/>
+                                <state key="normal" title="Boards">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Wsh-J8-f60" kind="push" id="D5W-Za-t4Q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Itj-8e-EsM">
+                                <rect key="frame" x="202" y="530" width="75" height="30"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7Oc-pg-XP8" kind="push" id="d5s-8Q-p7n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -665,7 +673,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="aMo-5t-E7L" kind="push" id="OBE-dG-YfI"/>
+                                            <segue destination="aMo-5t-E7L" kind="push" identifier="viewQueueSegue" id="OBE-dG-YfI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -676,8 +684,7 @@
                     <tabBarItem key="tabBarItem" title="View" id="Pkl-ky-iVV"/>
                     <navigationItem key="navigationItem" id="vwZ-ba-qh4"/>
                     <connections>
-                        <outlet property="navBar" destination="c7S-Y8-WZs" id="PtG-vb-kjh"/>
-                        <outlet property="tblPosts" destination="tkH-ob-Id8" id="nhq-rz-Qck"/>
+                        <outlet property="tblPosts" destination="tkH-ob-Id8" id="OPV-7W-2d1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0h-sO-DAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -780,6 +787,9 @@
                                 <state key="normal" title="Accept">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="touchUpAccept:" destination="aMo-5t-E7L" eventType="touchUpInside" id="DpP-Qw-wkW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="QOR-wV-VUr">
                                 <rect key="frame" x="159" y="466" width="142" height="45"/>
@@ -787,6 +797,9 @@
                                 <state key="normal" title="Deny">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="touchUpDeny:" destination="aMo-5t-E7L" eventType="touchUpInside" id="YN1-qw-Dkp"/>
+                                </connections>
                             </button>
                             <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zZk-E9-Msp">
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
@@ -799,6 +812,16 @@
                     <navigationItem key="navigationItem" title="View Post" id="9S8-nl-7OW">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jqz-V5-xT1"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnAccept" destination="L4r-HK-krs" id="U7r-8Z-T9M"/>
+                        <outlet property="btnDeny" destination="QOR-wV-VUr" id="TzL-5W-iyi"/>
+                        <outlet property="txtAddress" destination="Ywk-ol-Zj6" id="pdZ-mx-2Ck"/>
+                        <outlet property="txtDate" destination="D5R-NP-3v0" id="GLG-zi-EZL"/>
+                        <outlet property="txtEmail" destination="ad6-yB-JPL" id="N4T-t5-l9X"/>
+                        <outlet property="txtHost" destination="uM1-NS-c0c" id="YqI-JA-b7T"/>
+                        <outlet property="txtPhone" destination="xnH-sp-639" id="vSv-5t-bpQ"/>
+                        <outlet property="txvInformation" destination="K2S-Qk-71k" id="wro-FQ-cXK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAZ-1t-hg9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -862,9 +885,6 @@
                     <navigationItem key="navigationItem" title="View Post" id="iy1-fX-ugY">
                         <barButtonItem key="backBarButtonItem" title="Back" id="NPs-fw-sYQ"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="btnBlockType" destination="R8v-vS-Riu" id="zG0-5y-eoQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDb-BZ-MfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

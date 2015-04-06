@@ -33,10 +33,8 @@ Board *brd;
     self.tabBarController.title = @"View Board";
     
     brd = [Board new];
-    NSString *brdid = @"Board776655";
-    [Post setTableName:brdid];
-    [Post setHashKey:@"Post_ID"];
-    [brd populate:brdid];
+    NSString *brdid = @"776655";
+    [brd populate:brdid statFilter:@"Posted"];
     
     
     

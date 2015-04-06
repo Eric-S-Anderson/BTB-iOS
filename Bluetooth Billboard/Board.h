@@ -19,7 +19,8 @@
 @property NSString *Group;
 @property NSString *Description;
 @property NSMutableArray *Posts;
+@property NSString *StatusFilter;
 
--(void)populate:(NSString*)ident;
+-(void)populate:(NSString*)ident statFilter:(NSString*)filter;
 
 @end

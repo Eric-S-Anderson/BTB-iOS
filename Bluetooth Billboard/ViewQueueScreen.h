@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 @interface ViewQueueScreen : UIViewController
-
+@property Post *post;
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewQueueListScreen : UIViewController
+@interface ViewQueueListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

@@ -11,7 +11,7 @@
 @implementation Board
 
 
--(void)populate:(NSString *)ident{
+-(void)populate:(NSString *)ident statFilter:(NSString*)filter{
     
     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]
                                                           initWithRegionType:AWSRegionUSEast1
@@ -26,6 +26,22 @@
     AWSDynamoDBScanExpression *scanExpression = [AWSDynamoDBScanExpression new];
     scanExpression.limit = @10;
     
+    if (filter != nil){
+        
+        AWSDynamoDBCondition *condition = [AWSDynamoDBCondition new];
+        AWSDynamoDBAttributeValue *attribute = [AWSDynamoDBAttributeValue new];
+        attribute.S = filter;
+        condition.attributeValueList = @[attribute];
+        condition.comparisonOperator = AWSDynamoDBComparisonOperatorEQ;
+        scanExpression.scanFilter = @{@"Post_Status": condition};
+    }
+    
+    NSString *brdBlank = @"Board";
+    NSString *fullBoardID = [brdBlank stringByAppendingString:(ident)];
+    
+    [Post setTableName:fullBoardID];
+    [Post setHashKey:@"Post_ID"];
+    
     self.Posts = [[NSMutableArray alloc] init];
     
     [[dynamoDBObjectMapper scan:[Post class] expression:scanExpression]
@@ -39,7 +55,7 @@
          if (task.result) {
              AWSDynamoDBPaginatedOutput *paginatedOutput = task.result;
              for (Post *post in paginatedOutput.items) {
-                 //Do something with book.
+                 //Do something with post.
                  [self.Posts addObject:post];
              }
          }
