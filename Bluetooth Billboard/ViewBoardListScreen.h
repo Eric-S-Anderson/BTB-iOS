@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "Board.h"
 
-@interface ViewBoardListScreen : UIViewController
+@interface ViewBoardListScreen : UIViewController <CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+@property CBCentralManager *myCentralManager;
 
 @end

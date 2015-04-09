@@ -18,7 +18,7 @@
 
 @implementation ViewQueueListScreen
 
-Board *brd;
+Board *queueBoard;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,16 +26,17 @@ Board *brd;
     
     self.tabBarController.title = @"View Board Queue";
     
-    brd = [Board new];
+    queueBoard = [Board new];
     NSString *brdid = @"776655";
-    [brd populate:brdid statFilter:@"Queued"];
+    [queueBoard populate:brdid statFilter:@"Queued"];
     
     
-    while (brd.Posts == nil || brd.Posts.count == 0) {
+    while (queueBoard.Posts == nil || queueBoard.Posts.count == 0) {
     }
     
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,7 +54,7 @@ Board *brd;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [brd.Posts count];
+    return [queueBoard.Posts count];
 }
 
 
@@ -61,7 +62,7 @@ Board *brd;
     
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeCell" forIndexPath:indexPath];
     
-    Post *post = [brd.Posts objectAtIndex:indexPath.row];
+    Post *post = [queueBoard.Posts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.Host;
     // Configure the cell...
     //[self.tblPosts reloadData];
@@ -80,7 +81,7 @@ Board *brd;
     if ([segue.identifier isEqualToString:@"viewQueueSegue"]) {
         NSIndexPath *indexPath = [self.tblPosts indexPathForSelectedRow];
         ViewQueueScreen *destViewController = segue.destinationViewController;
-        Post *post = [brd.Posts objectAtIndex:indexPath.row];
+        Post *post = [queueBoard.Posts objectAtIndex:indexPath.row];
         destViewController.post = post;
     }
 }

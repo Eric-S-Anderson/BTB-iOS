@@ -54,8 +54,64 @@
 */
 
 - (IBAction)touchUpAccept:(id)sender {
+    
+    self.post.Post_Status = @"Posted";
+    
+    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    
+    [Post setTableName:@"Board776655"];
+    [Post setHashKey:@"Post_ID"];
+    
+    [[dynamoDBObjectMapper save:self.post]
+     continueWithBlock:^id(BFTask *task) {
+         if (task.error) {
+             NSLog(@"The request failed. Error: [%@]", task.error);
+         }
+         if (task.exception) {
+             NSLog(@"The request failed. Exception: [%@]", task.exception);
+         }
+         if (task.result) {
+             //Do something with the result.
+         }
+         return nil;
+     }];
+    
+    self.txtHost.text = @"";
+    self.txtAddress.text = @"";
+    self.txtPhone.text = @"";
+    self.txtEmail.text = @"";
+    self.txtDate.text = @"";
+    self.txvInformation.text = @"";
 }
 
 - (IBAction)touchUpDeny:(id)sender {
+    
+    self.post.Post_Status = @"Denied";
+    
+    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    
+    [Post setTableName:@"Board776655"];
+    [Post setHashKey:@"Post_ID"];
+    
+    [[dynamoDBObjectMapper save:self.post]
+     continueWithBlock:^id(BFTask *task) {
+         if (task.error) {
+             NSLog(@"The request failed. Error: [%@]", task.error);
+         }
+         if (task.exception) {
+             NSLog(@"The request failed. Exception: [%@]", task.exception);
+         }
+         if (task.result) {
+             //Do something with the result.
+         }
+         return nil;
+     }];
+    
+    self.txtHost.text = @"";
+    self.txtAddress.text = @"";
+    self.txtPhone.text = @"";
+    self.txtEmail.text = @"";
+    self.txtDate.text = @"";
+    self.txvInformation.text = @"";
 }
 @end
