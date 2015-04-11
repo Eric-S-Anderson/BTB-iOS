@@ -22,5 +22,6 @@
 @property NSString *StatusFilter;
 
 -(void)populate:(NSString*)ident statFilter:(NSString*)filter;
++(int)getQueryStatus;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ViewBoardListScreen.h"
+#import "ViewPostListScreen.h"
 
 @interface ViewBoardListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblBoards;
@@ -19,17 +20,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.myCentralManager =
-    [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
     
+    //initializations
+    self.myCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
     self.tblBoards.dataSource = self;
     self.tblBoards.delegate = self;
-    
     self.boardList = [[NSMutableArray alloc] init];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
-
+    //interface function for CBCentralManager
+    //ensure that the ble is on before attempting to scan
     if (central.state == CBCentralManagerStatePoweredOn){
         NSLog(@"BLE ON");
         [self.myCentralManager scanForPeripheralsWithServices:nil options:nil];
@@ -41,13 +42,20 @@
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
-    [self.boardList addObject:peripheral.name];
-    NSLog(@"Discovered %@", peripheral.name);
+    //called when the scan finds a ble device
+    BOOL foundIt = false;
+    for (int i = 0; i < self.boardList.count; i++) {
+        if ([[self.boardList objectAtIndex:(i)] isEqualToString:(peripheral.name)]) {
+            foundIt = true;     //check if device has already been found
+        }
+    }
+    if (!foundIt) {
+        //add device to the list and repopulate the table
+        [self.boardList addObject:peripheral.name];
+        NSLog(@"Discovered %@", peripheral.name);
+        [self.tblBoards reloadData];
+    }
     
-    //[self.tblBoards beginUpdates];
-    //[self.tblBoards insertRowsAtIndexPaths:self.boardList  withRowAnimation:UITableViewRowAnimationLeft];
-    //[self.tblBoards endUpdates];
-    [self.tblBoards reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +66,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     // Return the number of sections.
     return 1;
 }
@@ -70,24 +77,26 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    //get information for table cells
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeBoardCell" forIndexPath:indexPath];
-    
     NSString *cellPeripheral = [self.boardList objectAtIndex:indexPath.row];
     cell.textLabel.text = cellPeripheral;
-    // Configure the cell...
-    
     return cell;
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"selectBoardSegue"]){
+        //set the current board to the seleced board
+        NSIndexPath *indexPath = [self.tblBoards indexPathForSelectedRow];
+        [Post setCurrentBoard:[self.boardList objectAtIndex:indexPath.row]];
+    }
+    
 }
-*/
+
 
 @end

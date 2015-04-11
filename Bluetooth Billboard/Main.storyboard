@@ -924,7 +924,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="zXV-HZ-3dT" kind="push" id="kcE-zP-U3U"/>
+                                            <segue destination="zXV-HZ-3dT" kind="push" identifier="selectBoardSegue" id="kcE-zP-U3U"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

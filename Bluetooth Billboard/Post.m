@@ -13,6 +13,7 @@
 
 NSString *TableName;
 NSString *HashKey;
+NSString *currentBoard = @"776655";
 
 +(void)setTableName:(NSString*)Name{
     TableName = Name;
@@ -30,6 +31,15 @@ NSString *HashKey;
 +(NSString *)hashKeyAttribute {
     
     return HashKey;
+}
+
++(void)setCurrentBoard:(NSString*)newBoard{
+    currentBoard = newBoard;
+    NSLog(@"Current board set to %@", currentBoard);
+}
+
++(NSString *)getCurrentBoard{
+    return currentBoard;
 }
 
 -(void)populate:(int)ident{

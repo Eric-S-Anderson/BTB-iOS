@@ -29,7 +29,8 @@
 -(void)populate:(int)ident;
 +(void)setTableName:(NSString*)Name;
 +(void)setHashKey:(NSString*)Key;
-
++(void)setCurrentBoard:(NSString*)newBoard;
++(NSString*)getCurrentBoard;
 @end
 
 

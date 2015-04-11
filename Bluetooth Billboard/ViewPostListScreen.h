@@ -10,4 +10,6 @@
 
 @interface ViewPostListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property NSString *currentBoard;
+
 @end
