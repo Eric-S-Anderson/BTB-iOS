@@ -57,6 +57,7 @@ Board *myBoard;
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeCell" forIndexPath:indexPath];
     Post *post = [myBoard.Posts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.Host;
+    cell.detailTextLabel.text = post.Information;
     return cell;
 }
 

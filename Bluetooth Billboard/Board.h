@@ -12,15 +12,18 @@
 #import <AWSCognito/AWSCognito.h>
 #import "Post.h"
 
-@interface Board : NSObject
+@interface Board : AWSDynamoDBObjectModel <AWSDynamoDBModeling>
 
-@property NSString *Ident;
-@property NSString *Name;
-@property NSString *Group;
-@property NSString *Description;
+@property int Board_ID;
+@property NSString *Board_Name;
+@property NSString *Organization;
+@property int Group_ID;
+@property NSString *Instructions;
+@property int Moderator_ID;
 @property NSMutableArray *Posts;
-@property NSString *StatusFilter;
 
+
+-(void)getBoardData:(int)ident;
 -(void)populate:(NSString*)ident statFilter:(NSString*)filter;
 +(int)getQueryStatus;
 

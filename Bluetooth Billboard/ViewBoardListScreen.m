@@ -12,6 +12,7 @@
 @interface ViewBoardListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblBoards;
 @property NSMutableArray *boardList;
+@property NSMutableArray *scanResults;
 
 @end
 
@@ -26,6 +27,7 @@
     self.tblBoards.dataSource = self;
     self.tblBoards.delegate = self;
     self.boardList = [[NSMutableArray alloc] init];
+    self.scanResults = [[NSMutableArray alloc] init];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
@@ -44,15 +46,25 @@
                   RSSI:(NSNumber *)RSSI {
     //called when the scan finds a ble device
     BOOL foundIt = false;
-    for (int i = 0; i < self.boardList.count; i++) {
-        if ([[self.boardList objectAtIndex:(i)] isEqualToString:(peripheral.name)]) {
+    for (int i = 0; i < self.scanResults.count; i++) {
+        if ([[self.scanResults objectAtIndex:(i)] isEqualToString:(peripheral.name)]) {
             foundIt = true;     //check if device has already been found
         }
     }
     if (!foundIt) {
         //add device to the list and repopulate the table
-        [self.boardList addObject:peripheral.name];
         NSLog(@"Discovered %@", peripheral.name);
+        [self.scanResults addObject:peripheral.name];
+        if ([peripheral.name isEqualToString:@"BLEbeacon116826"]){
+            Board *foundBoard = [Board new];
+            [foundBoard getBoardData:[@"776655" intValue]];
+            while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
+            [self.boardList addObject:foundBoard];
+        }else if ([peripheral.name isEqualToString:@"Bluetooth6127"]){
+            Board *foundBoard = [Board new];
+            [foundBoard getBoardData:[@"213411" intValue]];
+            [self.boardList addObject:foundBoard];
+        }
         [self.tblBoards reloadData];
     }
     
@@ -79,8 +91,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //get information for table cells
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeBoardCell" forIndexPath:indexPath];
-    NSString *cellPeripheral = [self.boardList objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellPeripheral;
+    Board *cellBoard = [self.boardList objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = cellBoard.Board_Name;
+    cell.detailTextLabel.text = cellBoard.Organization;
     return cell;
 }
 
@@ -93,7 +107,9 @@
     if ([segue.identifier isEqualToString:@"selectBoardSegue"]){
         //set the current board to the seleced board
         NSIndexPath *indexPath = [self.tblBoards indexPathForSelectedRow];
-        [Post setCurrentBoard:[self.boardList objectAtIndex:indexPath.row]];
+        Board *bufferBoard = [self.boardList objectAtIndex:indexPath.row];
+        NSString *brdName = [NSString stringWithFormat:@"%d",bufferBoard.Board_ID];
+        [Post setCurrentBoard:brdName];
     }
     
 }
