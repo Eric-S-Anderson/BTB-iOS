@@ -12,6 +12,7 @@
 		1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB691AD1CABB00EFA727 /* ModeratorLoginScreen.m */; };
 		1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */; };
 		14287B001AC483D3007FC7B1 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 14287AFF1AC483D3007FC7B1 /* Post.m */; };
+		144237581ADD894F0081162C /* ViewSavedPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 144237571ADD894F0081162C /* ViewSavedPostScreen.m */; };
 		144FB0781AC878A4004008E0 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144FB0771AC878A4004008E0 /* Images-2.xcassets */; };
 		1463FBAA1AC7ACA40029E340 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */; };
 		146F13F71AC5C4D8008C2626 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13F61AC5C4D8008C2626 /* AWSDynamoDB.framework */; };
@@ -90,6 +91,8 @@
 		1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewBoardListScreen.m; sourceTree = "<group>"; };
 		14287AFE1AC47E65007FC7B1 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		14287AFF1AC483D3007FC7B1 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		144237561ADD894F0081162C /* ViewSavedPostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSavedPostScreen.h; sourceTree = "<group>"; };
+		144237571ADD894F0081162C /* ViewSavedPostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSavedPostScreen.m; sourceTree = "<group>"; };
 		144FB0771AC878A4004008E0 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		1463FBA71AC7A45B0029E340 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -274,6 +277,8 @@
 				14B60AB01AC38A2C0081D55A /* ModelController.m */,
 				14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */,
 				14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */,
+				144237561ADD894F0081162C /* ViewSavedPostScreen.h */,
+				144237571ADD894F0081162C /* ViewSavedPostScreen.m */,
 				1418FB6B1AD1CDE000EFA727 /* ViewBoardListScreen.h */,
 				1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */,
 				1418FB681AD1CABB00EFA727 /* ModeratorLoginScreen.h */,
@@ -454,6 +459,7 @@
 				1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */,
 				14A6AF661ACF26AB00EB4486 /* PostScreen.m in Sources */,
 				14B60AAE1AC38A2C0081D55A /* DataViewController.m in Sources */,
+				144237581ADD894F0081162C /* ViewSavedPostScreen.m in Sources */,
 				14A6AF751ACF2A3800EB4486 /* SearchScreen.m in Sources */,
 				14A6AF621ACF241300EB4486 /* HomeScreen.m in Sources */,
 				14287B001AC483D3007FC7B1 /* Post.m in Sources */,

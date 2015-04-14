@@ -76,6 +76,7 @@ NSString *currentBoard;
              self.Organization = bufferBoard.Organization;
              self.Moderator_ID = bufferBoard.Moderator_ID;
              queryStatus = 0;   //success code
+             NSLog(@"Query Sucessful");
          }
          return nil;
      }];
@@ -127,6 +128,7 @@ NSString *currentBoard;
                  [self.Posts addObject:post];   //store each result
              }
              queryStatus = 0;   //success code
+             NSLog(@"Scan Sucessful");
          }
          return nil;
      }];

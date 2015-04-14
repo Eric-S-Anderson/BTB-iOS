@@ -13,7 +13,7 @@
 
 NSString *TableName;
 NSString *HashKey;
-NSString *currentBoard = @"776655";
+NSString *currentBoard = @"213411";
 
 +(void)setTableName:(NSString*)Name{
     TableName = Name;
