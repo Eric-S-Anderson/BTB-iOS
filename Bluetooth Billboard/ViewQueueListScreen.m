@@ -27,12 +27,10 @@ Board *queueBoard;
     self.tabBarController.title = @"View Board Queue";
     
     queueBoard = [Board new];
-    NSString *brdid = @"776655";
-    [queueBoard populate:brdid statFilter:@"Queued"];
+    [queueBoard populate:[Post getCurrentBoard] statFilter:@"Queued"];
     
     
-    while (queueBoard.Posts == nil || queueBoard.Posts.count == 0) {
-    }
+    while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
     
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;

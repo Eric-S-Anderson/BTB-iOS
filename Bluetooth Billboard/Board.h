@@ -26,5 +26,7 @@
 -(void)getBoardData:(int)ident;
 -(void)populate:(NSString*)ident statFilter:(NSString*)filter;
 +(int)getQueryStatus;
++(BOOL)isConnected;
++(NSMutableArray*)getAllBoardData:(NSMutableArray*)emptyList;
 
 @end

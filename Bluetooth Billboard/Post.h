@@ -31,6 +31,8 @@
 +(void)setHashKey:(NSString*)Key;
 +(void)setCurrentBoard:(NSString*)newBoard;
 +(NSString*)getCurrentBoard;
+-(BOOL)isConnected;
+
 @end
 
 

@@ -42,6 +42,19 @@ NSString *currentBoard = @"213411";
     return currentBoard;
 }
 
+-(BOOL)isConnected{
+    //return whether device has an internet connection
+    NSURL *connectivityTester = [NSURL URLWithString:@"http://www.google.com"];
+    NSData *resultData = [NSData dataWithContentsOfURL:connectivityTester];
+    if (resultData){
+        NSLog(@"Device is connected to the internet");
+        return true;
+    }else{
+        NSLog(@"Device is not connected to the internet");
+        return false;
+    }
+}
+
 -(void)populate:(int)ident{
     
     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]

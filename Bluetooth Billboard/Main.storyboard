@@ -298,7 +298,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="mFS-j5-TqN" kind="push" identifier="searchBoardSegue" id="INS-ET-a5O"/>
+                                            <segue destination="mFS-j5-TqN" kind="modal" identifier="searchBoardSegue" id="INS-ET-a5O"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -309,7 +309,6 @@
                     <tabBarItem key="tabBarItem" title="Search" id="gAI-eM-m7k"/>
                     <connections>
                         <outlet property="scbBoardSearch" destination="GXu-mV-dAP" id="2aw-WA-Zgd"/>
-                        <outlet property="searchDisplayController" destination="7bF-Ex-SpM" id="kQw-5p-Cvl"/>
                         <outlet property="tblBoards" destination="F6y-Yz-7of" id="yD0-MZ-5jd"/>
                     </connections>
                 </viewController>
@@ -780,7 +779,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tkH-ob-Id8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="prototypeCell" textLabel="3Vo-ax-YbD" detailTextLabel="xXR-Y9-rpI" style="IBUITableViewCellStyleSubtitle" id="hD1-4m-ctt">
@@ -1084,7 +1083,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="mFS-j5-TqN" kind="push" identifier="selectBoardSegue" id="dKh-uv-ooF"/>
+                                            <segue destination="mFS-j5-TqN" kind="modal" identifier="selectBoardSegue" id="dKh-uv-ooF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1102,7 +1101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Mm-L7-43K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-703" y="314"/>
+            <point key="canvasLocation" x="-697" y="314"/>
         </scene>
         <!--ViewSavedPostScreen-->
         <scene sceneID="3NQ-lR-SbT">
