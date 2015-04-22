@@ -54,18 +54,22 @@
     if (!foundIt) {
         //add device to the list and repopulate the table
         NSLog(@"Discovered %@", peripheral.name);
-        [self.scanResults addObject:peripheral.name];
-        if ([peripheral.name isEqualToString:@"BLEbeacon116826"]){
-            Board *foundBoard = [Board new];
-            [foundBoard getBoardData:[@"776655" intValue]];
-            while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
-            [self.boardList addObject:foundBoard];
-        }else if ([peripheral.name isEqualToString:@"Bluetooth6127"]){
-            Board *foundBoard = [Board new];
-            [foundBoard getBoardData:[@"213411" intValue]];
-            [self.boardList addObject:foundBoard];
+        //CLBeacon *beacon;
+        
+        if (peripheral.name != nil){
+            [self.scanResults addObject:peripheral.name];
+            if ([peripheral.name isEqualToString:@"BLEbeacon116826"]){
+                Board *foundBoard = [Board new];
+                [foundBoard getBoardData:[@"776655" intValue]];
+                while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
+                [self.boardList addObject:foundBoard];
+            }else if ([peripheral.name isEqualToString:@"Bluetooth6127"]){
+                Board *foundBoard = [Board new];
+                [foundBoard getBoardData:[@"213411" intValue]];
+                [self.boardList addObject:foundBoard];
+            }
+            [self.tblBoards reloadData];
         }
-        [self.tblBoards reloadData];
     }
     
 }

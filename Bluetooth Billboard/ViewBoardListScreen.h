@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreLocation/CoreLocation.h>
 #import "Board.h"
 
 @interface ViewBoardListScreen : UIViewController <CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource>
