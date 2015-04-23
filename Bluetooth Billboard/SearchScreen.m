@@ -7,7 +7,6 @@
 //
 
 #import "SearchScreen.h"
-#import "Board.h"
 
 @interface SearchScreen ()
 @property (weak, nonatomic) IBOutlet UISearchBar *scbBoardSearch;
@@ -28,9 +27,9 @@
     self.scbBoardSearch.delegate = self;
     self.allBoards = [[NSMutableArray alloc] init];     //initialize storage array
 
-    self.allBoards = [Board getAllBoardData:self.allBoards];
+    self.allBoards = [DynamoInterface getAllBoardInformation:self.allBoards];
     
-    while ([Board getQueryStatus] < 0){}
+    while ([DynamoInterface getQueryStatus] < 0){}
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,7 +103,7 @@
     //this only occurs immediately before the modal exit segue
     Board *bufferBoard = [self.filterBoards objectAtIndex:indexPath.row];
     NSString *brdName = [NSString stringWithFormat:@"%d",bufferBoard.Board_ID];
-    [Post setCurrentBoard:brdName];
+    [DynamoInterface setCurrentBoard:brdName];
 }
 
 #pragma mark - Navigation

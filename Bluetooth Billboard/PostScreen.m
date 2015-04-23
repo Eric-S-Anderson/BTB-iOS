@@ -7,7 +7,7 @@
 //
 
 #import "PostScreen.h"
-#import "PreviewPostScreen.h"
+
 
 @interface PostScreen ()
 @property (weak, nonatomic) IBOutlet UITextField *txtHost;
@@ -104,7 +104,7 @@
     self.dpvDate.hidden = !self.dpvDate.hidden;
     NSDate *chosenDate = [self.dpvDate date];       //get selected date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/yyyy"];        //format date to string
+    [formatter setDateFormat:@"MMddyyyy"];        //format date to string
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
     NSString *stringFromDate = [formatter stringFromDate:chosenDate];
     self.txtDate.text = stringFromDate;
@@ -131,7 +131,8 @@
     Post *post = [Post new];
     post.Host = self.txtHost.text;
     post.Address = self.txtAddress.text;
-    post.Phone = [self.txtPhone.text intValue];
+    PhoneNumber *phoneBuffer = [[PhoneNumber alloc] initWithString:(self.txtPhone.text)];
+    post.Phone = phoneBuffer.value;
     post.Email = self.txtEmail.text;
     post.End_Date = [self.txtDate.text intValue];
     post.Post_Type = self.txtPostType.text;
@@ -139,24 +140,10 @@
     post.Post_ID = arc4random_uniform(99999999);  //easy auto-id, possible collisions
     post.Post_Status = @"Queued";
     
-    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    [DynamoInterface setTableName:@"Board213411"];
+    [DynamoInterface setHashKey:@"Post_ID"];
     
-    [Post setTableName:@"Board213411"];
-    [Post setHashKey:@"Post_ID"];
-    
-    [[dynamoDBObjectMapper save:post]
-     continueWithBlock:^id(BFTask *task) {
-         if (task.error) {
-             NSLog(@"The request failed. Error: [%@]", task.error);
-         }
-         if (task.exception) {
-             NSLog(@"The request failed. Exception: [%@]", task.exception);
-         }
-         if (task.result) {
-             //Do something with the result.
-         }
-         return nil;
-     }];
+    [DynamoInterface savePost:post];
     
 }
 

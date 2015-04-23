@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
+#import "DynamoInterface.h"
 
 @interface ViewQueueScreen : UIViewController
+
 @property Post *post;
+
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
+#import "DynamoInterface.h"
 
 @interface PreviewPostScreen : UIViewController
 

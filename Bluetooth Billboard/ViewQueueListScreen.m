@@ -7,8 +7,6 @@
 //
 
 #import "ViewQueueListScreen.h"
-#import "ViewQueueScreen.h"
-#import "Board.h"
 
 
 @interface ViewQueueListScreen ()
@@ -24,13 +22,9 @@ Board *queueBoard;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.tabBarController.title = @"View Board Queue";
+    queueBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Queued"];
     
-    queueBoard = [Board new];
-    [queueBoard populate:[Post getCurrentBoard] statFilter:@"Queued"];
-    
-    
-    while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
     
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;

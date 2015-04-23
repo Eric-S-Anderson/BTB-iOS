@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewQueueScreen.h"
+#import "DynamoInterface.h"
 
 @interface ViewQueueListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

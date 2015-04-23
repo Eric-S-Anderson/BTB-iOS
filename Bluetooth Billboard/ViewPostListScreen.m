@@ -7,9 +7,6 @@
 //
 
 #import "ViewPostListScreen.h"
-#import "ViewPostScreen.h"
-#import "Board.h"
-#import "Post.h"
 
 @interface ViewPostListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblPosts;
@@ -23,26 +20,22 @@ Board *myBoard;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //initializations
-    self.tabBarController.title = @"View Board";    //set title
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
-    //create a populate board
     
-    //myBoard = [Board new];
-    //[myBoard populate:[Post getCurrentBoard] statFilter:@"Posted"];
-    //NSLog(@"Waiting for database response...");
-    //while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
-    NSLog(@"view did appear");
-    myBoard = [Board new];
-    [myBoard populate:[Post getCurrentBoard] statFilter:@"Posted"];
+    
+    myBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Posted"];
     NSLog(@"Waiting for database response...");
-    while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    
     [self.tblPosts reloadData];
 }
 

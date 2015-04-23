@@ -7,7 +7,6 @@
 //
 
 #import "ViewBoardListScreen.h"
-#import "ViewPostListScreen.h"
 
 @interface ViewBoardListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblBoards;
@@ -59,13 +58,11 @@
         if (peripheral.name != nil){
             [self.scanResults addObject:peripheral.name];
             if ([peripheral.name isEqualToString:@"BLEbeacon116826"]){
-                Board *foundBoard = [Board new];
-                [foundBoard getBoardData:[@"776655" intValue]];
-                while ([Board getQueryStatus] < 0) {}   //loop while waiting for database
+                Board *foundBoard = [DynamoInterface getSingleBoardInformation:[@"776655" intValue]];
+                while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
                 [self.boardList addObject:foundBoard];
             }else if ([peripheral.name isEqualToString:@"Bluetooth6127"]){
-                Board *foundBoard = [Board new];
-                [foundBoard getBoardData:[@"213411" intValue]];
+                Board *foundBoard = [DynamoInterface getSingleBoardInformation:[@"213411" intValue]];
                 [self.boardList addObject:foundBoard];
             }
             [self.tblBoards reloadData];
@@ -113,7 +110,7 @@
         NSIndexPath *indexPath = [self.tblBoards indexPathForSelectedRow];
         Board *bufferBoard = [self.boardList objectAtIndex:indexPath.row];
         NSString *brdName = [NSString stringWithFormat:@"%d",bufferBoard.Board_ID];
-        [Post setCurrentBoard:brdName];
+        [DynamoInterface setCurrentBoard:brdName];
     }
     
 }

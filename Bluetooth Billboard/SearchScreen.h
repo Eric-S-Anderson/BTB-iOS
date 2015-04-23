@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DynamoInterface.h"
 
 @interface SearchScreen : UIViewController <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 

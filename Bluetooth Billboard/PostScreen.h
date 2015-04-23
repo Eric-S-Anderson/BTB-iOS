@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <stdlib.h>
-#import "Post.h"
+#import "DynamoInterface.h"
+#import "PreviewPostScreen.h"
+#import "PhoneNumber.h"
 
 @interface PostScreen : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, 
 UIGestureRecognizerDelegate>

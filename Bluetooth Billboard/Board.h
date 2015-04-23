@@ -6,13 +6,11 @@
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AWSDynamoDB/AWSDynamoDB.h>
-#import <AWSCore/AWSCore.h>
-#import <AWSCognito/AWSCognito.h>
 #import "Post.h"
+#import "DynamoInformation.h"
 
-@interface Board : AWSDynamoDBObjectModel <AWSDynamoDBModeling>
+@interface Board : AWSDynamoDBObjectModel
 
 @property int Board_ID;
 @property NSString *Board_Name;
@@ -21,12 +19,5 @@
 @property NSString *Instructions;
 @property int Moderator_ID;
 @property NSMutableArray *Posts;
-
-
--(void)getBoardData:(int)ident;
--(void)populate:(NSString*)ident statFilter:(NSString*)filter;
-+(int)getQueryStatus;
-+(BOOL)isConnected;
-+(NSMutableArray*)getAllBoardData:(NSMutableArray*)emptyList;
 
 @end

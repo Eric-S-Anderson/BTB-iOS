@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewPostScreen.h"
+#import "DynamoInterface.h"
 
 @interface ViewPostListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
-@property NSString *currentBoard;
 
 @end

@@ -13,29 +13,32 @@
 		1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */; };
 		14287B001AC483D3007FC7B1 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 14287AFF1AC483D3007FC7B1 /* Post.m */; };
 		144237581ADD894F0081162C /* ViewSavedPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 144237571ADD894F0081162C /* ViewSavedPostScreen.m */; };
+		144F40371AE9552600DBB35D /* AWSAutoScaling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40221AE9552600DBB35D /* AWSAutoScaling.framework */; };
+		144F40381AE9552600DBB35D /* AWSCloudWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40231AE9552600DBB35D /* AWSCloudWatch.framework */; };
+		144F40391AE9552600DBB35D /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40241AE9552600DBB35D /* AWSCognito.framework */; };
+		144F403A1AE9552600DBB35D /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40251AE9552600DBB35D /* AWSCore.framework */; };
+		144F403B1AE9552600DBB35D /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40261AE9552600DBB35D /* AWSDynamoDB.framework */; };
+		144F403C1AE9552600DBB35D /* AWSEC2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40271AE9552600DBB35D /* AWSEC2.framework */; };
+		144F403D1AE9552600DBB35D /* AWSElasticLoadBalancing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40281AE9552600DBB35D /* AWSElasticLoadBalancing.framework */; };
+		144F403E1AE9552600DBB35D /* AWSKinesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40291AE9552600DBB35D /* AWSKinesis.framework */; };
+		144F403F1AE9552600DBB35D /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F402A1AE9552600DBB35D /* AWSS3.framework */; };
+		144F40401AE9552600DBB35D /* AWSSES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F402B1AE9552600DBB35D /* AWSSES.framework */; };
+		144F40411AE9552600DBB35D /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F402C1AE9552600DBB35D /* AWSSimpleDB.framework */; };
+		144F40421AE9552600DBB35D /* AWSSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F402D1AE9552600DBB35D /* AWSSNS.framework */; };
+		144F40431AE9552600DBB35D /* AWSSQS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F402E1AE9552600DBB35D /* AWSSQS.framework */; };
+		144F40441AE9552600DBB35D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F402F1AE9552600DBB35D /* Bolts.framework */; };
+		144F40451AE9552600DBB35D /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40301AE9552600DBB35D /* FMDB.framework */; };
+		144F40461AE9552600DBB35D /* GZIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40311AE9552600DBB35D /* GZIP.framework */; };
+		144F40471AE9552600DBB35D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40321AE9552600DBB35D /* Mantle.framework */; };
+		144F40481AE9552600DBB35D /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40331AE9552600DBB35D /* Reachability.framework */; };
+		144F40491AE9552600DBB35D /* TMCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40341AE9552600DBB35D /* TMCache.framework */; };
+		144F404A1AE9552600DBB35D /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40351AE9552600DBB35D /* UICKeyChainStore.framework */; };
+		144F404B1AE9552600DBB35D /* XMLDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40361AE9552600DBB35D /* XMLDictionary.framework */; };
+		144F404E1AE955C800DBB35D /* PhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 144F404D1AE955C800DBB35D /* PhoneNumber.m */; };
+		144F40511AE96A7C00DBB35D /* DynamoInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 144F40501AE96A7C00DBB35D /* DynamoInterface.m */; };
+		144F40541AE97DEE00DBB35D /* DynamoInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 144F40531AE97DEE00DBB35D /* DynamoInformation.m */; };
 		144FB0781AC878A4004008E0 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144FB0771AC878A4004008E0 /* Images-2.xcassets */; };
 		1463FBAA1AC7ACA40029E340 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */; };
-		146F13F71AC5C4D8008C2626 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13F61AC5C4D8008C2626 /* AWSDynamoDB.framework */; };
-		146F13F91AC5C568008C2626 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13F81AC5C568008C2626 /* AWSCore.framework */; };
-		146F14041AC5C58C008C2626 /* AWSAutoScaling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13FA1AC5C58C008C2626 /* AWSAutoScaling.framework */; };
-		146F14051AC5C58C008C2626 /* AWSCloudWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13FB1AC5C58C008C2626 /* AWSCloudWatch.framework */; };
-		146F14061AC5C58C008C2626 /* AWSEC2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13FC1AC5C58C008C2626 /* AWSEC2.framework */; };
-		146F14071AC5C58C008C2626 /* AWSElasticLoadBalancing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13FD1AC5C58C008C2626 /* AWSElasticLoadBalancing.framework */; };
-		146F14081AC5C58C008C2626 /* AWSKinesis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13FE1AC5C58C008C2626 /* AWSKinesis.framework */; };
-		146F14091AC5C58C008C2626 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F13FF1AC5C58C008C2626 /* AWSS3.framework */; };
-		146F140A1AC5C58C008C2626 /* AWSSES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14001AC5C58C008C2626 /* AWSSES.framework */; };
-		146F140B1AC5C58C008C2626 /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14011AC5C58C008C2626 /* AWSSimpleDB.framework */; };
-		146F140C1AC5C58C008C2626 /* AWSSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14021AC5C58C008C2626 /* AWSSNS.framework */; };
-		146F140D1AC5C58C008C2626 /* AWSSQS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14031AC5C58C008C2626 /* AWSSQS.framework */; };
-		146F14161AC5C5CC008C2626 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F140E1AC5C5CC008C2626 /* Bolts.framework */; };
-		146F14171AC5C5CC008C2626 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F140F1AC5C5CC008C2626 /* FMDB.framework */; };
-		146F141A1AC5C5CC008C2626 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14121AC5C5CC008C2626 /* Reachability.framework */; };
-		146F141B1AC5C5CC008C2626 /* TMCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14131AC5C5CC008C2626 /* TMCache.framework */; };
-		146F141C1AC5C5CC008C2626 /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14141AC5C5CC008C2626 /* UICKeyChainStore.framework */; };
-		146F141D1AC5C5CC008C2626 /* XMLDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14151AC5C5CC008C2626 /* XMLDictionary.framework */; };
-		146F141F1AC5C7BD008C2626 /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F141E1AC5C7BD008C2626 /* AWSCognito.framework */; };
-		146F14221AC5CEB1008C2626 /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14111AC5C5CC008C2626 /* Mantle.framework */; };
-		146F14231AC5CEDB008C2626 /* GZIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146F14201AC5CE86008C2626 /* GZIP.framework */; };
 		14A6AF5C1ACF1F6900EB4486 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */; };
 		14A6AF5D1ACF1F6900EB4486 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */; };
 		14A6AF621ACF241300EB4486 /* HomeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF601ACF241300EB4486 /* HomeScreen.m */; };
@@ -49,9 +52,7 @@
 		14B60AA51AC38A2C0081D55A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B60AA41AC38A2C0081D55A /* main.m */; };
 		14B60AA81AC38A2C0081D55A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B60AA71AC38A2C0081D55A /* AppDelegate.m */; };
 		14B60AAB1AC38A2C0081D55A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B60AAA1AC38A2C0081D55A /* RootViewController.m */; };
-		14B60AAE1AC38A2C0081D55A /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B60AAD1AC38A2C0081D55A /* DataViewController.m */; };
 		14B60AB11AC38A2C0081D55A /* ModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B60AB01AC38A2C0081D55A /* ModelController.m */; };
-		14B60AC51AC38A2C0081D55A /* Bluetooth_BillboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B60AC41AC38A2C0081D55A /* Bluetooth_BillboardTests.m */; };
 		14C079311AC7345700D32B76 /* autoscaling-2011-01-01.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C079221AC7345700D32B76 /* autoscaling-2011-01-01.json */; };
 		14C079321AC7345700D32B76 /* cognito-identity-2014-06-30.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C079231AC7345700D32B76 /* cognito-identity-2014-06-30.json */; };
 		14C079331AC7345700D32B76 /* css-2014-06-30.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C079241AC7345700D32B76 /* css-2014-06-30.json */; };
@@ -70,16 +71,6 @@
 		14E379C91AD07A4800929A6F /* PreviewPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E379C81AD07A4800929A6F /* PreviewPostScreen.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		14B60ABF1AC38A2C0081D55A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 14B60A971AC38A2C0081D55A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 14B60A9E1AC38A2C0081D55A;
-			remoteInfo = "Bluetooth Billboard";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1418FB621AD1C6BF00EFA727 /* ViewQueueListScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewQueueListScreen.h; sourceTree = "<group>"; };
 		1418FB631AD1C6BF00EFA727 /* ViewQueueListScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewQueueListScreen.m; sourceTree = "<group>"; };
@@ -93,30 +84,36 @@
 		14287AFF1AC483D3007FC7B1 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		144237561ADD894F0081162C /* ViewSavedPostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSavedPostScreen.h; sourceTree = "<group>"; };
 		144237571ADD894F0081162C /* ViewSavedPostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSavedPostScreen.m; sourceTree = "<group>"; };
+		144F40221AE9552600DBB35D /* AWSAutoScaling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAutoScaling.framework; path = Libraries/AWSAutoScaling.framework; sourceTree = "<group>"; };
+		144F40231AE9552600DBB35D /* AWSCloudWatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCloudWatch.framework; path = Libraries/AWSCloudWatch.framework; sourceTree = "<group>"; };
+		144F40241AE9552600DBB35D /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCognito.framework; path = Libraries/AWSCognito.framework; sourceTree = "<group>"; };
+		144F40251AE9552600DBB35D /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = Libraries/AWSCore.framework; sourceTree = "<group>"; };
+		144F40261AE9552600DBB35D /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSDynamoDB.framework; path = Libraries/AWSDynamoDB.framework; sourceTree = "<group>"; };
+		144F40271AE9552600DBB35D /* AWSEC2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSEC2.framework; path = Libraries/AWSEC2.framework; sourceTree = "<group>"; };
+		144F40281AE9552600DBB35D /* AWSElasticLoadBalancing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSElasticLoadBalancing.framework; path = Libraries/AWSElasticLoadBalancing.framework; sourceTree = "<group>"; };
+		144F40291AE9552600DBB35D /* AWSKinesis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSKinesis.framework; path = Libraries/AWSKinesis.framework; sourceTree = "<group>"; };
+		144F402A1AE9552600DBB35D /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = Libraries/AWSS3.framework; sourceTree = "<group>"; };
+		144F402B1AE9552600DBB35D /* AWSSES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSES.framework; path = Libraries/AWSSES.framework; sourceTree = "<group>"; };
+		144F402C1AE9552600DBB35D /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = Libraries/AWSSimpleDB.framework; sourceTree = "<group>"; };
+		144F402D1AE9552600DBB35D /* AWSSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSNS.framework; path = Libraries/AWSSNS.framework; sourceTree = "<group>"; };
+		144F402E1AE9552600DBB35D /* AWSSQS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSQS.framework; path = Libraries/AWSSQS.framework; sourceTree = "<group>"; };
+		144F402F1AE9552600DBB35D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Libraries/Bolts.framework; sourceTree = "<group>"; };
+		144F40301AE9552600DBB35D /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Libraries/FMDB.framework; sourceTree = "<group>"; };
+		144F40311AE9552600DBB35D /* GZIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GZIP.framework; path = Libraries/GZIP.framework; sourceTree = "<group>"; };
+		144F40321AE9552600DBB35D /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = Libraries/Mantle.framework; sourceTree = "<group>"; };
+		144F40331AE9552600DBB35D /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Libraries/Reachability.framework; sourceTree = "<group>"; };
+		144F40341AE9552600DBB35D /* TMCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TMCache.framework; path = Libraries/TMCache.framework; sourceTree = "<group>"; };
+		144F40351AE9552600DBB35D /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Libraries/UICKeyChainStore.framework; sourceTree = "<group>"; };
+		144F40361AE9552600DBB35D /* XMLDictionary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XMLDictionary.framework; path = Libraries/XMLDictionary.framework; sourceTree = "<group>"; };
+		144F404C1AE955C800DBB35D /* PhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumber.h; sourceTree = "<group>"; };
+		144F404D1AE955C800DBB35D /* PhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumber.m; sourceTree = "<group>"; };
+		144F404F1AE96A7C00DBB35D /* DynamoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamoInterface.h; sourceTree = "<group>"; };
+		144F40501AE96A7C00DBB35D /* DynamoInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamoInterface.m; sourceTree = "<group>"; };
+		144F40521AE97DED00DBB35D /* DynamoInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamoInformation.h; sourceTree = "<group>"; };
+		144F40531AE97DEE00DBB35D /* DynamoInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamoInformation.m; sourceTree = "<group>"; };
 		144FB0771AC878A4004008E0 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		1463FBA71AC7A45B0029E340 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		146F13F61AC5C4D8008C2626 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSDynamoDB.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSDynamoDB.framework"; sourceTree = "<group>"; };
-		146F13F81AC5C568008C2626 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSCore.framework"; sourceTree = "<group>"; };
-		146F13FA1AC5C58C008C2626 /* AWSAutoScaling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAutoScaling.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSAutoScaling.framework"; sourceTree = "<group>"; };
-		146F13FB1AC5C58C008C2626 /* AWSCloudWatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCloudWatch.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSCloudWatch.framework"; sourceTree = "<group>"; };
-		146F13FC1AC5C58C008C2626 /* AWSEC2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSEC2.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSEC2.framework"; sourceTree = "<group>"; };
-		146F13FD1AC5C58C008C2626 /* AWSElasticLoadBalancing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSElasticLoadBalancing.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSElasticLoadBalancing.framework"; sourceTree = "<group>"; };
-		146F13FE1AC5C58C008C2626 /* AWSKinesis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSKinesis.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSKinesis.framework"; sourceTree = "<group>"; };
-		146F13FF1AC5C58C008C2626 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSS3.framework"; sourceTree = "<group>"; };
-		146F14001AC5C58C008C2626 /* AWSSES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSES.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSSES.framework"; sourceTree = "<group>"; };
-		146F14011AC5C58C008C2626 /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSSimpleDB.framework"; sourceTree = "<group>"; };
-		146F14021AC5C58C008C2626 /* AWSSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSNS.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSSNS.framework"; sourceTree = "<group>"; };
-		146F14031AC5C58C008C2626 /* AWSSQS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSQS.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/AWSSQS.framework"; sourceTree = "<group>"; };
-		146F140E1AC5C5CC008C2626 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/Bolts.framework"; sourceTree = "<group>"; };
-		146F140F1AC5C5CC008C2626 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/FMDB.framework"; sourceTree = "<group>"; };
-		146F14111AC5C5CC008C2626 /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/Mantle.framework"; sourceTree = "<group>"; };
-		146F14121AC5C5CC008C2626 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/Reachability.framework"; sourceTree = "<group>"; };
-		146F14131AC5C5CC008C2626 /* TMCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TMCache.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/TMCache.framework"; sourceTree = "<group>"; };
-		146F14141AC5C5CC008C2626 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/UICKeyChainStore.framework"; sourceTree = "<group>"; };
-		146F14151AC5C5CC008C2626 /* XMLDictionary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XMLDictionary.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/XMLDictionary.framework"; sourceTree = "<group>"; };
-		146F141E1AC5C7BD008C2626 /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCognito.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/frameworks/extras/AWSCognito.framework"; sourceTree = "<group>"; };
-		146F14201AC5CE86008C2626 /* GZIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GZIP.framework; path = "../../Downloads/aws-ios-sdk-2.1.0/third-party/GZIP.framework"; sourceTree = "<group>"; };
 		14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		14A6AF5F1ACF241300EB4486 /* HomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreen.h; sourceTree = "<group>"; };
@@ -142,13 +139,8 @@
 		14B60AA71AC38A2C0081D55A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		14B60AA91AC38A2C0081D55A /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		14B60AAA1AC38A2C0081D55A /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		14B60AAC1AC38A2C0081D55A /* DataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
-		14B60AAD1AC38A2C0081D55A /* DataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		14B60AAF1AC38A2C0081D55A /* ModelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelController.h; sourceTree = "<group>"; };
 		14B60AB01AC38A2C0081D55A /* ModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelController.m; sourceTree = "<group>"; };
-		14B60ABE1AC38A2C0081D55A /* Bluetooth BillboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bluetooth BillboardTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		14B60AC31AC38A2C0081D55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14B60AC41AC38A2C0081D55A /* Bluetooth_BillboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bluetooth_BillboardTests.m; sourceTree = "<group>"; };
 		14C079221AC7345700D32B76 /* autoscaling-2011-01-01.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "autoscaling-2011-01-01.json"; sourceTree = "<group>"; };
 		14C079231AC7345700D32B76 /* cognito-identity-2014-06-30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cognito-identity-2014-06-30.json"; sourceTree = "<group>"; };
 		14C079241AC7345700D32B76 /* css-2014-06-30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "css-2014-06-30.json"; sourceTree = "<group>"; };
@@ -173,35 +165,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144F40371AE9552600DBB35D /* AWSAutoScaling.framework in Frameworks */,
+				144F40381AE9552600DBB35D /* AWSCloudWatch.framework in Frameworks */,
+				144F40391AE9552600DBB35D /* AWSCognito.framework in Frameworks */,
+				144F403A1AE9552600DBB35D /* AWSCore.framework in Frameworks */,
+				144F403B1AE9552600DBB35D /* AWSDynamoDB.framework in Frameworks */,
+				144F403C1AE9552600DBB35D /* AWSEC2.framework in Frameworks */,
+				144F403D1AE9552600DBB35D /* AWSElasticLoadBalancing.framework in Frameworks */,
+				144F403E1AE9552600DBB35D /* AWSKinesis.framework in Frameworks */,
+				144F403F1AE9552600DBB35D /* AWSS3.framework in Frameworks */,
+				144F40401AE9552600DBB35D /* AWSSES.framework in Frameworks */,
+				144F40411AE9552600DBB35D /* AWSSimpleDB.framework in Frameworks */,
+				144F40421AE9552600DBB35D /* AWSSNS.framework in Frameworks */,
+				144F40431AE9552600DBB35D /* AWSSQS.framework in Frameworks */,
+				144F40441AE9552600DBB35D /* Bolts.framework in Frameworks */,
+				144F40451AE9552600DBB35D /* FMDB.framework in Frameworks */,
+				144F40461AE9552600DBB35D /* GZIP.framework in Frameworks */,
+				144F40471AE9552600DBB35D /* Mantle.framework in Frameworks */,
+				144F40481AE9552600DBB35D /* Reachability.framework in Frameworks */,
+				144F40491AE9552600DBB35D /* TMCache.framework in Frameworks */,
+				144F404A1AE9552600DBB35D /* UICKeyChainStore.framework in Frameworks */,
+				144F404B1AE9552600DBB35D /* XMLDictionary.framework in Frameworks */,
 				1463FBAA1AC7ACA40029E340 /* CoreBluetooth.framework in Frameworks */,
-				146F14161AC5C5CC008C2626 /* Bolts.framework in Frameworks */,
-				146F14171AC5C5CC008C2626 /* FMDB.framework in Frameworks */,
-				146F14221AC5CEB1008C2626 /* Mantle.framework in Frameworks */,
-				146F141A1AC5C5CC008C2626 /* Reachability.framework in Frameworks */,
-				146F141B1AC5C5CC008C2626 /* TMCache.framework in Frameworks */,
-				146F141C1AC5C5CC008C2626 /* UICKeyChainStore.framework in Frameworks */,
-				146F141D1AC5C5CC008C2626 /* XMLDictionary.framework in Frameworks */,
-				146F141F1AC5C7BD008C2626 /* AWSCognito.framework in Frameworks */,
-				146F14041AC5C58C008C2626 /* AWSAutoScaling.framework in Frameworks */,
-				146F14051AC5C58C008C2626 /* AWSCloudWatch.framework in Frameworks */,
-				146F14061AC5C58C008C2626 /* AWSEC2.framework in Frameworks */,
-				146F14071AC5C58C008C2626 /* AWSElasticLoadBalancing.framework in Frameworks */,
-				146F14081AC5C58C008C2626 /* AWSKinesis.framework in Frameworks */,
-				146F14091AC5C58C008C2626 /* AWSS3.framework in Frameworks */,
-				146F14231AC5CEDB008C2626 /* GZIP.framework in Frameworks */,
-				146F140A1AC5C58C008C2626 /* AWSSES.framework in Frameworks */,
-				146F140B1AC5C58C008C2626 /* AWSSimpleDB.framework in Frameworks */,
-				146F140C1AC5C58C008C2626 /* AWSSNS.framework in Frameworks */,
-				146F140D1AC5C58C008C2626 /* AWSSQS.framework in Frameworks */,
-				146F13F91AC5C568008C2626 /* AWSCore.framework in Frameworks */,
-				146F13F71AC5C4D8008C2626 /* AWSDynamoDB.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		14B60ABB1AC38A2C0081D55A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,31 +196,30 @@
 		14B60A961AC38A2C0081D55A = {
 			isa = PBXGroup;
 			children = (
+				144F40221AE9552600DBB35D /* AWSAutoScaling.framework */,
+				144F40231AE9552600DBB35D /* AWSCloudWatch.framework */,
+				144F40241AE9552600DBB35D /* AWSCognito.framework */,
+				144F40251AE9552600DBB35D /* AWSCore.framework */,
+				144F40261AE9552600DBB35D /* AWSDynamoDB.framework */,
+				144F40271AE9552600DBB35D /* AWSEC2.framework */,
+				144F40281AE9552600DBB35D /* AWSElasticLoadBalancing.framework */,
+				144F40291AE9552600DBB35D /* AWSKinesis.framework */,
+				144F402A1AE9552600DBB35D /* AWSS3.framework */,
+				144F402B1AE9552600DBB35D /* AWSSES.framework */,
+				144F402C1AE9552600DBB35D /* AWSSimpleDB.framework */,
+				144F402D1AE9552600DBB35D /* AWSSNS.framework */,
+				144F402E1AE9552600DBB35D /* AWSSQS.framework */,
+				144F402F1AE9552600DBB35D /* Bolts.framework */,
+				144F40301AE9552600DBB35D /* FMDB.framework */,
+				144F40311AE9552600DBB35D /* GZIP.framework */,
+				144F40321AE9552600DBB35D /* Mantle.framework */,
+				144F40331AE9552600DBB35D /* Reachability.framework */,
+				144F40341AE9552600DBB35D /* TMCache.framework */,
+				144F40351AE9552600DBB35D /* UICKeyChainStore.framework */,
+				144F40361AE9552600DBB35D /* XMLDictionary.framework */,
 				1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */,
 				1463FBA71AC7A45B0029E340 /* CoreLocation.framework */,
-				146F14201AC5CE86008C2626 /* GZIP.framework */,
-				146F141E1AC5C7BD008C2626 /* AWSCognito.framework */,
-				146F140E1AC5C5CC008C2626 /* Bolts.framework */,
-				146F140F1AC5C5CC008C2626 /* FMDB.framework */,
-				146F14111AC5C5CC008C2626 /* Mantle.framework */,
-				146F14121AC5C5CC008C2626 /* Reachability.framework */,
-				146F14131AC5C5CC008C2626 /* TMCache.framework */,
-				146F14141AC5C5CC008C2626 /* UICKeyChainStore.framework */,
-				146F14151AC5C5CC008C2626 /* XMLDictionary.framework */,
-				146F13FA1AC5C58C008C2626 /* AWSAutoScaling.framework */,
-				146F13FB1AC5C58C008C2626 /* AWSCloudWatch.framework */,
-				146F13FC1AC5C58C008C2626 /* AWSEC2.framework */,
-				146F13FD1AC5C58C008C2626 /* AWSElasticLoadBalancing.framework */,
-				146F13FE1AC5C58C008C2626 /* AWSKinesis.framework */,
-				146F13FF1AC5C58C008C2626 /* AWSS3.framework */,
-				146F14001AC5C58C008C2626 /* AWSSES.framework */,
-				146F14011AC5C58C008C2626 /* AWSSimpleDB.framework */,
-				146F14021AC5C58C008C2626 /* AWSSNS.framework */,
-				146F14031AC5C58C008C2626 /* AWSSQS.framework */,
-				146F13F81AC5C568008C2626 /* AWSCore.framework */,
-				146F13F61AC5C4D8008C2626 /* AWSDynamoDB.framework */,
 				14B60AA11AC38A2C0081D55A /* Bluetooth Billboard */,
-				14B60AC11AC38A2C0081D55A /* Bluetooth BillboardTests */,
 				14B60AA01AC38A2C0081D55A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -244,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				14B60A9F1AC38A2C0081D55A /* Bluetooth Billboard.app */,
-				14B60ABE1AC38A2C0081D55A /* Bluetooth BillboardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,8 +254,6 @@
 				14B60AA71AC38A2C0081D55A /* AppDelegate.m */,
 				14B60AA91AC38A2C0081D55A /* RootViewController.h */,
 				14B60AAA1AC38A2C0081D55A /* RootViewController.m */,
-				14B60AAC1AC38A2C0081D55A /* DataViewController.h */,
-				14B60AAD1AC38A2C0081D55A /* DataViewController.m */,
 				14B60AAF1AC38A2C0081D55A /* ModelController.h */,
 				14B60AB01AC38A2C0081D55A /* ModelController.m */,
 				14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */,
@@ -303,12 +284,18 @@
 				14A6AF651ACF26AB00EB4486 /* PostScreen.m */,
 				14A6AF5F1ACF241300EB4486 /* HomeScreen.h */,
 				14A6AF601ACF241300EB4486 /* HomeScreen.m */,
-				144FB0771AC878A4004008E0 /* Images-2.xcassets */,
-				14B60AA21AC38A2C0081D55A /* Supporting Files */,
+				144F404C1AE955C800DBB35D /* PhoneNumber.h */,
+				144F404D1AE955C800DBB35D /* PhoneNumber.m */,
+				144F404F1AE96A7C00DBB35D /* DynamoInterface.h */,
+				144F40501AE96A7C00DBB35D /* DynamoInterface.m */,
+				144F40521AE97DED00DBB35D /* DynamoInformation.h */,
+				144F40531AE97DEE00DBB35D /* DynamoInformation.m */,
 				14A6AF761ACF2DD200EB4486 /* Board.h */,
 				14A6AF771ACF2DD200EB4486 /* Board.m */,
 				14287AFE1AC47E65007FC7B1 /* Post.h */,
 				14287AFF1AC483D3007FC7B1 /* Post.m */,
+				144FB0771AC878A4004008E0 /* Images-2.xcassets */,
+				14B60AA21AC38A2C0081D55A /* Supporting Files */,
 			);
 			path = "Bluetooth Billboard";
 			sourceTree = "<group>";
@@ -318,23 +305,6 @@
 			children = (
 				14B60AA31AC38A2C0081D55A /* Info.plist */,
 				14B60AA41AC38A2C0081D55A /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		14B60AC11AC38A2C0081D55A /* Bluetooth BillboardTests */ = {
-			isa = PBXGroup;
-			children = (
-				14B60AC41AC38A2C0081D55A /* Bluetooth_BillboardTests.m */,
-				14B60AC21AC38A2C0081D55A /* Supporting Files */,
-			);
-			path = "Bluetooth BillboardTests";
-			sourceTree = "<group>";
-		};
-		14B60AC21AC38A2C0081D55A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				14B60AC31AC38A2C0081D55A /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -359,24 +329,6 @@
 			productReference = 14B60A9F1AC38A2C0081D55A /* Bluetooth Billboard.app */;
 			productType = "com.apple.product-type.application";
 		};
-		14B60ABD1AC38A2C0081D55A /* Bluetooth BillboardTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 14B60ACB1AC38A2C0081D55A /* Build configuration list for PBXNativeTarget "Bluetooth BillboardTests" */;
-			buildPhases = (
-				14B60ABA1AC38A2C0081D55A /* Sources */,
-				14B60ABB1AC38A2C0081D55A /* Frameworks */,
-				14B60ABC1AC38A2C0081D55A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				14B60AC01AC38A2C0081D55A /* PBXTargetDependency */,
-			);
-			name = "Bluetooth BillboardTests";
-			productName = "Bluetooth BillboardTests";
-			productReference = 14B60ABE1AC38A2C0081D55A /* Bluetooth BillboardTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -389,10 +341,6 @@
 					14B60A9E1AC38A2C0081D55A = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 479E35RDQR;
-					};
-					14B60ABD1AC38A2C0081D55A = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 14B60A9E1AC38A2C0081D55A;
 					};
 				};
 			};
@@ -410,7 +358,6 @@
 			projectRoot = "";
 			targets = (
 				14B60A9E1AC38A2C0081D55A /* Bluetooth Billboard */,
-				14B60ABD1AC38A2C0081D55A /* Bluetooth BillboardTests */,
 			);
 		};
 /* End PBXProject section */
@@ -441,13 +388,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14B60ABC1AC38A2C0081D55A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -456,20 +396,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A6AF781ACF2DD200EB4486 /* Board.m in Sources */,
+				144F40511AE96A7C00DBB35D /* DynamoInterface.m in Sources */,
 				1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */,
 				14A6AF661ACF26AB00EB4486 /* PostScreen.m in Sources */,
-				14B60AAE1AC38A2C0081D55A /* DataViewController.m in Sources */,
 				144237581ADD894F0081162C /* ViewSavedPostScreen.m in Sources */,
 				14A6AF751ACF2A3800EB4486 /* SearchScreen.m in Sources */,
 				14A6AF621ACF241300EB4486 /* HomeScreen.m in Sources */,
 				14287B001AC483D3007FC7B1 /* Post.m in Sources */,
 				14A6AF6C1ACF295200EB4486 /* ViewPostScreen.m in Sources */,
 				14B60AA81AC38A2C0081D55A /* AppDelegate.m in Sources */,
+				144F404E1AE955C800DBB35D /* PhoneNumber.m in Sources */,
 				1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */,
 				14A6AF691ACF291100EB4486 /* ViewPostListScreen.m in Sources */,
 				14B60AB11AC38A2C0081D55A /* ModelController.m in Sources */,
 				14A6AF721ACF29C900EB4486 /* SavedBoardsListScreen.m in Sources */,
 				14B60AA51AC38A2C0081D55A /* main.m in Sources */,
+				144F40541AE97DEE00DBB35D /* DynamoInformation.m in Sources */,
 				1418FB641AD1C6BF00EFA727 /* ViewQueueListScreen.m in Sources */,
 				14B60AAB1AC38A2C0081D55A /* RootViewController.m in Sources */,
 				14A6AF6F1ACF299800EB4486 /* SavedPostsListScreen.m in Sources */,
@@ -478,23 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14B60ABA1AC38A2C0081D55A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14B60AC51AC38A2C0081D55A /* Bluetooth_BillboardTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		14B60AC01AC38A2C0081D55A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 14B60A9E1AC38A2C0081D55A /* Bluetooth Billboard */;
-			targetProxy = 14B60ABF1AC38A2C0081D55A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		14B60AC61AC38A2C0081D55A /* Debug */ = {
@@ -587,6 +513,7 @@
 					"/Users/Eric_Anderson/Downloads/aws-ios-sdk-2.1.0/frameworks",
 					"/Users/Eric_Anderson/Downloads/aws-ios-sdk-2.1.0/third-party",
 					"/Users/Eric_Anderson/Downloads/aws-ios-sdk-2.1.0/frameworks/extras",
+					"$(PROJECT_DIR)/Libraries",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
@@ -617,6 +544,7 @@
 					"/Users/Eric_Anderson/Downloads/aws-ios-sdk-2.1.0/frameworks",
 					"/Users/Eric_Anderson/Downloads/aws-ios-sdk-2.1.0/third-party",
 					"/Users/Eric_Anderson/Downloads/aws-ios-sdk-2.1.0/frameworks/extras",
+					"$(PROJECT_DIR)/Libraries",
 				);
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
@@ -632,40 +560,6 @@
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
-		14B60ACC1AC38A2C0081D55A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Bluetooth BillboardTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bluetooth Billboard.app/Bluetooth Billboard";
-			};
-			name = Debug;
-		};
-		14B60ACD1AC38A2C0081D55A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Bluetooth BillboardTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bluetooth Billboard.app/Bluetooth Billboard";
 			};
 			name = Release;
 		};
@@ -686,15 +580,6 @@
 			buildConfigurations = (
 				14B60AC91AC38A2C0081D55A /* Debug */,
 				14B60ACA1AC38A2C0081D55A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		14B60ACB1AC38A2C0081D55A /* Build configuration list for PBXNativeTarget "Bluetooth BillboardTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				14B60ACC1AC38A2C0081D55A /* Debug */,
-				14B60ACD1AC38A2C0081D55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

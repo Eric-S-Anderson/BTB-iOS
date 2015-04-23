@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
-#import "Board.h"
+#import "DynamoInterface.h"
+#import "ViewPostListScreen.h"
 
 @interface ViewBoardListScreen : UIViewController <CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+
 @property CBCentralManager *myCentralManager;
 
 @end

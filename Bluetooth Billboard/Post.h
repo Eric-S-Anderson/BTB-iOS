@@ -6,18 +6,13 @@
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
 
-#ifndef Bluetooth_Billboard_Post_h
-#define Bluetooth_Billboard_Post_h
-
 #import <AWSDynamoDB/AWSDynamoDB.h>
-#import <AWSCore/AWSCore.h>
-#import <AWSCognito/AWSCognito.h>
-#import "AppDelegate.h"
+#import "DynamoInformation.h"
 
-@interface Post : AWSDynamoDBObjectModel <AWSDynamoDBModeling>
+@interface Post : AWSDynamoDBObjectModel
 
 @property int Post_ID;
-@property int Phone;
+@property long Phone;
 @property int End_Date;
 @property NSString *Host;
 @property NSString *Email;
@@ -26,14 +21,7 @@
 @property NSString *Post_Type;
 @property NSString *Post_Status;
 
--(void)populate:(int)ident;
-+(void)setTableName:(NSString*)Name;
-+(void)setHashKey:(NSString*)Key;
-+(void)setCurrentBoard:(NSString*)newBoard;
-+(NSString*)getCurrentBoard;
--(BOOL)isConnected;
+-(id)init;
 
 @end
 
-
-#endif

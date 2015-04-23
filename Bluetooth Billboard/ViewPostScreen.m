@@ -28,18 +28,18 @@
     // Do any additional setup after loading the view.
     
     if (self.post != nil){
-    self.txtHost.text = self.post.Host;
-    self.txtAddress.text = self.post.Address;
-    self.txtPhone.text = [NSString stringWithFormat:@"%d",self.post.Phone];
-    self.txtEmail.text = self.post.Email;
-    self.txtDate.text = [NSString stringWithFormat:@"%d",self.post.End_Date];
-    self.txvInformation.text = self.post.Information;
+        self.txtHost.text = self.post.Host;
+        self.txtAddress.text = self.post.Address;
+        self.txtPhone.text = [NSString stringWithFormat:@"%ld",self.post.Phone];
+        self.txtEmail.text = self.post.Email;
+        self.txtDate.text = [NSString stringWithFormat:@"%d",self.post.End_Date];
+        self.txvInformation.text = self.post.Information;
     
-    NSString *blkHost = [@"Block Host\n" stringByAppendingString:self.post.Host];
-    NSString *blkType = [@"Block Type\n" stringByAppendingString:self.post.Post_Type];
+        NSString *blkHost = [@"Block Host\n" stringByAppendingString:self.post.Host];
+        NSString *blkType = [@"Block Type\n" stringByAppendingString:self.post.Post_Type];
     
-    [self.btnBlockHost setTitle:(blkHost) forState:UIControlStateNormal];
-    [self.btnBlockType setTitle:(blkType) forState:UIControlStateNormal];
+        [self.btnBlockHost setTitle:(blkHost) forState:UIControlStateNormal];
+        [self.btnBlockType setTitle:(blkType) forState:UIControlStateNormal];
     }
 }
 
