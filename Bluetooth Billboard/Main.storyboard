@@ -398,6 +398,9 @@
                     <navigationItem key="navigationItem" title="Saved Posts List" id="dhF-Gp-Fje">
                         <barButtonItem key="backBarButtonItem" title="Back" id="KmY-pr-gMG"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tblPosts" destination="Yqe-zg-lU6" id="eB0-1t-PZC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjX-Ur-hDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -569,7 +572,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3h-Ye-C4j">
-                                <rect key="frame" x="16" y="291" width="288" height="160"/>
+                                <rect key="frame" x="16" y="291" width="288" height="85"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -577,19 +580,50 @@
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HtT-xm-IU6">
-                                <rect key="frame" x="16" y="466" width="142" height="45"/>
+                                <rect key="frame" x="16" y="384" width="142" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Block Host">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="touchUpBlockHost:" destination="OqG-ng-xhZ" eventType="touchUpInside" id="jYX-1Z-kXh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="aJc-Yl-szU">
-                                <rect key="frame" x="159" y="466" width="142" height="45"/>
+                                <rect key="frame" x="162" y="384" width="142" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Block Type">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="touchUpBlockType:" destination="OqG-ng-xhZ" eventType="touchUpInside" id="NcV-vR-ceH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cW3-Nm-r0t">
+                                <rect key="frame" x="16" y="437" width="65" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Save Post">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchUpSave:" destination="OqG-ng-xhZ" eventType="touchUpInside" id="da3-2j-AyA"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWV-tw-ZTL">
+                                <rect key="frame" x="166" y="437" width="135" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB1-Kl-UST">
+                                <rect key="frame" x="100" y="445" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchUpTest:" destination="OqG-ng-xhZ" eventType="touchUpInside" id="S2z-OJ-cHC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -605,6 +639,7 @@
                         <outlet property="txtEmail" destination="LLZ-nx-hDE" id="GC9-ph-ZeU"/>
                         <outlet property="txtHost" destination="aD5-W2-5OJ" id="Ikw-aK-7FH"/>
                         <outlet property="txtPhone" destination="8q4-NN-pQM" id="MyB-IK-kid"/>
+                        <outlet property="txtTest" destination="gWV-tw-ZTL" id="g6Q-GG-SXY"/>
                         <outlet property="txvInformation" destination="H3h-Ye-C4j" id="Iop-1o-yfZ"/>
                     </connections>
                 </viewController>
@@ -910,16 +945,6 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="QOR-wV-VUr">
-                                <rect key="frame" x="159" y="466" width="142" height="45"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Deny">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="touchUpDeny:" destination="aMo-5t-E7L" eventType="touchUpInside" id="YN1-qw-Dkp"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="L4r-HK-krs">
                                 <rect key="frame" x="17" y="348" width="142" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -929,6 +954,16 @@
                                 </state>
                                 <connections>
                                     <action selector="touchUpAccept:" destination="aMo-5t-E7L" eventType="touchUpInside" id="DpP-Qw-wkW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="QOR-wV-VUr">
+                                <rect key="frame" x="162" y="348" width="142" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Deny">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchUpDeny:" destination="aMo-5t-E7L" eventType="touchUpInside" id="YN1-qw-Dkp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1198,6 +1233,14 @@
                     <navigationItem key="navigationItem" title="Saved Post" id="DuK-Pf-SP4">
                         <barButtonItem key="backBarButtonItem" title="Back" id="3pW-6H-4k5"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="txtAddress" destination="cUZ-Ne-5fx" id="BeZ-LT-nGp"/>
+                        <outlet property="txtDate" destination="0Ai-Lb-d9J" id="8yb-hc-6tL"/>
+                        <outlet property="txtEmail" destination="z3o-BV-ZQu" id="Aca-Dh-urR"/>
+                        <outlet property="txtHost" destination="Qxx-4q-8ZV" id="YXV-H2-Z5u"/>
+                        <outlet property="txtPhone" destination="unV-4m-Ge3" id="agw-G3-qBk"/>
+                        <outlet property="txvInformation" destination="7bc-Og-16G" id="fzi-q4-BWR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dd-f8-Y6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

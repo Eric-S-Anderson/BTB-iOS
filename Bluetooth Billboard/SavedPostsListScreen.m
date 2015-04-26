@@ -9,19 +9,54 @@
 #import "SavedPostsListScreen.h"
 
 @interface SavedPostsListScreen ()
+@property (weak, nonatomic) IBOutlet UITableView *tblPosts;
 
 @end
 
 @implementation SavedPostsListScreen
 
+NSMutableArray *posts;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.tblPosts.dataSource = self;
+    self.tblPosts.delegate = self;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    
+    NSError *error;
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    
+    posts = [[NSMutableArray alloc] init];
+    
+    for (unsigned int i = 0; i < objects.count; i++){
+        NSManagedObject *apost = [objects objectAtIndex:i];
+        Post *buffer = [Post new];
+        NSNumber *pid = [apost valueForKey:@"postID"];
+        NSNumber *phn = [apost valueForKey:@"phone"];
+        NSNumber *end = [apost valueForKey:@"end_Date"];
+        buffer.Post_ID = pid.intValue;
+        buffer.Phone = phn.longValue;
+        buffer.End_Date = end.intValue;
+        buffer.Host = [apost valueForKey:@"host"];
+        buffer.Email = [apost valueForKey:@"email"];
+        buffer.Address = [apost valueForKey:@"address"];
+        buffer.Information = [apost valueForKey:@"information"];
+        buffer.Post_Type = [apost valueForKey:@"post_Type"];
+        buffer.Post_Status = [apost valueForKey:@"post_Status"];
+        [posts addObject:buffer];
+    }
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,23 +68,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [posts count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savedPostsPrototype" forIndexPath:indexPath];
     
     // Configure the cell...
     
+    Post *cellPost = [posts objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = cellPost.Host;
+    cell.detailTextLabel.text = cellPost.Information;
+    
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -85,14 +125,21 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"savedPostSegue"]) {
+        NSIndexPath *indexPath = [self.tblPosts indexPathForSelectedRow];
+        ViewSavedPostScreen *destViewController = segue.destinationViewController;
+        Post *post = [posts objectAtIndex:indexPath.row];
+        destViewController.post = post;
+    }
 }
-*/
+
 
 @end

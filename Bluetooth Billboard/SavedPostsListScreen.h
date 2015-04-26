@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import <CoreData/CoreData.h>
+#import "Post.h"
+#import "ViewSavedPostScreen.h"
 
-@interface SavedPostsListScreen : UIViewController
+@interface SavedPostsListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

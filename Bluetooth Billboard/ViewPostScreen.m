@@ -18,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
 @property (weak, nonatomic) IBOutlet UIButton *btnBlockHost;
 @property (weak, nonatomic) IBOutlet UIButton *btnBlockType;
+- (IBAction)touchUpBlockHost:(id)sender;
+- (IBAction)touchUpBlockType:(id)sender;
+- (IBAction)touchUpSave:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *txtTest;
+- (IBAction)touchUpTest:(id)sender;
 
 @end
 
@@ -48,14 +53,81 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)touchUpBlockHost:(id)sender {
+    
+    NSMutableArray *banHosts = [[NSMutableArray alloc] init];
+    NSString *blockHost = [NSString stringWithString:self.post.Host];
+    banHosts = [[[NSUserDefaults standardUserDefaults] objectForKey:@"blockedHosts"]mutableCopy];
+    [banHosts addObject:blockHost];
+    [[NSUserDefaults standardUserDefaults] setObject:banHosts forKey:@"blockedHosts"];
+    NSLog(@"Host '%@' has been blocked.", self.post.Host);
 }
-*/
+
+- (IBAction)touchUpBlockType:(id)sender {
+    
+    NSMutableArray *banType = [[NSMutableArray alloc] init];
+    NSString *blockType = [NSString stringWithString:self.post.Post_Type];
+    banType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"blockedTypes"]mutableCopy];
+    [banType addObject:blockType];
+    [[NSUserDefaults standardUserDefaults] setObject:banType forKey:@"blockedTypes"];
+    NSLog(@"Type '%@' has been blocked.", self.post.Post_Type);
+}
+
+- (IBAction)touchUpSave:(id)sender {
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *savedPost;
+    savedPost = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedPost" inManagedObjectContext:context];
+    [savedPost setValue:[NSNumber numberWithInteger:self.post.Post_ID] forKey:@"postID"];
+    [savedPost setValue:[NSNumber numberWithInteger:self.post.Phone] forKey:@"phone"];
+    [savedPost setValue:[NSNumber numberWithInteger:self.post.End_Date] forKey:@"end_Date"];
+    [savedPost setValue:self.post.Host forKey:@"host"];
+    [savedPost setValue:self.post.Email forKey:@"email"];
+    [savedPost setValue:self.post.Address forKey:@"address"];
+    [savedPost setValue:self.post.Information forKey:@"information"];
+    [savedPost setValue:self.post.Post_Type forKey:@"post_Type"];
+    [savedPost setValue:self.post.Post_Status forKey:@"post_Status"];
+    NSError *error;
+    [context save:&error];
+    NSLog(@"Post saved");
+    
+    
+}
+
+- (IBAction)touchUpTest:(id)sender {
+
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    //NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    //[request setEntity:entityDesc];
+    
+    [request setEntity:[NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context]];
+    
+    NSError *error;
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    
+    NSManagedObject *apost = [objects objectAtIndex:0];
+    
+    NSNumber *blah = [apost valueForKey:@"postID"];
+    
+    self.txtTest.text = [NSString stringWithFormat:@"%@",blah];
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+
 
 @end

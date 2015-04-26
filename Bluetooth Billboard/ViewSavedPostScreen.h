@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 @interface ViewSavedPostScreen : UIViewController
+
+@property Post *post;
 
 @end

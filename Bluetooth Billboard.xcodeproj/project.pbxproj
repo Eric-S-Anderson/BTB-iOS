@@ -12,6 +12,8 @@
 		1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB691AD1CABB00EFA727 /* ModeratorLoginScreen.m */; };
 		1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */; };
 		14287B001AC483D3007FC7B1 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 14287AFF1AC483D3007FC7B1 /* Post.m */; };
+		14406EE81AEC57FB00DC5BD3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14406EE71AEC57FB00DC5BD3 /* CoreData.framework */; };
+		14406EEB1AEC5A6800DC5BD3 /* BTB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14406EE91AEC5A6800DC5BD3 /* BTB.xcdatamodeld */; };
 		144237581ADD894F0081162C /* ViewSavedPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 144237571ADD894F0081162C /* ViewSavedPostScreen.m */; };
 		144F40371AE9552600DBB35D /* AWSAutoScaling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40221AE9552600DBB35D /* AWSAutoScaling.framework */; };
 		144F40381AE9552600DBB35D /* AWSCloudWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 144F40231AE9552600DBB35D /* AWSCloudWatch.framework */; };
@@ -82,6 +84,8 @@
 		1418FB6C1AD1CDE000EFA727 /* ViewBoardListScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewBoardListScreen.m; sourceTree = "<group>"; };
 		14287AFE1AC47E65007FC7B1 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		14287AFF1AC483D3007FC7B1 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		14406EE71AEC57FB00DC5BD3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		14406EEA1AEC5A6800DC5BD3 /* BTB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BTB.xcdatamodel; sourceTree = "<group>"; };
 		144237561ADD894F0081162C /* ViewSavedPostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSavedPostScreen.h; sourceTree = "<group>"; };
 		144237571ADD894F0081162C /* ViewSavedPostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSavedPostScreen.m; sourceTree = "<group>"; };
 		144F40221AE9552600DBB35D /* AWSAutoScaling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSAutoScaling.framework; path = Libraries/AWSAutoScaling.framework; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14406EE81AEC57FB00DC5BD3 /* CoreData.framework in Frameworks */,
 				144F40371AE9552600DBB35D /* AWSAutoScaling.framework in Frameworks */,
 				144F40381AE9552600DBB35D /* AWSCloudWatch.framework in Frameworks */,
 				144F40391AE9552600DBB35D /* AWSCognito.framework in Frameworks */,
@@ -196,6 +201,8 @@
 		14B60A961AC38A2C0081D55A = {
 			isa = PBXGroup;
 			children = (
+				14406EE91AEC5A6800DC5BD3 /* BTB.xcdatamodeld */,
+				14406EE71AEC57FB00DC5BD3 /* CoreData.framework */,
 				144F40221AE9552600DBB35D /* AWSAutoScaling.framework */,
 				144F40231AE9552600DBB35D /* AWSCloudWatch.framework */,
 				144F40241AE9552600DBB35D /* AWSCognito.framework */,
@@ -395,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14406EEB1AEC5A6800DC5BD3 /* BTB.xcdatamodeld in Sources */,
 				14A6AF781ACF2DD200EB4486 /* Board.m in Sources */,
 				144F40511AE96A7C00DBB35D /* DynamoInterface.m in Sources */,
 				1418FB6A1AD1CABB00EFA727 /* ModeratorLoginScreen.m in Sources */,
@@ -585,6 +593,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		14406EE91AEC5A6800DC5BD3 /* BTB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				14406EEA1AEC5A6800DC5BD3 /* BTB.xcdatamodel */,
+			);
+			currentVersion = 14406EEA1AEC5A6800DC5BD3 /* BTB.xcdatamodel */;
+			path = BTB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 14B60A971AC38A2C0081D55A /* Project object */;
 }

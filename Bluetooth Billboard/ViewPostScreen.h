@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "Post.h"
+#import "AppDelegate.h"
+#import "DynamoInterface.h"
 
 @interface ViewPostScreen : UIViewController
 

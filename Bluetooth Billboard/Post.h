@@ -9,7 +9,7 @@
 #import <AWSDynamoDB/AWSDynamoDB.h>
 #import "DynamoInformation.h"
 
-@interface Post : AWSDynamoDBObjectModel
+@interface Post : AWSDynamoDBObjectModel 
 
 @property int Post_ID;
 @property long Phone;
