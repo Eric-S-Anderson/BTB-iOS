@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewPostScreen.h"
 #import "DynamoInterface.h"
+#import "AppDelegate.h"
 
 @interface ViewPostListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

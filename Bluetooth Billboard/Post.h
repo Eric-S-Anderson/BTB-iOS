@@ -11,17 +11,15 @@
 
 @interface Post : AWSDynamoDBObjectModel 
 
-@property int Post_ID;
-@property long Phone;
-@property int End_Date;
+@property NSNumber *Post_ID;
+@property NSNumber *Phone;
+@property NSNumber *End_Date;
 @property NSString *Host;
 @property NSString *Email;
 @property NSString *Address;
 @property NSString *Information;
 @property NSString *Post_Type;
 @property NSString *Post_Status;
-
--(id)init;
 
 @end
 

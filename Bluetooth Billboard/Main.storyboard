@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mFS-j5-TqN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mFS-j5-TqN">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--PostNavigationController-->
@@ -224,7 +224,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="mFS-j5-TqN" kind="push" identifier="savedBoardSegue" id="ekU-sI-C1p"/>
+                                            <segue destination="mFS-j5-TqN" kind="modal" identifier="savedBoardSegue" id="ekU-sI-C1p"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -241,6 +241,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Saved Boards" id="N1g-IP-yyV"/>
+                    <connections>
+                        <outlet property="tblBoards" destination="aMZ-Nm-ksH" id="lUK-Wg-O9E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="giS-vc-Zgx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -437,7 +440,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xDt-Ms-zym">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="prototypeCell" textLabel="4RL-Un-17X" detailTextLabel="mCp-hy-LGt" style="IBUITableViewCellStyleSubtitle" id="jZ3-Ba-KBw">
@@ -476,6 +479,17 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ol-1D-Zww">
+                                <rect key="frame" x="89" y="474" width="142" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Save Board">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchUpSaveBoard:" destination="zXV-HZ-3dT" eventType="touchUpInside" id="Tuc-uM-Tej"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -601,7 +615,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cW3-Nm-r0t">
-                                <rect key="frame" x="16" y="437" width="65" height="45"/>
+                                <rect key="frame" x="89" y="437" width="142" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Save Post">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -609,20 +623,6 @@
                                 </state>
                                 <connections>
                                     <action selector="touchUpSave:" destination="OqG-ng-xhZ" eventType="touchUpInside" id="da3-2j-AyA"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWV-tw-ZTL">
-                                <rect key="frame" x="166" y="437" width="135" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lB1-Kl-UST">
-                                <rect key="frame" x="100" y="445" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="touchUpTest:" destination="OqG-ng-xhZ" eventType="touchUpInside" id="S2z-OJ-cHC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -639,7 +639,6 @@
                         <outlet property="txtEmail" destination="LLZ-nx-hDE" id="GC9-ph-ZeU"/>
                         <outlet property="txtHost" destination="aD5-W2-5OJ" id="Ikw-aK-7FH"/>
                         <outlet property="txtPhone" destination="8q4-NN-pQM" id="MyB-IK-kid"/>
-                        <outlet property="txtTest" destination="gWV-tw-ZTL" id="g6Q-GG-SXY"/>
                         <outlet property="txvInformation" destination="H3h-Ye-C4j" id="Iop-1o-yfZ"/>
                     </connections>
                 </viewController>

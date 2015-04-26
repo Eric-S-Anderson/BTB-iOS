@@ -40,12 +40,9 @@ NSMutableArray *posts;
     for (unsigned int i = 0; i < objects.count; i++){
         NSManagedObject *apost = [objects objectAtIndex:i];
         Post *buffer = [Post new];
-        NSNumber *pid = [apost valueForKey:@"postID"];
-        NSNumber *phn = [apost valueForKey:@"phone"];
-        NSNumber *end = [apost valueForKey:@"end_Date"];
-        buffer.Post_ID = pid.intValue;
-        buffer.Phone = phn.longValue;
-        buffer.End_Date = end.intValue;
+        buffer.Post_ID = [apost valueForKey:@"postID"];
+        buffer.Phone = [apost valueForKey:@"phone"];
+        buffer.End_Date = [apost valueForKey:@"end_Date"];
         buffer.Host = [apost valueForKey:@"host"];
         buffer.Email = [apost valueForKey:@"email"];
         buffer.Address = [apost valueForKey:@"address"];

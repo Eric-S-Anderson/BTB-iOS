@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import <CoreData/CoreData.h>
+#import "DynamoInterface.h"
 
-@interface SavedBoardsListScreen : UIViewController
+@interface SavedBoardsListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

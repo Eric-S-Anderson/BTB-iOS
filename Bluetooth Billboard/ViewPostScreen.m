@@ -21,8 +21,6 @@
 - (IBAction)touchUpBlockHost:(id)sender;
 - (IBAction)touchUpBlockType:(id)sender;
 - (IBAction)touchUpSave:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *txtTest;
-- (IBAction)touchUpTest:(id)sender;
 
 @end
 
@@ -35,9 +33,9 @@
     if (self.post != nil){
         self.txtHost.text = self.post.Host;
         self.txtAddress.text = self.post.Address;
-        self.txtPhone.text = [NSString stringWithFormat:@"%ld",self.post.Phone];
+        self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
         self.txtEmail.text = self.post.Email;
-        self.txtDate.text = [NSString stringWithFormat:@"%d",self.post.End_Date];
+        self.txtDate.text = [NSString stringWithFormat:@"%@",self.post.End_Date];
         self.txvInformation.text = self.post.Information;
     
         NSString *blkHost = [@"Block Host\n" stringByAppendingString:self.post.Host];
@@ -80,9 +78,9 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSManagedObject *savedPost;
     savedPost = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedPost" inManagedObjectContext:context];
-    [savedPost setValue:[NSNumber numberWithInteger:self.post.Post_ID] forKey:@"postID"];
-    [savedPost setValue:[NSNumber numberWithInteger:self.post.Phone] forKey:@"phone"];
-    [savedPost setValue:[NSNumber numberWithInteger:self.post.End_Date] forKey:@"end_Date"];
+    [savedPost setValue:self.post.Post_ID forKey:@"postID"];
+    [savedPost setValue:self.post.Phone forKey:@"phone"];
+    [savedPost setValue:self.post.End_Date forKey:@"end_Date"];
     [savedPost setValue:self.post.Host forKey:@"host"];
     [savedPost setValue:self.post.Email forKey:@"email"];
     [savedPost setValue:self.post.Address forKey:@"address"];
@@ -94,29 +92,6 @@
     NSLog(@"Post saved");
     
     
-}
-
-- (IBAction)touchUpTest:(id)sender {
-
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    //NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:context];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    //[request setEntity:entityDesc];
-    
-    [request setEntity:[NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context]];
-    
-    NSError *error;
-    NSArray *objects = [context executeFetchRequest:request error:&error];
-    
-    NSManagedObject *apost = [objects objectAtIndex:0];
-    
-    NSNumber *blah = [apost valueForKey:@"postID"];
-    
-    self.txtTest.text = [NSString stringWithFormat:@"%@",blah];
 }
 
 /*

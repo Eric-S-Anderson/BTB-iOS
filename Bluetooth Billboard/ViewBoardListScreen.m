@@ -109,7 +109,7 @@
         //set the current board to the seleced board
         NSIndexPath *indexPath = [self.tblBoards indexPathForSelectedRow];
         Board *bufferBoard = [self.boardList objectAtIndex:indexPath.row];
-        NSString *brdName = [NSString stringWithFormat:@"%d",bufferBoard.Board_ID];
+        NSString *brdName = [NSString stringWithFormat:@"%@",bufferBoard.Board_ID];
         [DynamoInterface setCurrentBoard:brdName];
     }
     

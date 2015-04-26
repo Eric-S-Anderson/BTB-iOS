@@ -12,12 +12,12 @@
 
 @interface Board : AWSDynamoDBObjectModel
 
-@property int Board_ID;
+@property NSNumber *Board_ID;
 @property NSString *Board_Name;
 @property NSString *Organization;
-@property int Group_ID;
+@property NSNumber *Group_ID;
 @property NSString *Instructions;
-@property int Moderator_ID;
+@property NSNumber *Moderator_ID;
 @property NSMutableArray *Posts;
 
 @end

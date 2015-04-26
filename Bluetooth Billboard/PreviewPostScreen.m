@@ -30,9 +30,9 @@
     if (self.post != nil){
         self.txtHost.text = self.post.Host;
         self.txtAddress.text = self.post.Address;
-        self.txtPhone.text = [NSString stringWithFormat:@"%ld",self.post.Phone];
+        self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
         self.txtEmail.text = self.post.Email;
-        self.txtDate.text = [NSString stringWithFormat:@"%d",self.post.End_Date];
+        self.txtDate.text = [NSString stringWithFormat:@"%@",self.post.End_Date];
         self.txvInformation.text = self.post.Information;
     }
 }
@@ -55,9 +55,9 @@
 - (IBAction)touchUpSubmit:(id)sender {
     
     //submit the already populated post to the db
-    [DynamoInterface setTableName:@"Board213411"];
-    [DynamoInterface setHashKey:@"Post_ID"];
+    //[DynamoInterface setTableName:@"Board213411"];
+    //[DynamoInterface setHashKey:@"Post_ID"];
     
-    [DynamoInterface savePost:self.post];
+    //[DynamoInterface savePost:self.post];
 }
 @end

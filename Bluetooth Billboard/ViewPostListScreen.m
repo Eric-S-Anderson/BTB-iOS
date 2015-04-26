@@ -11,6 +11,7 @@
 @interface ViewPostListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblPosts;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+- (IBAction)touchUpSaveBoard:(id)sender;
 
 @end
 
@@ -66,6 +67,27 @@ Board *myBoard;
     return cell;
 }
 
+- (IBAction)touchUpSaveBoard:(id)sender {
+
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *savedBoard;
+    savedBoard = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedBoard" inManagedObjectContext:context];
+    Board *bufferBoard = [DynamoInterface getSingleBoardInformation:[[DynamoInterface getCurrentBoard] intValue]];
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    
+    [savedBoard setValue:bufferBoard.Board_ID forKey:@"boardID"];
+    [savedBoard setValue:bufferBoard.Group_ID forKey:@"groupID"];
+    [savedBoard setValue:bufferBoard.Moderator_ID forKey:@"moderatorID"];
+    [savedBoard setValue:bufferBoard.Organization forKey:@"organization"];
+    [savedBoard setValue:bufferBoard.Instructions forKey:@"instructions"];
+    [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
+    NSError *error;
+    [context save:&error];
+    NSLog(@"Board saved");
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -79,6 +101,7 @@ Board *myBoard;
     }
     
 }
+
 
 
 @end

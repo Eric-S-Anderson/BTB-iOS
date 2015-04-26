@@ -20,18 +20,4 @@
     return [DynamoInformation getHashKey];
 }
 
--(id)init{
-    
-    self.Post_ID = -1;
-    self.End_Date = -1;
-    self.Phone = -1;
-    self.Host = nil;
-    self.Address = nil;
-    self.Post_Status = nil;
-    self.Post_Type = nil;
-    self.Email = nil;
-    self.Information = nil;
-    return self;
-}
-
 @end

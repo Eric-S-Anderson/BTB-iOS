@@ -102,7 +102,7 @@
     //set the current board to the selected board
     //this only occurs immediately before the modal exit segue
     Board *bufferBoard = [self.filterBoards objectAtIndex:indexPath.row];
-    NSString *brdName = [NSString stringWithFormat:@"%d",bufferBoard.Board_ID];
+    NSString *brdName = [NSString stringWithFormat:@"%@",bufferBoard.Board_ID];
     [DynamoInterface setCurrentBoard:brdName];
 }
 

@@ -131,13 +131,12 @@
     Post *post = [Post new];
     post.Host = self.txtHost.text;
     post.Address = self.txtAddress.text;
-    PhoneNumber *phoneBuffer = [[PhoneNumber alloc] initWithString:(self.txtPhone.text)];
-    post.Phone = phoneBuffer.value;
+    post.Phone = [NSNumber numberWithInteger:[self.txtPhone.text integerValue]];
     post.Email = self.txtEmail.text;
-    post.End_Date = [self.txtDate.text intValue];
+    post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
     post.Post_Type = self.txtPostType.text;
     post.Information = self.txvInformation.text;
-    post.Post_ID = arc4random_uniform(99999999);  //easy auto-id, possible collisions
+    post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id
     post.Post_Status = @"Queued";
     
     [DynamoInterface setTableName:@"Board213411"];
@@ -162,12 +161,12 @@
         Post *post = [Post new];
         post.Host = self.txtHost.text;
         post.Address = self.txtAddress.text;
-        post.Phone = [self.txtPhone.text intValue];
+        post.Phone = [NSNumber numberWithInteger:[self.txtPhone.text integerValue]];
         post.Email = self.txtEmail.text;
-        post.End_Date = [self.txtDate.text intValue];
+        post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
         post.Post_Type = self.txtPostType.text;
         post.Information = self.txvInformation.text;
-        post.Post_ID = arc4random_uniform(99999999);  //easy auto-id, possible collisions
+        post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id
         post.Post_Status = @"Queued";
         
         destViewController.post = post;
