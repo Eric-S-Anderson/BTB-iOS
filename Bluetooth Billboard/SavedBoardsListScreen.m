@@ -23,6 +23,12 @@ NSMutableArray *boards;
     self.tblBoards.dataSource = self;
     self.tblBoards.delegate = self;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -48,6 +54,8 @@ NSMutableArray *boards;
         buffer.Board_Name = [aboard valueForKey:@"boardName"];
         [boards addObject:buffer];
     }
+    
+    [self.tblBoards reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

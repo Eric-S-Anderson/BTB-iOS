@@ -28,8 +28,7 @@
     self.allBoards = [[NSMutableArray alloc] init];     //initialize storage array
 
     self.allBoards = [DynamoInterface getAllBoardInformation:self.allBoards];
-    
-    while ([DynamoInterface getQueryStatus] < 0){}
+
 }
 
 - (void)didReceiveMemoryWarning {

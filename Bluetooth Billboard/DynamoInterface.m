@@ -13,32 +13,44 @@
 int queryStatus;
 NSString *TableName;
 NSString *HashKey;
-NSString *currentBoard = @"213411";
+NSString *currentBoard;
+Board *fullBoard;
 
 +(void)setTableName:(NSString*)Name{
+    //set table name
     TableName = Name;
 }
 
 +(void)setHashKey:(NSString*)Key{
+    //set hash key
     HashKey = Key;
 }
 
 +(NSString *)dynamoDBTableName{
-    
+    //return table name
     return TableName;
 }
 
 +(NSString *)hashKeyAttribute{
-    
+    //return hash key for a query/scan
     return HashKey;
 }
 
 +(void)setCurrentBoard:(NSString*)newBoard{
+    //sets current board and gets info for it
     currentBoard = newBoard;
     NSLog(@"Current board set to %@", currentBoard);
+    fullBoard = [DynamoInterface getSingleBoardInformation:[currentBoard intValue]];
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+}
+
++(Board *)getCurrentBoardInfo{
+    //return curent board info
+    return fullBoard;
 }
 
 +(NSString *)getCurrentBoard{
+    //return current board name
     return currentBoard;
 }
 
@@ -52,9 +64,11 @@ NSString *currentBoard = @"213411";
     NSURL *connectivityTester = [NSURL URLWithString:@"http://www.google.com"];
     NSData *resultData = [NSData dataWithContentsOfURL:connectivityTester];
     if (resultData){
+        //connection to google was made
         NSLog(@"Device is connected to the internet");
         return true;
     }else{
+        //connection was not made
         NSLog(@"Device is not connected to the internet");
         return false;
     }
@@ -63,10 +77,10 @@ NSString *currentBoard = @"213411";
 +(NSMutableArray*)getAllBoardInformation:(NSMutableArray*)emptyList{
     
     //aws credentials
-    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]
-                                                          initWithRegionType:AWSRegionUSEast1
-                                                          identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    //aws service configuration
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:credentialsProvider];
+    //aws service manager
     [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
     //aws object mapper
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
@@ -78,6 +92,7 @@ NSString *currentBoard = @"213411";
     HashKey = @"Board_ID";
     
     queryStatus = -1;           //reset query status
+    NSLog(@"Waiting for database reponse...");
     
     if (self.isConnected){
         [[dynamoDBObjectMapper scan:[Board class] expression:scanExpression]
@@ -103,29 +118,32 @@ NSString *currentBoard = @"213411";
     }else{
         queryStatus = 3;
     }
+    
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+
     return emptyList;
 }
 
 +(Board*)getSingleBoardInformation:(int)ident{
     
+    //aws credentials
     AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]
-                                                          initWithRegionType:AWSRegionUSEast1
-                                                          identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
-    
+        initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    //aws service configuration
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:credentialsProvider];
-    
+    //aws service manager
     [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
-    
+    //aws object mapper
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
     
     Board *fillBoard = [Board new];
-    
     TableName = @"Board";    //set table name and key
     HashKey = @"Board_ID";
-    
     NSNumber *recasted = [NSNumber numberWithInt:(ident)];
     fillBoard.Posts = [[NSMutableArray alloc] init];     //initialize storage array
+    
     queryStatus = -1;           //reset query status
+    NSLog(@"Waiting for database reponse...");
     
     if (self.isConnected){
         [[dynamoDBObjectMapper load:[Board class] hashKey:recasted rangeKey:nil]
@@ -154,15 +172,19 @@ NSString *currentBoard = @"213411";
     }else{
         queryStatus = 3;
     }
+    
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+
     return fillBoard;
 }
 
 +(Board*)getFilteredPosts:(NSString *)ident statFilter:(NSString*)filter{
+    
     //aws credentials
-    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]
-                                                          initWithRegionType:AWSRegionUSEast1
-                                                          identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    //aws service configuration
     AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:credentialsProvider];
+    //aws service manager
     [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
     //aws object mapper
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
@@ -184,11 +206,11 @@ NSString *currentBoard = @"213411";
     NSString *fullBoardID = [brdBlank stringByAppendingString:(ident)];
     TableName = fullBoardID;    //set table name and key
     HashKey = @"Post_ID";
-    
     Board *fillBoard = [Board new];
-    
     fillBoard.Posts = [[NSMutableArray alloc] init];     //initialize storage array
+    
     queryStatus = -1;           //reset query status
+    NSLog(@"Waiting for database reponse...");
     
     if (self.isConnected){
         [[dynamoDBObjectMapper scan:[Post class] expression:scanExpression]
@@ -207,33 +229,99 @@ NSString *currentBoard = @"213411";
                      [fillBoard.Posts addObject:post];   //store each result
                  }
                  queryStatus = 0;   //success code
-                 NSLog(@"Scan Sucessful");
+                 NSLog(@"Scan successful");
              }
              return nil;
          }];
     }else{
         queryStatus = 3;
     }
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    
     return fillBoard;
 }
 
 +(void)savePost:(Post*)toBeSaved{
     
+    //aws object mapper
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
     
-    [[dynamoDBObjectMapper save:toBeSaved]
+    queryStatus = -1;
+    NSLog(@"Waiting for database reponse...");
+    
+    if (self.isConnected){
+        [[dynamoDBObjectMapper save:toBeSaved] continueWithBlock:^id(BFTask *task) {
+            if (task.error) {
+                queryStatus = 1;    //error code
+                NSLog(@"The request failed. Error: [%@]", task.error);
+            }
+            if (task.exception) {
+                queryStatus = 2;    //exception code
+                NSLog(@"The request failed. Exception: [%@]", task.exception);
+            }
+            if (task.result) {
+                queryStatus = 0;   //success code
+                NSLog(@"Save successful");
+            }
+            return nil;
+        }];
+    }else{
+        queryStatus = 3;
+    }
+    
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+
+}
+
++(BOOL)verifyCredentials:(NSString *)User pWord:(NSString *)Pass{
+    
+    BOOL verified = false;
+    Moderator *aMod = [Moderator new];
+    NSString *recasted = [NSString stringWithFormat:@"%@",fullBoard.Moderator_ID];
+    //aws object mapper
+    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    
+    TableName = @"Moderator";    //set table name and key
+    HashKey = @"Moderator_ID";
+    queryStatus = -1;
+    NSLog(@"Waiting for database reponse...");
+    
+    if (self.isConnected){
+    [[dynamoDBObjectMapper load:[Moderator class] hashKey:recasted rangeKey:nil]
      continueWithBlock:^id(BFTask *task) {
          if (task.error) {
+             queryStatus = 1;    //error code
              NSLog(@"The request failed. Error: [%@]", task.error);
          }
          if (task.exception) {
+             queryStatus = 2;    //exception code
              NSLog(@"The request failed. Exception: [%@]", task.exception);
          }
          if (task.result) {
-             //Do something with the result.
+             Moderator *bMod = task.result;
+             aMod.Moderator_ID = bMod.Moderator_ID;
+             aMod.Username = bMod.Username;
+             aMod.Password = bMod.Password;
+             queryStatus = 0;   //success code
+             NSLog(@"Query successful");
          }
          return nil;
      }];
+    }else{
+        queryStatus = 3;
+    }
+    
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    
+    if ([aMod.Username isEqualToString:User] && [aMod.Password isEqualToString:Pass]){
+        verified = true;
+        NSLog(@"Username and password verified");
+    }else{
+        verified = false;
+        NSLog(@"Invalid username and/or password");
+    }
+    
+    return verified;
 }
 
 @end

@@ -18,6 +18,7 @@
 @implementation ViewPostListScreen
 
 Board *myBoard;
+NSMutableArray *filteredPosts;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +26,8 @@ Board *myBoard;
     //initializations
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
+    
+    
     
 }
 
@@ -34,8 +37,30 @@ Board *myBoard;
     [super viewDidAppear:animated];
     
     myBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Posted"];
-    NSLog(@"Waiting for database response...");
-    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    filteredPosts = [[NSMutableArray alloc] init];
+    [filteredPosts removeAllObjects];
+    NSArray *blockedTypes = [[NSUserDefaults standardUserDefaults] objectForKey:@"blockedTypes"];
+    NSArray *blockedHosts = [[NSUserDefaults standardUserDefaults] objectForKey:@"blockedHosts"];
+    bool foundIT = false;
+    
+    //filteredPosts = myBoard.Posts;
+    for (unsigned int i = 0; i < myBoard.Posts.count; i++){
+        foundIT = false;
+        Post *filterMe = [myBoard.Posts objectAtIndex:i];
+        for (unsigned int j = 0; j < blockedTypes.count; j++){
+            if ([[blockedTypes objectAtIndex:j] isEqualToString:filterMe.Post_Type]){
+                foundIT = true;
+            }
+        }
+        for (unsigned int k = 0; k < blockedHosts.count; k++){
+            if ([[blockedHosts objectAtIndex:k] isEqualToString:filterMe.Host]){
+                foundIT = true;
+            }
+        }
+        if (!foundIT){
+            [filteredPosts addObject:filterMe];
+        }
+    }
     
     [self.tblPosts reloadData];
 }
@@ -54,14 +79,14 @@ Board *myBoard;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [myBoard.Posts count];
+    return [filteredPosts count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //get information for table cells
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeCell" forIndexPath:indexPath];
-    Post *post = [myBoard.Posts objectAtIndex:indexPath.row];
+    Post *post = [filteredPosts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.Host;
     cell.detailTextLabel.text = post.Information;
     return cell;
@@ -72,20 +97,36 @@ Board *myBoard;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSManagedObject *savedBoard;
-    savedBoard = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedBoard" inManagedObjectContext:context];
-    Board *bufferBoard = [DynamoInterface getSingleBoardInformation:[[DynamoInterface getCurrentBoard] intValue]];
-    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
     
-    [savedBoard setValue:bufferBoard.Board_ID forKey:@"boardID"];
-    [savedBoard setValue:bufferBoard.Group_ID forKey:@"groupID"];
-    [savedBoard setValue:bufferBoard.Moderator_ID forKey:@"moderatorID"];
-    [savedBoard setValue:bufferBoard.Organization forKey:@"organization"];
-    [savedBoard setValue:bufferBoard.Instructions forKey:@"instructions"];
-    [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
+    Board *bufferBoard = [DynamoInterface getCurrentBoardInfo];
+    
     NSError *error;
-    [context save:&error];
-    NSLog(@"Board saved");
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity =
+    [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardID == %@", bufferBoard.Board_ID];
+    [request setPredicate:predicate];
+    
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if (array.count == 0) {
+        NSManagedObject *savedBoard;
+        savedBoard =
+        [NSEntityDescription insertNewObjectForEntityForName:@"ManagedBoard" inManagedObjectContext:context];
+        [savedBoard setValue:bufferBoard.Board_ID forKey:@"boardID"];
+        [savedBoard setValue:bufferBoard.Group_ID forKey:@"groupID"];
+        [savedBoard setValue:bufferBoard.Moderator_ID forKey:@"moderatorID"];
+        [savedBoard setValue:bufferBoard.Organization forKey:@"organization"];
+        [savedBoard setValue:bufferBoard.Instructions forKey:@"instructions"];
+        [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
+        [context save:&error];
+        NSLog(@"Board saved");
+    }else{
+        NSLog(@"Board has already been saved.");
+    }
+    
 }
 
 #pragma mark - Navigation
@@ -96,7 +137,7 @@ Board *myBoard;
     if ([segue.identifier isEqualToString:@"postViewSegue"]) {
         NSIndexPath *indexPath = [self.tblPosts indexPathForSelectedRow];
         ViewPostScreen *destViewController = segue.destinationViewController;
-        Post *post = [myBoard.Posts objectAtIndex:indexPath.row];
+        Post *post = [filteredPosts objectAtIndex:indexPath.row];
         destViewController.post = post;
     }
     

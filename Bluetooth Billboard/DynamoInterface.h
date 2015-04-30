@@ -12,6 +12,7 @@
 #import <AWSCognito/AWSCognito.h>
 #import "Board.h"
 #import "Post.h"
+#import "Moderator.h"
 #import "AppDelegate.h"
 
 @interface DynamoInterface : NSObject
@@ -20,6 +21,7 @@
 +(void)setTableName:(NSString*)Name;
 +(void)setHashKey:(NSString*)Key;
 +(void)setCurrentBoard:(NSString*)newBoard;
++(Board*)getCurrentBoardInfo;
 +(NSString*)getCurrentBoard;
 +(int)getQueryStatus;
 +(BOOL)isConnected;
@@ -27,5 +29,6 @@
 +(Board*)getSingleBoardInformation:(int)ident;
 +(Board*)getFilteredPosts:(NSString *)ident statFilter:(NSString*)filter;
 +(void)savePost:(Post*)toBeSaved;
++(BOOL)verifyCredentials:(NSString *)User pWord:(NSString *)Pass;
 
 @end

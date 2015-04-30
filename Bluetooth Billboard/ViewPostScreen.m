@@ -53,22 +53,42 @@
 
 - (IBAction)touchUpBlockHost:(id)sender {
     
+    bool foundIT = false;
     NSMutableArray *banHosts = [[NSMutableArray alloc] init];
     NSString *blockHost = [NSString stringWithString:self.post.Host];
     banHosts = [[[NSUserDefaults standardUserDefaults] objectForKey:@"blockedHosts"]mutableCopy];
-    [banHosts addObject:blockHost];
+    for (unsigned int i = 0; i < banHosts.count; i++){
+        if ([banHosts objectAtIndex:i] == blockHost){
+            foundIT = true;
+        }
+    }
+    if (!foundIT){
+        [banHosts addObject:blockHost];
+        NSLog(@"Host %@ has been banned", blockHost);
+    }else{
+        NSLog(@"Host was already banned");
+    }
     [[NSUserDefaults standardUserDefaults] setObject:banHosts forKey:@"blockedHosts"];
-    NSLog(@"Host '%@' has been blocked.", self.post.Host);
 }
 
 - (IBAction)touchUpBlockType:(id)sender {
     
+    bool foundIT = false;
     NSMutableArray *banType = [[NSMutableArray alloc] init];
     NSString *blockType = [NSString stringWithString:self.post.Post_Type];
     banType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"blockedTypes"]mutableCopy];
-    [banType addObject:blockType];
+    for (unsigned int i = 0; i < banType.count; i++){
+        if ([banType objectAtIndex:i] == blockType){
+            foundIT = true;
+        }
+    }
+    if (!foundIT){
+        [banType addObject:blockType];
+        NSLog(@"Type %@ has been banned", blockType);
+    }else{
+        NSLog(@"Type was already banned");
+    }
     [[NSUserDefaults standardUserDefaults] setObject:banType forKey:@"blockedTypes"];
-    NSLog(@"Type '%@' has been blocked.", self.post.Post_Type);
 }
 
 - (IBAction)touchUpSave:(id)sender {
@@ -76,21 +96,35 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSManagedObject *savedPost;
-    savedPost = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedPost" inManagedObjectContext:context];
-    [savedPost setValue:self.post.Post_ID forKey:@"postID"];
-    [savedPost setValue:self.post.Phone forKey:@"phone"];
-    [savedPost setValue:self.post.End_Date forKey:@"end_Date"];
-    [savedPost setValue:self.post.Host forKey:@"host"];
-    [savedPost setValue:self.post.Email forKey:@"email"];
-    [savedPost setValue:self.post.Address forKey:@"address"];
-    [savedPost setValue:self.post.Information forKey:@"information"];
-    [savedPost setValue:self.post.Post_Type forKey:@"post_Type"];
-    [savedPost setValue:self.post.Post_Status forKey:@"post_Status"];
-    NSError *error;
-    [context save:&error];
-    NSLog(@"Post saved");
     
+    
+    NSError *error;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postID == %@", self.post.Post_ID];
+    [request setPredicate:predicate];
+    
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if (array.count == 0) {
+        NSManagedObject *savedPost;
+        savedPost = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedPost" inManagedObjectContext:context];
+        [savedPost setValue:self.post.Post_ID forKey:@"postID"];
+        [savedPost setValue:self.post.Phone forKey:@"phone"];
+        [savedPost setValue:self.post.End_Date forKey:@"end_Date"];
+        [savedPost setValue:self.post.Host forKey:@"host"];
+        [savedPost setValue:self.post.Email forKey:@"email"];
+        [savedPost setValue:self.post.Address forKey:@"address"];
+        [savedPost setValue:self.post.Information forKey:@"information"];
+        [savedPost setValue:self.post.Post_Type forKey:@"post_Type"];
+        [savedPost setValue:self.post.Post_Status forKey:@"post_Status"];
+        [context save:&error];
+        NSLog(@"Post saved");
+    }else{
+        NSLog(@"Post has already been saved.");
+    }
     
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DynamoInterface.h"
 
 @interface ModeratorLoginScreen : UIViewController
 

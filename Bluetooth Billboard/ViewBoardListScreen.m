@@ -59,7 +59,6 @@
             [self.scanResults addObject:peripheral.name];
             if ([peripheral.name isEqualToString:@"BLEbeacon116826"]){
                 Board *foundBoard = [DynamoInterface getSingleBoardInformation:[@"776655" intValue]];
-                while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
                 [self.boardList addObject:foundBoard];
             }else if ([peripheral.name isEqualToString:@"Bluetooth6127"]){
                 Board *foundBoard = [DynamoInterface getSingleBoardInformation:[@"213411" intValue]];

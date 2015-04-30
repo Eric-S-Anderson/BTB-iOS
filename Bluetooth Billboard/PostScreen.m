@@ -139,7 +139,6 @@
     post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id
     post.Post_Status = @"Queued";
     
-    [DynamoInterface setTableName:@"Board213411"];
     [DynamoInterface setHashKey:@"Post_ID"];
     
     [DynamoInterface savePost:post];

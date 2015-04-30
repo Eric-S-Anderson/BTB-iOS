@@ -14,6 +14,7 @@
 #import <AWSSNS/AWSSNS.h>
 #import <AWSSQS/AWSSQS.h>
 #import <CoreData/CoreData.h>
+#import "DynamoInterface.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

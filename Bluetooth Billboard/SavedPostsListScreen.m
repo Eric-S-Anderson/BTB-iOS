@@ -23,6 +23,12 @@ NSMutableArray *posts;
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+ 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -52,8 +58,7 @@ NSMutableArray *posts;
         [posts addObject:buffer];
     }
     
-    
-    
+    [self.tblPosts reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

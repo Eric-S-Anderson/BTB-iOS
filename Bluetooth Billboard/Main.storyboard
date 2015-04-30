@@ -1019,12 +1019,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kw7-Kd-1A2">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Admin" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kw7-Kd-1A2">
                                 <rect key="frame" x="89" y="253" width="212" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gdh-l1-U9h">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gdh-l1-U9h">
                                 <rect key="frame" x="89" y="298" width="212" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1056,7 +1056,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="uD5-VT-etj" kind="push" id="qXW-Ku-Tgn"/>
+                                    <action selector="touchUpLogin:" destination="7Oc-pg-XP8" eventType="touchUpInside" id="lat-SS-Buk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1065,6 +1065,12 @@
                     <navigationItem key="navigationItem" title="Moderator Login" id="iy1-fX-ugY">
                         <barButtonItem key="backBarButtonItem" title="Back" id="NPs-fw-sYQ"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnLogin" destination="R8v-vS-Riu" id="Fn2-I5-Tvk"/>
+                        <outlet property="txtPass" destination="gdh-l1-U9h" id="3oA-ad-aPa"/>
+                        <outlet property="txtUser" destination="Kw7-Kd-1A2" id="nfM-yD-WvF"/>
+                        <segue destination="uD5-VT-etj" kind="push" identifier="moderatorLoginSegue" id="WD1-xY-RnP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDb-BZ-MfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

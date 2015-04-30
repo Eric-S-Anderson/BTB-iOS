@@ -55,9 +55,9 @@
 - (IBAction)touchUpSubmit:(id)sender {
     
     //submit the already populated post to the db
-    //[DynamoInterface setTableName:@"Board213411"];
-    //[DynamoInterface setHashKey:@"Post_ID"];
+
+    [DynamoInterface setHashKey:@"Post_ID"];
     
-    //[DynamoInterface savePost:self.post];
+    [DynamoInterface savePost:self.post];
 }
 @end

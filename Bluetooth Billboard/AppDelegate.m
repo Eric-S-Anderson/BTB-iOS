@@ -46,6 +46,8 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:hosts];
     [[NSUserDefaults standardUserDefaults] registerDefaults:types];
     
+    [DynamoInterface setCurrentBoard:@"213411"];
+    
     return YES;
 }
 
