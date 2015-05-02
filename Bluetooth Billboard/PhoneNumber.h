@@ -12,10 +12,10 @@
 
 @property NSString *formattedNumber;
 @property NSString *unformattedNumber;
-@property long value;
+@property NSNumber *value;
 
 -(id)initWithString:(NSString*)numberString;
--(id)initWithLong:(long)numberValue;
+-(id)initWithNumber:(NSNumber*)numberValue;
 -(id)init;
 
 @end

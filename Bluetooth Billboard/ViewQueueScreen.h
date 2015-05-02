@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "DynamoInterface.h"
 
-@interface ViewQueueScreen : UIViewController
+@interface ViewQueueScreen : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property Post *post;
 

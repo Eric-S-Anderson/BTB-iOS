@@ -59,6 +59,17 @@
     
     [DynamoInterface savePost:self.post];
     
+    NSString *mesApproval = @"Your post has been approved!\n\n";
+    
+    MFMailComposeViewController *sendMe = [[MFMailComposeViewController alloc] init];
+    [sendMe setMailComposeDelegate:self];
+    if ([MFMailComposeViewController canSendMail]) {
+        [sendMe setToRecipients:[NSArray arrayWithObject:self.post.Email]];
+        [sendMe setMessageBody:mesApproval isHTML:false];
+        [sendMe setSubject:@"Your post has been approved!"];
+        [self presentViewController:sendMe animated:YES completion:NULL];
+    }
+    
     self.txtHost.text = @"";
     self.txtAddress.text = @"";
     self.txtPhone.text = @"";
@@ -73,11 +84,49 @@
     
     [DynamoInterface savePost:self.post];
     
+    NSString *mesDenial = @"Your post has been denied!\n\n";
+    
+    MFMailComposeViewController *sendMe = [[MFMailComposeViewController alloc] init];
+    [sendMe setMailComposeDelegate:self];
+    if ([MFMailComposeViewController canSendMail]) {
+        [sendMe setToRecipients:[NSArray arrayWithObject:self.post.Email]];
+        [sendMe setMessageBody:mesDenial isHTML:false];
+        [sendMe setSubject:@"Your post has been denied!"];
+        [self presentViewController:sendMe animated:YES completion:NULL];
+    }
+    
     self.txtHost.text = @"";
     self.txtAddress.text = @"";
     self.txtPhone.text = @"";
     self.txtEmail.text = @"";
     self.txtDate.text = @"";
     self.txvInformation.text = @"";
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error{
+    
+    if(error) {
+        NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
+    }
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
+    return;
 }
 @end

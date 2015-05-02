@@ -31,11 +31,11 @@
 - (IBAction)touchUpLogin:(id)sender {
     
     /*********************Login Override********************/
-    /*
+    
     if ([self.txtUser.text isEqualToString:@"Admin"] && [self.txtPass.text isEqualToString:@"12345"]){
         [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
     }
-    */
+    
     /**********************End Override*********************/
     
     if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text]){

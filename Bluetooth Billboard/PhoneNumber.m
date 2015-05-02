@@ -13,16 +13,18 @@
 
 -(id)initWithString:(NSString*)numberString{
 
-    long checkLong;
+    NSNumber *checkLong;
     NSString *formatString;
-    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    checkLong = [formatter numberFromString:numberString];
     if (numberString.length <= 10 && numberString.length >= 13){
-        if ((checkLong = [numberString longLongValue]) != 0){
-            return [self initWithLong:checkLong];
+        if (checkLong != nil){
+            return [self initWithNumber:checkLong];
         }else{
             formatString = [[numberString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
-            if ((checkLong = [formatString longLongValue]) != 0){
-                return [self initWithLong:checkLong];
+            if (checkLong!= nil){
+                return [self initWithNumber:checkLong];
             }else{
                 return nil;
             }
@@ -33,13 +35,13 @@
     return self;
 }
 
--(id)initWithLong:(long)numberValue{
+-(id)initWithNumber:(NSNumber*)numberValue{
     
     NSMutableString *formatString;
     
-    if (numberValue <= 9999999999 && numberValue > 999999999){
+    if (numberValue.longValue <= 9999999999 && numberValue.longValue > 999999999){
         self.value = numberValue;
-        self.unformattedNumber = [NSString stringWithFormat:@"%ld",numberValue];
+        self.unformattedNumber = [NSString stringWithFormat:@"%@",numberValue];
         formatString = [NSMutableString stringWithString:self.unformattedNumber];
         [formatString insertString:@"(" atIndex:0];
         [formatString insertString:@")" atIndex:3];
@@ -55,7 +57,7 @@
     
     self.formattedNumber = nil;
     self.unformattedNumber = nil;
-    self.value = -1;
+    self.value = nil;
     return self;
 }
 

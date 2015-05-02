@@ -131,7 +131,8 @@
     Post *post = [Post new];
     post.Host = self.txtHost.text;
     post.Address = self.txtAddress.text;
-    post.Phone = [NSNumber numberWithInteger:[self.txtPhone.text integerValue]];
+    PhoneNumber *postPhone = [[PhoneNumber alloc] initWithString:self.txtPhone.text];
+    post.Phone = postPhone.value;
     post.Email = self.txtEmail.text;
     post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
     post.Post_Type = self.txtPostType.text;
@@ -160,7 +161,8 @@
         Post *post = [Post new];
         post.Host = self.txtHost.text;
         post.Address = self.txtAddress.text;
-        post.Phone = [NSNumber numberWithInteger:[self.txtPhone.text integerValue]];
+        PhoneNumber *postPhone = [[PhoneNumber alloc] initWithString:self.txtPhone.text];
+        post.Phone = postPhone.value;
         post.Email = self.txtEmail.text;
         post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
         post.Post_Type = self.txtPostType.text;

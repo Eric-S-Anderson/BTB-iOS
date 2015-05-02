@@ -71,6 +71,7 @@
 		14C0793D1AC7345700D32B76 /* sns-2010-03-31.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C0792E1AC7345700D32B76 /* sns-2010-03-31.json */; };
 		14C0793E1AC7345700D32B76 /* sqs-2012-11-05.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C0792F1AC7345700D32B76 /* sqs-2012-11-05.json */; };
 		14C0793F1AC7345700D32B76 /* sts-2011-06-15.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C079301AC7345700D32B76 /* sts-2011-06-15.json */; };
+		14D8D2811AF53AB900D240A7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D8D2801AF53AB900D240A7 /* MessageUI.framework */; };
 		14E379C91AD07A4800929A6F /* PreviewPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E379C81AD07A4800929A6F /* PreviewPostScreen.m */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +164,7 @@
 		14C0792E1AC7345700D32B76 /* sns-2010-03-31.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sns-2010-03-31.json"; sourceTree = "<group>"; };
 		14C0792F1AC7345700D32B76 /* sqs-2012-11-05.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sqs-2012-11-05.json"; sourceTree = "<group>"; };
 		14C079301AC7345700D32B76 /* sts-2011-06-15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sts-2011-06-15.json"; sourceTree = "<group>"; };
+		14D8D2801AF53AB900D240A7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		14E379C71AD07A4800929A6F /* PreviewPostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPostScreen.h; sourceTree = "<group>"; };
 		14E379C81AD07A4800929A6F /* PreviewPostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPostScreen.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14D8D2811AF53AB900D240A7 /* MessageUI.framework in Frameworks */,
 				14406EE81AEC57FB00DC5BD3 /* CoreData.framework in Frameworks */,
 				144F40371AE9552600DBB35D /* AWSAutoScaling.framework in Frameworks */,
 				144F40381AE9552600DBB35D /* AWSCloudWatch.framework in Frameworks */,
@@ -205,6 +208,96 @@
 			isa = PBXGroup;
 			children = (
 				14406EE91AEC5A6800DC5BD3 /* BTB.xcdatamodeld */,
+				14D8D2AC1AF54AC300D240A7 /* Frameworks */,
+				14B60AA11AC38A2C0081D55A /* Bluetooth Billboard */,
+				14B60AA01AC38A2C0081D55A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14B60AA01AC38A2C0081D55A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14B60A9F1AC38A2C0081D55A /* Bluetooth Billboard.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14B60AA11AC38A2C0081D55A /* Bluetooth Billboard */ = {
+			isa = PBXGroup;
+			children = (
+				14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */,
+				14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */,
+				14D8D2AE1AF54B2900D240A7 /* View Controllers */,
+				14D8D28E1AF545E300D240A7 /* Interfaces */,
+				14D8D28D1AF545CD00D240A7 /* Data Classes */,
+				14D8D2AD1AF54B0100D240A7 /* Other Classes */,
+				14D8D2AF1AF54B7100D240A7 /* Application Controllers */,
+				14B60AA21AC38A2C0081D55A /* Supporting Files */,
+				14D8D28C1AF5459500D240A7 /* JSON Files */,
+				144FB0771AC878A4004008E0 /* Images-2.xcassets */,
+			);
+			path = "Bluetooth Billboard";
+			sourceTree = "<group>";
+		};
+		14B60AA21AC38A2C0081D55A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14B60AA31AC38A2C0081D55A /* Info.plist */,
+				14B60AA41AC38A2C0081D55A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14D8D28C1AF5459500D240A7 /* JSON Files */ = {
+			isa = PBXGroup;
+			children = (
+				14C079221AC7345700D32B76 /* autoscaling-2011-01-01.json */,
+				14C079231AC7345700D32B76 /* cognito-identity-2014-06-30.json */,
+				14C079241AC7345700D32B76 /* css-2014-06-30.json */,
+				14C079251AC7345700D32B76 /* dynamodb-2012-08-10.json */,
+				14C079261AC7345700D32B76 /* ec2-2014-09-01.json */,
+				14C079271AC7345700D32B76 /* elasticloadbalancing-2012-06-01.json */,
+				14C079281AC7345700D32B76 /* email-2010-12-01.json */,
+				14C079291AC7345700D32B76 /* kinesis-2013-12-02.json */,
+				14C0792A1AC7345700D32B76 /* mobileanalytics-2014-06-30.json */,
+				14C0792B1AC7345700D32B76 /* monitoring-2010-08-01.json */,
+				14C0792C1AC7345700D32B76 /* s3-2006-03-01.json */,
+				14C0792D1AC7345700D32B76 /* sdb-2009-04-15.json */,
+				14C0792E1AC7345700D32B76 /* sns-2010-03-31.json */,
+				14C0792F1AC7345700D32B76 /* sqs-2012-11-05.json */,
+				14C079301AC7345700D32B76 /* sts-2011-06-15.json */,
+			);
+			name = "JSON Files";
+			sourceTree = "<group>";
+		};
+		14D8D28D1AF545CD00D240A7 /* Data Classes */ = {
+			isa = PBXGroup;
+			children = (
+				14A6AF761ACF2DD200EB4486 /* Board.h */,
+				14A6AF771ACF2DD200EB4486 /* Board.m */,
+				14287AFE1AC47E65007FC7B1 /* Post.h */,
+				14287AFF1AC483D3007FC7B1 /* Post.m */,
+				1454E5AB1AF2CF68005EB994 /* Moderator.h */,
+				1454E5AC1AF2CF68005EB994 /* Moderator.m */,
+			);
+			name = "Data Classes";
+			sourceTree = "<group>";
+		};
+		14D8D28E1AF545E300D240A7 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				144F404F1AE96A7C00DBB35D /* DynamoInterface.h */,
+				144F40501AE96A7C00DBB35D /* DynamoInterface.m */,
+				144F40521AE97DED00DBB35D /* DynamoInformation.h */,
+				144F40531AE97DEE00DBB35D /* DynamoInformation.m */,
+			);
+			name = Interfaces;
+			sourceTree = "<group>";
+		};
+		14D8D2AC1AF54AC300D240A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14D8D2801AF53AB900D240A7 /* MessageUI.framework */,
 				14406EE71AEC57FB00DC5BD3 /* CoreData.framework */,
 				144F40221AE9552600DBB35D /* AWSAutoScaling.framework */,
 				144F40231AE9552600DBB35D /* AWSCloudWatch.framework */,
@@ -229,45 +322,22 @@
 				144F40361AE9552600DBB35D /* XMLDictionary.framework */,
 				1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */,
 				1463FBA71AC7A45B0029E340 /* CoreLocation.framework */,
-				14B60AA11AC38A2C0081D55A /* Bluetooth Billboard */,
-				14B60AA01AC38A2C0081D55A /* Products */,
 			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		14B60AA01AC38A2C0081D55A /* Products */ = {
+		14D8D2AD1AF54B0100D240A7 /* Other Classes */ = {
 			isa = PBXGroup;
 			children = (
-				14B60A9F1AC38A2C0081D55A /* Bluetooth Billboard.app */,
+				144F404C1AE955C800DBB35D /* PhoneNumber.h */,
+				144F404D1AE955C800DBB35D /* PhoneNumber.m */,
 			);
-			name = Products;
+			name = "Other Classes";
 			sourceTree = "<group>";
 		};
-		14B60AA11AC38A2C0081D55A /* Bluetooth Billboard */ = {
+		14D8D2AE1AF54B2900D240A7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				14C079221AC7345700D32B76 /* autoscaling-2011-01-01.json */,
-				14C079231AC7345700D32B76 /* cognito-identity-2014-06-30.json */,
-				14C079241AC7345700D32B76 /* css-2014-06-30.json */,
-				14C079251AC7345700D32B76 /* dynamodb-2012-08-10.json */,
-				14C079261AC7345700D32B76 /* ec2-2014-09-01.json */,
-				14C079271AC7345700D32B76 /* elasticloadbalancing-2012-06-01.json */,
-				14C079281AC7345700D32B76 /* email-2010-12-01.json */,
-				14C079291AC7345700D32B76 /* kinesis-2013-12-02.json */,
-				14C0792A1AC7345700D32B76 /* mobileanalytics-2014-06-30.json */,
-				14C0792B1AC7345700D32B76 /* monitoring-2010-08-01.json */,
-				14C0792C1AC7345700D32B76 /* s3-2006-03-01.json */,
-				14C0792D1AC7345700D32B76 /* sdb-2009-04-15.json */,
-				14C0792E1AC7345700D32B76 /* sns-2010-03-31.json */,
-				14C0792F1AC7345700D32B76 /* sqs-2012-11-05.json */,
-				14C079301AC7345700D32B76 /* sts-2011-06-15.json */,
-				14B60AA61AC38A2C0081D55A /* AppDelegate.h */,
-				14B60AA71AC38A2C0081D55A /* AppDelegate.m */,
-				14B60AA91AC38A2C0081D55A /* RootViewController.h */,
-				14B60AAA1AC38A2C0081D55A /* RootViewController.m */,
-				14B60AAF1AC38A2C0081D55A /* ModelController.h */,
-				14B60AB01AC38A2C0081D55A /* ModelController.m */,
-				14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */,
-				14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */,
 				144237561ADD894F0081162C /* ViewSavedPostScreen.h */,
 				144237571ADD894F0081162C /* ViewSavedPostScreen.m */,
 				1418FB6B1AD1CDE000EFA727 /* ViewBoardListScreen.h */,
@@ -294,31 +364,21 @@
 				14A6AF651ACF26AB00EB4486 /* PostScreen.m */,
 				14A6AF5F1ACF241300EB4486 /* HomeScreen.h */,
 				14A6AF601ACF241300EB4486 /* HomeScreen.m */,
-				144F404C1AE955C800DBB35D /* PhoneNumber.h */,
-				144F404D1AE955C800DBB35D /* PhoneNumber.m */,
-				144F404F1AE96A7C00DBB35D /* DynamoInterface.h */,
-				144F40501AE96A7C00DBB35D /* DynamoInterface.m */,
-				144F40521AE97DED00DBB35D /* DynamoInformation.h */,
-				144F40531AE97DEE00DBB35D /* DynamoInformation.m */,
-				14A6AF761ACF2DD200EB4486 /* Board.h */,
-				14A6AF771ACF2DD200EB4486 /* Board.m */,
-				14287AFE1AC47E65007FC7B1 /* Post.h */,
-				14287AFF1AC483D3007FC7B1 /* Post.m */,
-				1454E5AB1AF2CF68005EB994 /* Moderator.h */,
-				1454E5AC1AF2CF68005EB994 /* Moderator.m */,
-				144FB0771AC878A4004008E0 /* Images-2.xcassets */,
-				14B60AA21AC38A2C0081D55A /* Supporting Files */,
 			);
-			path = "Bluetooth Billboard";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		14B60AA21AC38A2C0081D55A /* Supporting Files */ = {
+		14D8D2AF1AF54B7100D240A7 /* Application Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				14B60AA31AC38A2C0081D55A /* Info.plist */,
-				14B60AA41AC38A2C0081D55A /* main.m */,
+				14B60AA61AC38A2C0081D55A /* AppDelegate.h */,
+				14B60AA71AC38A2C0081D55A /* AppDelegate.m */,
+				14B60AA91AC38A2C0081D55A /* RootViewController.h */,
+				14B60AAA1AC38A2C0081D55A /* RootViewController.m */,
+				14B60AAF1AC38A2C0081D55A /* ModelController.h */,
+				14B60AB01AC38A2C0081D55A /* ModelController.m */,
 			);
-			name = "Supporting Files";
+			name = "Application Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
