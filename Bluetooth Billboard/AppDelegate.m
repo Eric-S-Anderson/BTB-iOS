@@ -14,6 +14,8 @@
 
 @implementation AppDelegate
 
+CLLocationManager *locManager;
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -21,28 +23,26 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    //request location service usage from device/user
+    [locManager requestWhenInUseAuthorization];
+    [locManager requestAlwaysAuthorization];
     
-    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1
-                                                                         credentialsProvider:credentialsProvider];
+    NSUUID *myUUID = [[NSUUID alloc] initWithUUIDString:@"B8FB1855-0644-4FFC-94E7-CBA10CFC4087"];
     
-    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
+    // Create the beacon region to be monitored.
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:myUUID identifier:@"BTBRegion"];
+    beaconRegion.notifyEntryStateOnDisplay = true;
+    beaconRegion.notifyOnEntry = true;
+    // Register the beacon region with the location manager.
+    locManager = [[CLLocationManager alloc] init];
+    locManager.delegate = self;
+    [locManager startMonitoringForRegion:beaconRegion];
+    [locManager startRangingBeaconsInRegion:beaconRegion];
     
-    AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
-    AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
-    //uploadRequest.bucket = yourBucket;
-    //uploadRequest.key = yourKey;
-    //uploadRequest.body = yourDataURL;
-    //uploadRequest.contentLength = [NSNumber numberWithUnsignedLongLong:fileSize];
-    
-    [[transferManager upload:uploadRequest] continueWithBlock:^id(BFTask *task) {
-        // Do something with the response
-        return nil;
-    }];
-    
+    NSDictionary *boards = [NSDictionary dictionaryWithObject:[[NSMutableArray alloc] init] forKey:@"boards"];
     NSDictionary *hosts = [NSDictionary dictionaryWithObject:[[NSMutableArray alloc] init] forKey:@"blockedHosts"];
     NSDictionary *types = [NSDictionary dictionaryWithObject:[[NSMutableArray alloc] init] forKey:@"blockedTypes"];
-    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:boards];
     [[NSUserDefaults standardUserDefaults] registerDefaults:hosts];
     [[NSUserDefaults standardUserDefaults] registerDefaults:types];
     
@@ -54,23 +54,33 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    NSLog(@"Resign active");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSLog(@"Entered background");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    NSLog(@"Entered foreground");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    NSLog(@"Became active");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    NSLog(@"Terminate");
 }
 
 - (void)saveContext
@@ -85,6 +95,51 @@
             abort();
         }
     }
+}
+
+#pragma mark - Region Monitoring
+
+- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region{
+    
+    if (beacons.count > 0) {
+        
+        CLBeacon *foundBeacon = [beacons objectAtIndex:0];
+        NSString *foundMajor = [NSString stringWithFormat:@"%@", foundBeacon.major];
+        NSString *foundMinor = [NSString stringWithFormat:@"%@", foundBeacon.minor];
+        NSString *foundBoard = [foundMajor stringByAppendingString:foundMinor];
+        
+        
+        
+        bool foundIT = false;
+        NSMutableArray *alreadyFound = [[NSMutableArray alloc] init];
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *boardID = [formatter numberFromString:foundBoard];
+        
+        alreadyFound = [[[NSUserDefaults standardUserDefaults] objectForKey:@"boards"]mutableCopy];
+        for (unsigned int i = 0; i < alreadyFound.count; i++){
+            NSNumber *bufferID = [alreadyFound objectAtIndex:i];
+            if (bufferID.intValue == boardID.intValue){
+                foundIT = true;
+            }
+        }
+        if (!foundIT){
+            [alreadyFound addObject:boardID];
+            NSLog(@"Added board %@", foundBoard);
+        }else{
+            //NSLog(@"Board %@ already added", foundBoard);
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:alreadyFound forKey:@"boards"];
+    }else{
+        NSLog(@"Found beacon region %@", region.identifier);
+    }
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
+    
+    NSLog(@"Entered region %@", region.identifier);
+    
 }
 
 #pragma mark - Core Data stack

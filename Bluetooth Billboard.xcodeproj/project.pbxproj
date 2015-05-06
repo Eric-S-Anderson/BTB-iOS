@@ -413,6 +413,11 @@
 					14B60A9E1AC38A2C0081D55A = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 479E35RDQR;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

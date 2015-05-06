@@ -11,7 +11,6 @@
 @interface ViewBoardListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblBoards;
 @property NSMutableArray *boardList;
-@property NSMutableArray *scanResults;
 
 @end
 
@@ -22,52 +21,23 @@
     // Do any additional setup after loading the view.
     
     //initializations
-    self.myCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
     self.tblBoards.dataSource = self;
     self.tblBoards.delegate = self;
+    
+}
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
     self.boardList = [[NSMutableArray alloc] init];
-    self.scanResults = [[NSMutableArray alloc] init];
-}
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
-    //interface function for CBCentralManager
-    //ensure that the ble is on before attempting to scan
-    if (central.state == CBCentralManagerStatePoweredOn){
-        NSLog(@"BLE ON");
-        [self.myCentralManager scanForPeripheralsWithServices:nil options:nil];
+    NSArray *boardIDs = [[[NSUserDefaults standardUserDefaults] objectForKey:@"boards"]mutableCopy];
+    for (unsigned int i = 0; i < boardIDs.count; i++){
+        NSNumber *bufferID = [boardIDs objectAtIndex:i];
+        Board *newBoard = [Board new];
+        newBoard = [DynamoInterface getSingleBoardInformation:bufferID.intValue];
+        [self.boardList addObject:newBoard];
     }
-    
-}
-
-- (void)centralManager:(CBCentralManager *)central
- didDiscoverPeripheral:(CBPeripheral *)peripheral
-     advertisementData:(NSDictionary *)advertisementData
-                  RSSI:(NSNumber *)RSSI {
-    //called when the scan finds a ble device
-    BOOL foundIt = false;
-    for (int i = 0; i < self.scanResults.count; i++) {
-        if ([[self.scanResults objectAtIndex:(i)] isEqualToString:(peripheral.name)]) {
-            foundIt = true;     //check if device has already been found
-        }
-    }
-    if (!foundIt) {
-        //add device to the list and repopulate the table
-        NSLog(@"Discovered %@", peripheral.name);
-        //CLBeacon *beacon;
-        
-        if (peripheral.name != nil){
-            [self.scanResults addObject:peripheral.name];
-            if ([peripheral.name isEqualToString:@"BLEbeacon116826"]){
-                Board *foundBoard = [DynamoInterface getSingleBoardInformation:[@"776655" intValue]];
-                [self.boardList addObject:foundBoard];
-            }else if ([peripheral.name isEqualToString:@"Bluetooth6127"]){
-                Board *foundBoard = [DynamoInterface getSingleBoardInformation:[@"213411" intValue]];
-                [self.boardList addObject:foundBoard];
-            }
-            [self.tblBoards reloadData];
-        }
-    }
-    
+    [self.tblBoards reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

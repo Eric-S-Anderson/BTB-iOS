@@ -39,7 +39,7 @@
     
     NSMutableString *formatString;
     
-    if (numberValue.longValue <= 9999999999 && numberValue.longValue > 999999999){
+    if (numberValue.longLongValue <= 9999999999 && numberValue.longLongValue > 999999999){
         self.value = numberValue;
         self.unformattedNumber = [NSString stringWithFormat:@"%@",numberValue];
         formatString = [NSMutableString stringWithString:self.unformattedNumber];

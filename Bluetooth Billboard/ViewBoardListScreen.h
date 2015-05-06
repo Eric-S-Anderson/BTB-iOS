@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
 #import "DynamoInterface.h"
 #import "ViewPostListScreen.h"
 
-@interface ViewBoardListScreen : UIViewController <CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource>
-
-@property CBCentralManager *myCentralManager;
+@interface ViewBoardListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

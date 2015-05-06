@@ -14,9 +14,10 @@
 #import <AWSSNS/AWSSNS.h>
 #import <AWSSQS/AWSSQS.h>
 #import <CoreData/CoreData.h>
+#import <CoreLocation/CoreLocation.h>
 #import "DynamoInterface.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
