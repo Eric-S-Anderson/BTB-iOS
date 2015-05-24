@@ -11,6 +11,7 @@
 @interface ViewBoardListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblBoards;
 @property NSMutableArray *boardList;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 
 @end
 
@@ -35,6 +36,10 @@
         NSNumber *bufferID = [boardIDs objectAtIndex:i];
         Board *newBoard = [Board new];
         newBoard = [DynamoInterface getSingleBoardInformation:bufferID.intValue];
+        
+        while ([DynamoInterface getQueryStatus] < 0) {self.aivWaiting.hidden = false;}
+        self.aivWaiting.hidden = true;
+        
         [self.boardList addObject:newBoard];
     }
     [self.tblBoards reloadData];

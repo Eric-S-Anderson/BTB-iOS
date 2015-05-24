@@ -11,6 +11,7 @@
 
 @interface ViewQueueListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblPosts;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 
 @end
 
@@ -23,10 +24,10 @@ Board *queueBoard;
     // Do any additional setup after loading the view.
     
     queueBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Queued"];
-    
+    while ([DynamoInterface getQueryStatus] < 0) {self.aivWaiting.hidden = false;}
+    self.aivWaiting.hidden = true;
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
-    
 }
 
 - (void)didReceiveMemoryWarning {

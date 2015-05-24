@@ -23,9 +23,16 @@ CLLocationManager *locManager;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound|UIUserNotificationTypeBadge
+                                                                                                              categories:nil]];
+    }
+    
     //request location service usage from device/user
-    [locManager requestWhenInUseAuthorization];
     [locManager requestAlwaysAuthorization];
+    [locManager startUpdatingLocation];
     
     NSUUID *myUUID = [[NSUUID alloc] initWithUUIDString:@"B8FB1855-0644-4FFC-94E7-CBA10CFC4087"];
     
@@ -49,6 +56,38 @@ CLLocationManager *locManager;
     [DynamoInterface setCurrentBoard:@"213411"];
     
     return YES;
+}
+
+- (void)requestAlwaysAuthorization
+{
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    
+    // If the status is denied or only granted for when in use, display an alert
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
+        NSString *title;
+        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
+        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Settings", nil];
+        [alertView show];
+    }
+    // The user has not enabled any location services. Request background authorization.
+    else if (status == kCLAuthorizationStatusNotDetermined) {
+        [locManager requestAlwaysAuthorization];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        // Send the user to the Settings for this app
+        NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:settingsURL];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -75,6 +114,7 @@ CLLocationManager *locManager;
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     NSLog(@"Became active");
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -126,6 +166,14 @@ CLLocationManager *locManager;
         if (!foundIT){
             [alreadyFound addObject:boardID];
             NSLog(@"Added board %@", foundBoard);
+            
+            UILocalNotification* notifyBoard = [[UILocalNotification alloc] init];
+            notifyBoard.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+            notifyBoard.alertBody = @"You've found a new billboard!";
+            notifyBoard.timeZone = [NSTimeZone defaultTimeZone];
+            notifyBoard.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notifyBoard];
+            
         }else{
             //NSLog(@"Board %@ already added", foundBoard);
         }
@@ -139,6 +187,23 @@ CLLocationManager *locManager;
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
     
     NSLog(@"Entered region %@", region.identifier);
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region{
+    
+    if (state == CLRegionStateInside) {
+        
+        NSLog(@"Entered region %@", region);
+        //Start Ranging
+        [manager startRangingBeaconsInRegion:region];
+    }
+    
+    else{
+        
+        //Stop Ranging
+        [manager stopRangingBeaconsInRegion:region];
+    }
     
 }
 

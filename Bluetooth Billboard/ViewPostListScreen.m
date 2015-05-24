@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblPosts;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 - (IBAction)touchUpSaveBoard:(id)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 
 @end
 
@@ -26,8 +27,7 @@ NSMutableArray *filteredPosts;
     //initializations
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
-    
-    
+    self.aivWaiting.hidden = true;
     
 }
 
@@ -37,6 +37,10 @@ NSMutableArray *filteredPosts;
     [super viewDidAppear:animated];
     
     myBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Posted"];
+    
+    while ([DynamoInterface getQueryStatus] < 0) {self.aivWaiting.hidden = false;}
+    self.aivWaiting.hidden = true;
+    
     filteredPosts = [[NSMutableArray alloc] init];
     [filteredPosts removeAllObjects];
     NSArray *blockedTypes = [[NSUserDefaults standardUserDefaults] objectForKey:@"blockedTypes"];

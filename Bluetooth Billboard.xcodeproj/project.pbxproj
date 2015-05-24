@@ -42,7 +42,7 @@
 		144FB0781AC878A4004008E0 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144FB0771AC878A4004008E0 /* Images-2.xcassets */; };
 		1454E5AD1AF2CF68005EB994 /* Moderator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454E5AC1AF2CF68005EB994 /* Moderator.m */; };
 		1463FBAA1AC7ACA40029E340 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */; };
-		14A6AF5C1ACF1F6900EB4486 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */; };
+		1464C1471B1245D7009200EF /* SplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1464C1461B1245D7009200EF /* SplashScreen.xib */; };
 		14A6AF5D1ACF1F6900EB4486 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */; };
 		14A6AF621ACF241300EB4486 /* HomeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF601ACF241300EB4486 /* HomeScreen.m */; };
 		14A6AF661ACF26AB00EB4486 /* PostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF651ACF26AB00EB4486 /* PostScreen.m */; };
@@ -122,7 +122,7 @@
 		1454E5AC1AF2CF68005EB994 /* Moderator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Moderator.m; sourceTree = "<group>"; };
 		1463FBA71AC7A45B0029E340 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1463FBA91AC7ACA40029E340 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		1464C1461B1245D7009200EF /* SplashScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreen.xib; sourceTree = "<group>"; };
 		14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		14A6AF5F1ACF241300EB4486 /* HomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreen.h; sourceTree = "<group>"; };
 		14A6AF601ACF241300EB4486 /* HomeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreen.m; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		14B60AA11AC38A2C0081D55A /* Bluetooth Billboard */ = {
 			isa = PBXGroup;
 			children = (
-				14A6AF5A1ACF1F6900EB4486 /* LaunchScreen.xib */,
+				1464C1461B1245D7009200EF /* SplashScreen.xib */,
 				14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */,
 				14D8D2AE1AF54B2900D240A7 /* View Controllers */,
 				14D8D28E1AF545E300D240A7 /* Interfaces */,
@@ -444,6 +444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1464C1471B1245D7009200EF /* SplashScreen.xib in Resources */,
 				144FB0781AC878A4004008E0 /* Images-2.xcassets in Resources */,
 				14C0793D1AC7345700D32B76 /* sns-2010-03-31.json in Resources */,
 				14C079341AC7345700D32B76 /* dynamodb-2012-08-10.json in Resources */,
@@ -453,7 +454,6 @@
 				14C0793E1AC7345700D32B76 /* sqs-2012-11-05.json in Resources */,
 				14C0793F1AC7345700D32B76 /* sts-2011-06-15.json in Resources */,
 				14C079311AC7345700D32B76 /* autoscaling-2011-01-01.json in Resources */,
-				14A6AF5C1ACF1F6900EB4486 /* LaunchScreen.xib in Resources */,
 				14C079361AC7345700D32B76 /* elasticloadbalancing-2012-06-01.json in Resources */,
 				14C079331AC7345700D32B76 /* css-2014-06-30.json in Resources */,
 				14C0793B1AC7345700D32B76 /* s3-2006-03-01.json in Resources */,
