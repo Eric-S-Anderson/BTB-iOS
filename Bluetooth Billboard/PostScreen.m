@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *pkvPostType;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dpvDate;
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
+@property (weak, nonatomic) IBOutlet UISwitch *swtVerify;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 @property NSArray *types;
 - (IBAction)touchUpType:(id)sender;
 - (IBAction)touchUpDate:(id)sender;
@@ -33,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.aivWaiting stopAnimating];
     
     //picker data
     self.types = [[NSArray alloc] initWithObjects:@"Event", @"Announcement", @"Employment", @"Coupon", @"Sales", @"Services", @"Other", nil];
@@ -128,21 +132,46 @@
 
 - (IBAction)touchSubmit:(id)sender {
     
-    Post *post = [Post new];
-    post.Host = self.txtHost.text;
-    post.Address = self.txtAddress.text;
-    PhoneNumber *postPhone = [[PhoneNumber alloc] initWithString:self.txtPhone.text];
-    post.Phone = postPhone.value;
-    post.Email = self.txtEmail.text;
-    post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
-    post.Post_Type = self.txtPostType.text;
-    post.Information = self.txvInformation.text;
-    post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id
-    post.Post_Status = @"Queued";
+    if (!self.swtVerify.on){
+        UIAlertView *botAlert = [[UIAlertView alloc] initWithTitle:@"Robot"
+                                                           message:@"No Robots Allowed!"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [botAlert show];
+    }else{
+        Post *post = [Post new];
+        post.Host = self.txtHost.text;
+        post.Address = self.txtAddress.text;
+        PhoneNumber *postPhone = [[PhoneNumber alloc] initWithString:self.txtPhone.text];
+        post.Phone = postPhone.value;
+        post.Email = self.txtEmail.text;
+        post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
+        post.Post_Type = self.txtPostType.text;
+        post.Information = self.txvInformation.text;
+        post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id
+        post.Post_Status = @"Queued";
+
+        [DynamoInterface savePost:post];
+        while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];self.aivWaiting.hidden = false;}
+        [self.aivWaiting stopAnimating];
+        if ([DynamoInterface getQueryStatus] == 0){
+            UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Submitted"
+                                                                message:@"Your post has been submitted for review.  A moderator will approve or deny your post, and notify you via the e-mail address you have entered."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [saveAlert show];
+        }else{
+            UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Not Submitted"
+                                                                message:@"Could not connect to the database.  Please verify your internet conenction or try again later."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [saveAlert show];
+        }
     
-    [DynamoInterface setHashKey:@"Post_ID"];
-    
-    [DynamoInterface savePost:post];
+    }
     
 }
 

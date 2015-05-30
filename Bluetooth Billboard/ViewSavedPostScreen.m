@@ -14,7 +14,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
+@property (weak, nonatomic) IBOutlet UIButton *btnDelete;
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
+- (IBAction)touchUpDelete:(id)sender;
 
 @end
 
@@ -50,4 +52,40 @@
 }
 */
 
+- (IBAction)touchUpDelete:(id)sender {
+    //delete the post from the device
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSError *error;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postID == %@", self.post.Post_ID];
+    [request setPredicate:predicate];
+    
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if (array.count == 0){
+        NSLog(@"Post cannot be deleted");
+        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Post Corrupted"
+                                                            message:@"Data corruption, could not locate post."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [delAlert show];
+    }else{
+        NSLog(@"Post deleted");
+        [context deleteObject:[array objectAtIndex:0]];
+        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Post Deleted"
+                                                            message:@"The post has been deleted from your device."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [delAlert show];
+    }
+    
+}
 @end

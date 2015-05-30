@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDeny;
 - (IBAction)touchUpAccept:(id)sender;
 - (IBAction)touchUpDeny:(id)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 
 @end
 
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.aivWaiting stopAnimating];
     
     if (self.post != nil){
         self.txtHost.text = self.post.Host;
@@ -58,6 +61,8 @@
     self.post.Post_Status = @"Posted";
     
     [DynamoInterface savePost:self.post];
+    while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
+    [self.aivWaiting stopAnimating];
     
     NSString *mesApproval = @"Your post has been approved!\n\n";
     
@@ -83,6 +88,8 @@
     self.post.Post_Status = @"Denied";
     
     [DynamoInterface savePost:self.post];
+    while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
+    [self.aivWaiting stopAnimating];
     
     NSString *mesDenial = @"Your post has been denied!\n\n";
     

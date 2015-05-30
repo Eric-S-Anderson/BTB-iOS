@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
+@property (weak, nonatomic) IBOutlet UISwitch *swtVerify;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 - (IBAction)touchUpSubmit:(id)sender;
 
 @end
@@ -25,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.aivWaiting stopAnimating];
     
     //populate ui fields with the passed post
     if (self.post != nil){
@@ -55,9 +59,33 @@
 - (IBAction)touchUpSubmit:(id)sender {
     
     //submit the already populated post to the db
-
-    [DynamoInterface setHashKey:@"Post_ID"];
     
-    [DynamoInterface savePost:self.post];
+    if (!self.swtVerify.on){
+        UIAlertView *botAlert = [[UIAlertView alloc] initWithTitle:@"Robot"
+                                                           message:@"No Robots Allowed!"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [botAlert show];
+    }else{
+        [DynamoInterface savePost:self.post];
+        while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
+        [self.aivWaiting stopAnimating];
+        if ([DynamoInterface getQueryStatus] == 0){
+            UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Submitted"
+                                                                message:@"Your post has been submitted for review.  A moderator will approve or deny your post, and notify you via the e-mail address you have entered."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [saveAlert show];
+        }else{
+            UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Not Submitted"
+                                                                message:@"Could not connect to the database.  Please verify your internet conenction or try again later."
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [saveAlert show];
+        }
+    }
 }
 @end

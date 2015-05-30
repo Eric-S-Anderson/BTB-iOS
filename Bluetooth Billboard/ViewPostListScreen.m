@@ -27,7 +27,7 @@ NSMutableArray *filteredPosts;
     //initializations
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
-    self.aivWaiting.hidden = true;
+    [self.aivWaiting stopAnimating];
     
 }
 
@@ -38,8 +38,8 @@ NSMutableArray *filteredPosts;
     
     myBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Posted"];
     
-    while ([DynamoInterface getQueryStatus] < 0) {self.aivWaiting.hidden = false;}
-    self.aivWaiting.hidden = true;
+    while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
+    [self.aivWaiting stopAnimating];
     
     filteredPosts = [[NSMutableArray alloc] init];
     [filteredPosts removeAllObjects];
@@ -98,7 +98,7 @@ NSMutableArray *filteredPosts;
 
 - (IBAction)touchUpSaveBoard:(id)sender {
 
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
@@ -127,8 +127,20 @@ NSMutableArray *filteredPosts;
         [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
         [context save:&error];
         NSLog(@"Board saved");
+        UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Saved"
+                                                           message:@"You have sucessfully saved the board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [saveAlert show];
     }else{
         NSLog(@"Board has already been saved.");
+        UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Already Saved"
+                                                            message:@"You had already saved this board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [saveAlert show];
     }
     
 }

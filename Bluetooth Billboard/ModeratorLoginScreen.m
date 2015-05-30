@@ -11,16 +11,26 @@
 @interface ModeratorLoginScreen ()
 @property (weak, nonatomic) IBOutlet UITextField *txtUser;
 @property (weak, nonatomic) IBOutlet UITextField *txtPass;
+@property (weak, nonatomic) IBOutlet UISwitch *swtVerify;
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
+@property (weak, nonatomic) IBOutlet UILabel *lblFailedAttempts;
 - (IBAction)touchUpLogin:(id)sender;
 
 @end
 
 @implementation ModeratorLoginScreen
 
+int failed = 0;
+NSString *failStart = @"You have failed to login ";
+NSString *failMEnd = @" times.";
+NSString *failSEnd = @" time.";
+NSString *tooMany = @"This login is no longer available.";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.lblFailedAttempts.text = failStart;
+    self.lblFailedAttempts.hidden = true;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,11 +47,39 @@
     }
     
     /**********************End Override*********************/
-    
-    if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text]){
+    NSLog(@"Failed attempts: %d", failed);
+    if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text] && self.swtVerify.on){
         [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
+    }else{
+        if (!self.swtVerify.on){
+            UIAlertView *botAlert = [[UIAlertView alloc] initWithTitle:@"Robot"
+                                                            message:@"No Robots Allowed!"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [botAlert show];
+        }else{
+            UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Invalid Login"
+                                                            message:@"The password or username you have entered is incorrect."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [saveAlert show];
+        }
+        failed++;
+        if (failed == 1){
+            self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failSEnd]];
+        }else if (failed < 5){
+            self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failMEnd]];
+        }else{
+            self.lblFailedAttempts.text = tooMany;
+            self.btnLogin.enabled = false;
+            self.btnLogin.hidden = true;
+        }
+        self.txtUser.text = @"";
+        self.txtPass.text = @"";
+        self.lblFailedAttempts.hidden = false;
     }
-    
     
 }
 

@@ -1,8 +1,8 @@
 //
-//  ViewSavedPostScreen.h
+//  ViewBanListScreen.h
 //  Bluetooth Billboard
 //
-//  Created by Eric Anderson on 4/14/15.
+//  Created by Eric Anderson on 5/29/15.
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
 
@@ -10,8 +10,6 @@
 #import "AppDelegate.h"
 #import "DynamoInterface.h"
 
-@interface ViewSavedPostScreen : UIViewController
-
-@property Post *post;
+@interface ViewBanListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

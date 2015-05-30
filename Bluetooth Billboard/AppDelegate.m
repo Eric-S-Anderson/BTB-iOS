@@ -196,13 +196,13 @@ CLLocationManager *locManager;
         
         NSLog(@"Entered region %@", region);
         //Start Ranging
-        [manager startRangingBeaconsInRegion:region];
+        //[manager startRangingBeaconsInRegion:region];
     }
     
     else{
         
         //Stop Ranging
-        [manager stopRangingBeaconsInRegion:region];
+        //[manager stopRangingBeaconsInRegion:region];
     }
     
 }

@@ -29,9 +29,8 @@
     self.allBoards = [[NSMutableArray alloc] init];     //initialize storage array
 
     self.allBoards = [DynamoInterface getAllBoardInformation:self.allBoards];
-    
-    while ([DynamoInterface getQueryStatus] < 0) {self.aivWaiting.hidden = false;}
-    self.aivWaiting.hidden = true;
+    while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
+    [self.aivWaiting stopAnimating];
 
 }
 

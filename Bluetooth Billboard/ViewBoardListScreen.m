@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self.aivWaiting stopAnimating];
     //initializations
     self.tblBoards.dataSource = self;
     self.tblBoards.delegate = self;
@@ -37,8 +37,8 @@
         Board *newBoard = [Board new];
         newBoard = [DynamoInterface getSingleBoardInformation:bufferID.intValue];
         
-        while ([DynamoInterface getQueryStatus] < 0) {self.aivWaiting.hidden = false;}
-        self.aivWaiting.hidden = true;
+        while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
+        [self.aivWaiting stopAnimating];
         
         [self.boardList addObject:newBoard];
     }

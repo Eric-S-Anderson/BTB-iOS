@@ -65,8 +65,20 @@
     if (!foundIT){
         [banHosts addObject:blockHost];
         NSLog(@"Host %@ has been banned", blockHost);
+        UIAlertView *banAlert = [[UIAlertView alloc] initWithTitle:@"Host Banned"
+                                                            message:@"You have sucessfully banned this host. You can undo this by selecting 'Ban Lists' from the tab bar."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [banAlert show];
     }else{
         NSLog(@"Host was already banned");
+        UIAlertView *banAlert = [[UIAlertView alloc] initWithTitle:@"Host Already Banned"
+                                                           message:@"This host was already banned. You can undo this by selecting 'Ban Lists' from the tab bar."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [banAlert show];
     }
     [[NSUserDefaults standardUserDefaults] setObject:banHosts forKey:@"blockedHosts"];
 }
@@ -85,15 +97,27 @@
     if (!foundIT){
         [banType addObject:blockType];
         NSLog(@"Type %@ has been banned", blockType);
+        UIAlertView *banAlert = [[UIAlertView alloc] initWithTitle:@"Type Banned"
+                                                           message:@"You have sucessfully banned this type. You can undo this by selecting 'Ban Lists' from the tab bar."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [banAlert show];
     }else{
         NSLog(@"Type was already banned");
+        UIAlertView *banAlert = [[UIAlertView alloc] initWithTitle:@"Type Already Banned"
+                                                           message:@"This type was already banned. You can undo this by selecting 'Ban Lists' from the tab bar."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [banAlert show];
     }
     [[NSUserDefaults standardUserDefaults] setObject:banType forKey:@"blockedTypes"];
 }
 
 - (IBAction)touchUpSave:(id)sender {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
@@ -122,8 +146,20 @@
         [savedPost setValue:self.post.Post_Status forKey:@"post_Status"];
         [context save:&error];
         NSLog(@"Post saved");
+        UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Saved"
+                                                           message:@"You have sucessfully saved this post.  To view this post again, click the 'Saved Posts' icon on your tab bar."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [saveAlert show];
     }else{
         NSLog(@"Post has already been saved.");
+        UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Already Saved"
+                                                            message:@"You had already saved this post.  To view this post again, click the 'Saved Posts' icon on your tab bar."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [saveAlert show];
     }
     
 }

@@ -236,7 +236,8 @@ Board *fullBoard;
     }else{
         queryStatus = 3;
     }
-    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    
+    //while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
     
     return fillBoard;
 }
@@ -245,7 +246,7 @@ Board *fullBoard;
     
     //aws object mapper
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
-    
+    [DynamoInterface setHashKey:@"Post_ID"];
     queryStatus = -1;
     NSLog(@"Waiting for database reponse...");
     
