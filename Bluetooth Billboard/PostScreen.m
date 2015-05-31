@@ -139,6 +139,30 @@
                                                  cancelButtonTitle:@"OK"
                                                  otherButtonTitles:nil];
         [botAlert show];
+    }else if (self.txtHost.text == NULL){
+        UIAlertView *invAlert = [[UIAlertView alloc] initWithTitle:@"No Host Name"
+                                                           message:@"You must provide a host name."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [invAlert show];
+        [self.txtHost becomeFirstResponder];
+    }else if (self.txtPostType.text == NULL){
+        UIAlertView *invAlert = [[UIAlertView alloc] initWithTitle:@"No Type Chosen"
+                                                           message:@"You must choose a post type."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [invAlert show];
+        [self.txtPostType becomeFirstResponder];
+    }else if (self.txvInformation.text == NULL){
+        UIAlertView *invAlert = [[UIAlertView alloc] initWithTitle:@"No Information"
+                                                           message:@"You must add some information."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [invAlert show];
+        [self.txvInformation becomeFirstResponder];
     }else{
         Post *post = [Post new];
         post.Host = self.txtHost.text;
@@ -146,7 +170,20 @@
         PhoneNumber *postPhone = [[PhoneNumber alloc] initWithString:self.txtPhone.text];
         post.Phone = postPhone.value;
         post.Email = self.txtEmail.text;
-        post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
+        if (self.txtDate.text == NULL){
+            NSDate *today = [[NSDate alloc] init];
+            NSCalendar *gregorian = [[NSCalendar alloc]
+                                     initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+            [offsetComponents setDay:90];
+            NSDate *endDay = [gregorian dateByAddingComponents:offsetComponents
+                                                                toDate:today options:0];
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"MMddyyyy"];
+            post.End_Date = [NSNumber numberWithInteger:[[dateFormat stringFromDate:endDay] integerValue]];
+        }else{
+            post.End_Date = [NSNumber numberWithInteger:[self.txtDate.text integerValue]];
+        }
         post.Post_Type = self.txtPostType.text;
         post.Information = self.txvInformation.text;
         post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id

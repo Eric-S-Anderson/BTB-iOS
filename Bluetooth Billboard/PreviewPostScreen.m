@@ -9,16 +9,18 @@
 #import "PreviewPostScreen.h"
 
 @interface PreviewPostScreen ()
-@property (weak, nonatomic) IBOutlet UITextField *txtHost;
-@property (weak, nonatomic) IBOutlet UITextField *txtAddress;
+@property (weak, nonatomic) IBOutlet UILabel *lblHost;
+@property (weak, nonatomic) IBOutlet UITextView *txvAddress;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
+@property (weak, nonatomic) IBOutlet UIScrollView *scvDetails;
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (weak, nonatomic) IBOutlet UISwitch *swtVerify;
+@property (weak, nonatomic) IBOutlet UISwitch *swtDetails;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 - (IBAction)touchUpSubmit:(id)sender;
+- (IBAction)changeContact:(id)sender;
 
 @end
 
@@ -32,13 +34,20 @@
     
     //populate ui fields with the passed post
     if (self.post != nil){
-        self.txtHost.text = self.post.Host;
-        self.txtAddress.text = self.post.Address;
+        self.lblHost.text = self.post.Host;
+        self.txvAddress.text = self.post.Address;
+        if (self.post.Phone != NULL){
         self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
+        }
         self.txtEmail.text = self.post.Email;
-        self.txtDate.text = [NSString stringWithFormat:@"%@",self.post.End_Date];
         self.txvInformation.text = self.post.Information;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    self.scvDetails.contentSize = CGSizeMake(240, 250);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +95,14 @@
                                                       otherButtonTitles:nil];
             [saveAlert show];
         }
+    }
+}
+
+- (IBAction)changeContact:(id)sender {
+    if (self.swtDetails.on){
+        self.scvDetails.hidden = false;
+    }else{
+        self.scvDetails.hidden = true;
     }
 }
 @end

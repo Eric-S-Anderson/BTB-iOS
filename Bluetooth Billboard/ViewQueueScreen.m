@@ -9,16 +9,19 @@
 #import "ViewQueueScreen.h"
 
 @interface ViewQueueScreen ()
-@property (weak, nonatomic) IBOutlet UITextField *txtHost;
-@property (weak, nonatomic) IBOutlet UITextField *txtAddress;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblHost;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtDate;
+@property (weak, nonatomic) IBOutlet UITextView *txvAddress;
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
+@property (weak, nonatomic) IBOutlet UIScrollView *scvDetails;
+@property (weak, nonatomic) IBOutlet UISwitch *swtDetails;
 @property (weak, nonatomic) IBOutlet UIButton *btnAccept;
 @property (weak, nonatomic) IBOutlet UIButton *btnDeny;
 - (IBAction)touchUpAccept:(id)sender;
 - (IBAction)touchUpDeny:(id)sender;
+- (IBAction)changeDetails:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
 
 @end
@@ -32,13 +35,20 @@
     [self.aivWaiting stopAnimating];
     
     if (self.post != nil){
-        self.txtHost.text = self.post.Host;
-        self.txtAddress.text = self.post.Address;
-        self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
+        self.lblHost.text = self.post.Host;
+        self.txvAddress.text = self.post.Address;
+        if (self.post.Phone != NULL){
+            self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
+        }
         self.txtEmail.text = self.post.Email;
-        self.txtDate.text = [NSString stringWithFormat:@"%@",self.post.End_Date];
         self.txvInformation.text = self.post.Information;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    self.scvDetails.contentSize = CGSizeMake(240, 250);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,11 +85,10 @@
         [self presentViewController:sendMe animated:YES completion:NULL];
     }
     
-    self.txtHost.text = @"";
-    self.txtAddress.text = @"";
+    self.lblHost.text = @"";
+    self.txvAddress.text = @"";
     self.txtPhone.text = @"";
     self.txtEmail.text = @"";
-    self.txtDate.text = @"";
     self.txvInformation.text = @"";
 }
 
@@ -102,12 +111,19 @@
         [self presentViewController:sendMe animated:YES completion:NULL];
     }
     
-    self.txtHost.text = @"";
-    self.txtAddress.text = @"";
+    self.lblHost.text = @"";
+    self.txvAddress.text = @"";
     self.txtPhone.text = @"";
     self.txtEmail.text = @"";
-    self.txtDate.text = @"";
     self.txvInformation.text = @"";
+}
+
+- (IBAction)changeDetails:(id)sender {
+    if (self.swtDetails.on){
+        self.scvDetails.hidden = false;
+    }else{
+        self.scvDetails.hidden = true;
+    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error{

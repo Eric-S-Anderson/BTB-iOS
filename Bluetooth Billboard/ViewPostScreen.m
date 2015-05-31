@@ -10,17 +10,21 @@
 #import "Post.h"
 
 @interface ViewPostScreen ()
-@property (weak, nonatomic) IBOutlet UITextField *txtHost;
-@property (weak, nonatomic) IBOutlet UITextField *txtAddress;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *lblHost;
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
+@property (weak, nonatomic) IBOutlet UITextView *txvAddress;
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtDate;
 @property (weak, nonatomic) IBOutlet UITextView *txvInformation;
+@property (weak, nonatomic) IBOutlet UIScrollView *scvDetails;
+@property (weak, nonatomic) IBOutlet UISwitch *swtDetails;
 @property (weak, nonatomic) IBOutlet UIButton *btnBlockHost;
 @property (weak, nonatomic) IBOutlet UIButton *btnBlockType;
 - (IBAction)touchUpBlockHost:(id)sender;
 - (IBAction)touchUpBlockType:(id)sender;
 - (IBAction)touchUpSave:(id)sender;
+- (IBAction)changeDetails:(id)sender;
 
 @end
 
@@ -31,11 +35,12 @@
     // Do any additional setup after loading the view.
     
     if (self.post != nil){
-        self.txtHost.text = self.post.Host;
-        self.txtAddress.text = self.post.Address;
-        self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
+        self.lblHost.text = self.post.Host;
+        self.txvAddress.text = self.post.Address;
+        if (self.post.Phone != NULL){
+            self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
+        }
         self.txtEmail.text = self.post.Email;
-        self.txtDate.text = [NSString stringWithFormat:@"%@",self.post.End_Date];
         self.txvInformation.text = self.post.Information;
     
         NSString *blkHost = [@"Block Host\n" stringByAppendingString:self.post.Host];
@@ -44,6 +49,12 @@
         [self.btnBlockHost setTitle:(blkHost) forState:UIControlStateNormal];
         [self.btnBlockType setTitle:(blkType) forState:UIControlStateNormal];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    self.scvDetails.contentSize = CGSizeMake(240, 250);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,6 +173,14 @@
         [saveAlert show];
     }
     
+}
+
+- (IBAction)changeDetails:(id)sender {
+    if (self.swtDetails.on){
+        self.scvDetails.hidden = false;
+    }else{
+        self.scvDetails.hidden = true;
+    }
 }
 
 /*
