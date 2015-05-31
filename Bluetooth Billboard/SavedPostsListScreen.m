@@ -66,6 +66,76 @@ NSMutableArray *posts;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)holdIt:(UILongPressGestureRecognizer*)gesture {
+    if ( gesture.state == UIGestureRecognizerStateBegan ) {
+        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Delete Post"
+                                                           message:@"Would you like to delete this post from your device?"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                                 otherButtonTitles:@"OK", nil];
+        [delAlert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1){
+        
+        Post *endMe = [posts objectAtIndex:self.tblPosts.indexPathForSelectedRow.row];
+        NSNumber *postID = endMe.Post_ID;
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        
+        NSError *error;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context];
+        [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postID == %@", postID];
+        [request setPredicate:predicate];
+        
+        NSArray *array = [[NSArray alloc] init];
+        array = [context executeFetchRequest:request error:&error];
+        if (array.count > 0){
+            [context deleteObject:[array objectAtIndex:0]];
+            NSLog(@"Post deleted");
+        }
+        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Post Deleted"
+                                                           message:@"The post has been deleted."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [delAlert show];
+        
+        NSFetchRequest *rePop = [[NSFetchRequest alloc] init];
+        [rePop setEntity:entity];
+        
+        NSArray *objects = [context executeFetchRequest:rePop error:&error];
+        
+        posts = [[NSMutableArray alloc] init];
+        
+        for (unsigned int i = 0; i < objects.count; i++){
+            NSManagedObject *apost = [objects objectAtIndex:i];
+            Post *buffer = [Post new];
+            buffer.Post_ID = [apost valueForKey:@"postID"];
+            buffer.Phone = [apost valueForKey:@"phone"];
+            buffer.End_Date = [apost valueForKey:@"end_Date"];
+            buffer.Host = [apost valueForKey:@"host"];
+            buffer.Email = [apost valueForKey:@"email"];
+            buffer.Address = [apost valueForKey:@"address"];
+            buffer.Information = [apost valueForKey:@"information"];
+            buffer.Post_Type = [apost valueForKey:@"post_Type"];
+            buffer.Post_Status = [apost valueForKey:@"post_Status"];
+            [posts addObject:buffer];
+        }
+        
+        [self.tblPosts reloadData];
+    }
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -88,7 +158,8 @@ NSMutableArray *posts;
     
     cell.textLabel.text = cellPost.Host;
     cell.detailTextLabel.text = cellPost.Information;
-    
+    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
+    [cell addGestureRecognizer:holdIt];
     return cell;
 }
 

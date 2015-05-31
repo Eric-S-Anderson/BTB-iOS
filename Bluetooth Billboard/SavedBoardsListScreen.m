@@ -63,6 +63,73 @@ NSMutableArray *boards;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)holdIt:(UILongPressGestureRecognizer*)gesture {
+    if ( gesture.state == UIGestureRecognizerStateBegan ) {
+        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Delete Board"
+                                                           message:@"Would you like to delete this board from your device?"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                                 otherButtonTitles:@"OK", nil];
+        [delAlert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1){
+        
+        Board *endMe = [boards objectAtIndex:self.tblBoards.indexPathForSelectedRow.row];
+        NSNumber *boardID = endMe.Board_ID;
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        
+        NSError *error;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
+        [request setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardID == %@", boardID];
+        [request setPredicate:predicate];
+        
+        NSArray *array = [[NSArray alloc] init];
+        array = [context executeFetchRequest:request error:&error];
+        if (array.count > 0){
+            [context deleteObject:[array objectAtIndex:0]];
+            NSLog(@"Board deleted");
+        }
+        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Board Deleted"
+                                                           message:@"The board has been deleted."
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [delAlert show];
+        
+        NSFetchRequest *rePop = [[NSFetchRequest alloc] init];
+        [rePop setEntity:entity];
+        
+        NSArray *objects = [context executeFetchRequest:rePop error:&error];
+        
+        boards = [[NSMutableArray alloc] init];
+        
+        for (unsigned int i = 0; i < objects.count; i++){
+            NSManagedObject *aboard = [objects objectAtIndex:i];
+            Board *buffer = [Board new];
+            buffer.Board_ID = [aboard valueForKey:@"boardID"];
+            buffer.Group_ID = [aboard valueForKey:@"groupID"];
+            buffer.Moderator_ID = [aboard valueForKey:@"moderatorID"];
+            buffer.Instructions = [aboard valueForKey:@"instructions"];
+            buffer.Organization = [aboard valueForKey:@"organization"];
+            buffer.Board_Name = [aboard valueForKey:@"boardName"];
+            [boards addObject:buffer];
+        }
+        
+        [self.tblBoards reloadData];
+    }
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -84,6 +151,8 @@ NSMutableArray *boards;
     
     cell.textLabel.text = cellBoard.Board_Name;
     cell.detailTextLabel.text = cellBoard.Organization;
+    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
+    [cell addGestureRecognizer:holdIt];
     return cell;
 }
 
