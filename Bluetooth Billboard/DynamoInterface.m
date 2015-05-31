@@ -274,6 +274,74 @@ Board *fullBoard;
 
 }
 
++(void)deletePost:(Post*)toBeDeleted{
+    
+    //aws object mapper
+    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    [DynamoInterface setHashKey:@"Post_ID"];
+    queryStatus = -1;
+    NSLog(@"Waiting for database reponse...");
+    
+    if (self.isConnected){
+        [[dynamoDBObjectMapper remove:toBeDeleted] continueWithBlock:^id(BFTask *task) {
+            if (task.error) {
+                queryStatus = 1;    //error code
+                NSLog(@"The request failed. Error: [%@]", task.error);
+            }
+            if (task.exception) {
+                queryStatus = 2;    //exception code
+                NSLog(@"The request failed. Exception: [%@]", task.exception);
+            }
+            if (task.result) {
+                queryStatus = 0;   //success code
+                NSLog(@"Deletion successful");
+            }
+            return nil;
+        }];
+    }else{
+        queryStatus = 3;
+    }
+    
+    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+}
+
++(void)removeOutdated{
+    
+    Board *checkBoard = [Board new];
+    NSDate *today = [[NSDate alloc] init];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = kCFDateFormatterShortStyle;
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    checkBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:nil];
+    while ([DynamoInterface getQueryStatus] < 0) {}
+    
+    for (int i = 0; i < checkBoard.Posts.count; i++){
+        
+        Post *currentPost = [checkBoard.Posts objectAtIndex:i];
+        NSString *dateString = [NSString stringWithFormat:@"%@", currentPost.End_Date];
+        if (dateString.length == 7){
+            dateString = [@"0" stringByAppendingString:dateString];
+        }
+        NSDateComponents *dPieces = [[NSDateComponents alloc] init];
+        [dPieces setMonth:[[dateString substringWithRange:NSMakeRange (0,2)] intValue]];
+        [dPieces setDay:[[dateString substringWithRange:NSMakeRange (2,2)] intValue]];
+        [dPieces setYear:[[dateString substringWithRange:NSMakeRange (4,4)] intValue]];
+        NSDate *postDate = [[NSCalendar currentCalendar] dateFromComponents:dPieces];
+        
+        NSUInteger unitFlags = NSCalendarUnitDay;
+        
+        NSDateComponents *components = [gregorian components:unitFlags
+                                                    fromDate:today
+                                                      toDate:postDate options:0];
+        NSInteger days = [components day];
+        
+        if (days < 0 || [currentPost.Post_Status isEqualToString:@"Denied"]){
+            [DynamoInterface deletePost:currentPost];
+        }
+    }
+}
+
 +(BOOL)verifyCredentials:(NSString *)User pWord:(NSString *)Pass{
     
     BOOL verified = false;

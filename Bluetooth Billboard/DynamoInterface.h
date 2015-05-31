@@ -29,6 +29,8 @@
 +(Board*)getSingleBoardInformation:(int)ident;
 +(Board*)getFilteredPosts:(NSString *)ident statFilter:(NSString*)filter;
 +(void)savePost:(Post*)toBeSaved;
++(void)deletePost:(Post*)toBeDeleted;
++(void)removeOutdated;
 +(BOOL)verifyCredentials:(NSString *)User pWord:(NSString *)Pass;
 
 @end

@@ -43,12 +43,14 @@ NSString *tooMany = @"This login is no longer available.";
     /*********************Login Override********************/
     
     if ([self.txtUser.text isEqualToString:@"Admin"] && [self.txtPass.text isEqualToString:@"12345"]){
+        [DynamoInterface removeOutdated];
         [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
     }
     
     /**********************End Override*********************/
     NSLog(@"Failed attempts: %d", failed);
     if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text] && self.swtVerify.on){
+        [DynamoInterface removeOutdated];
         [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
     }else{
         if (!self.swtVerify.on){
