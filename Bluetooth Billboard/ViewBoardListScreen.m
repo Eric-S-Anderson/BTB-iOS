@@ -17,6 +17,8 @@
 
 @implementation ViewBoardListScreen
 
+Board *infoBoard;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -50,6 +52,74 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)holdIt:(UILongPressGestureRecognizer*)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan ) {
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        NSInteger tagNum = cell.tag;
+        infoBoard = [self.boardList objectAtIndex:tagNum];
+        NSString *message = [NSString stringWithFormat:@"Organization\n %@ \n Instructions\n %@", infoBoard.Organization, infoBoard.Instructions];
+        
+        UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:infoBoard.Board_Name
+                                                           message:message
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:@"Save Board", nil];
+        [infoAlert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1){
+        Board *bufferBoard = infoBoard;
+        
+        if (bufferBoard.Board_ID != nil){
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            
+            NSManagedObjectContext *context = [appDelegate managedObjectContext];
+            
+            NSError *error;
+            
+            NSFetchRequest *request = [[NSFetchRequest alloc] init];
+            NSEntityDescription *entity =
+            [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
+            [request setEntity:entity];
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardID == %@", bufferBoard.Board_ID];
+            [request setPredicate:predicate];
+            
+            NSArray *array = [context executeFetchRequest:request error:&error];
+            if (array.count == 0) {
+                NSManagedObject *savedBoard;
+                savedBoard =
+                [NSEntityDescription insertNewObjectForEntityForName:@"ManagedBoard" inManagedObjectContext:context];
+                [savedBoard setValue:bufferBoard.Board_ID forKey:@"boardID"];
+                [savedBoard setValue:bufferBoard.Group_ID forKey:@"groupID"];
+                [savedBoard setValue:bufferBoard.Moderator_ID forKey:@"moderatorID"];
+                [savedBoard setValue:bufferBoard.Organization forKey:@"organization"];
+                [savedBoard setValue:bufferBoard.Instructions forKey:@"instructions"];
+                [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
+                [context save:&error];
+                NSLog(@"Board saved");
+                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Saved"
+                                                                    message:@"You have sucessfully saved the board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                [saveAlert show];
+            }else{
+                NSLog(@"Board has already been saved.");
+                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Already Saved"
+                                                                    message:@"You had already saved this board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                [saveAlert show];
+            }
+        }
+        
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -70,6 +140,9 @@
     
     cell.textLabel.text = cellBoard.Board_Name;
     cell.detailTextLabel.text = cellBoard.Organization;
+    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
+    [cell addGestureRecognizer:holdIt];
+    cell.tag = indexPath.row;
     return cell;
 }
 

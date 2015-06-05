@@ -10,10 +10,8 @@
 
 @interface ViewBanListScreen ()
 @property (weak, nonatomic) IBOutlet UITableView *tblBanned;
-@property (weak, nonatomic) IBOutlet UIButton *btnHosts;
 @property (weak, nonatomic) IBOutlet UIButton *btnTypes;
 - (IBAction)touchUpTypes:(id)sender;
-- (IBAction)touchUpHosts:(id)sender;
 
 @end
 
@@ -30,7 +28,8 @@ NSMutableArray *banHost;
     
     self.tblBanned.dataSource = self;
     self.tblBanned.delegate = self;
-    
+    [self.btnTypes setTitle:(@"Banned Types") forState:UIControlStateNormal];
+    self.navigationItem.title = @"Banned Hosts";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -131,12 +130,18 @@ NSMutableArray *banHost;
 */
 
 - (IBAction)touchUpTypes:(id)sender {
-    currentList = 1;
+    
+    if (currentList == 0){
+        currentList = 1;
+        [self.btnTypes setTitle:(@"Banned Hosts") forState:UIControlStateNormal];
+        self.navigationItem.title = @"Banned Types";
+    }else{
+        currentList = 0;
+        [self.btnTypes setTitle:(@"Banned Types") forState:UIControlStateNormal];
+        self.navigationItem.title = @"Banned Hosts";
+    }
+    
     [self.tblBanned reloadData];
 }
 
-- (IBAction)touchUpHosts:(id)sender {
-    currentList = 0;
-    [self.tblBanned reloadData];
-}
 @end

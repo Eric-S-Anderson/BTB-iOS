@@ -24,9 +24,11 @@
 +(Board*)getCurrentBoardInfo;
 +(NSString*)getCurrentBoard;
 +(int)getQueryStatus;
++(BOOL)getConnection;
 +(BOOL)isConnected;
 +(NSMutableArray*)getAllBoardInformation:(NSMutableArray*)emptyList;
 +(Board*)getSingleBoardInformation:(int)ident;
++(Post*)getSinglePost:(int)ident;
 +(Board*)getFilteredPosts:(NSString *)ident statFilter:(NSString*)filter;
 +(void)savePost:(Post*)toBeSaved;
 +(void)deletePost:(Post*)toBeDeleted;

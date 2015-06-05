@@ -11,6 +11,7 @@
 @implementation DynamoInterface
 
 int queryStatus;
+bool connection = false;
 NSString *TableName;
 NSString *HashKey;
 NSString *currentBoard;
@@ -59,6 +60,11 @@ Board *fullBoard;
     return queryStatus;
 }
 
++(BOOL)getConnection{
+    //return conection status
+    return connection;
+}
+
 +(BOOL)isConnected{
     //return whether device has an internet connection
     NSURL *connectivityTester = [NSURL URLWithString:@"http://www.google.com"];
@@ -66,10 +72,18 @@ Board *fullBoard;
     if (resultData){
         //connection to google was made
         NSLog(@"Device is connected to the internet");
+        connection = true;
         return true;
     }else{
         //connection was not made
         NSLog(@"Device is not connected to the internet");
+        connection = false;
+        UIAlertView *conAlert = [[UIAlertView alloc] initWithTitle:@"Not Connected"
+                                                            message:@"Could not connect to the database.  Please verify your internet conenction or try again later."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [conAlert show];
         return false;
     }
 }
@@ -119,7 +133,7 @@ Board *fullBoard;
         queryStatus = 3;
     }
     
-    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    //while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
 
     return emptyList;
 }
@@ -173,9 +187,64 @@ Board *fullBoard;
         queryStatus = 3;
     }
     
-    while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    //while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
 
     return fillBoard;
+}
+
++(Post*)getSinglePost:(int)ident{
+    
+    //aws credentials
+    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]
+                                                          initWithRegionType:AWSRegionUSEast1 identityPoolId:@"us-east-1:ed50d9e9-fd87-4188-b4e2-24a974ee68e9"];
+    //aws service configuration
+    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSEast1 credentialsProvider:credentialsProvider];
+    //aws service manager
+    [AWSServiceManager defaultServiceManager].defaultServiceConfiguration = configuration;
+    //aws object mapper
+    AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
+    
+    Post *checkPost = [Post new];
+    HashKey = @"Post_ID";
+    NSNumber *recasted = [NSNumber numberWithInt:(ident)];
+    
+    queryStatus = -1;           //reset query status
+    NSLog(@"Waiting for database reponse...");
+    
+    if (self.isConnected){
+        [[dynamoDBObjectMapper load:[Post class] hashKey:recasted rangeKey:nil]
+         continueWithBlock:^id(BFTask *task) {
+             if (task.error) {
+                 NSLog(@"The request failed. Error: [%@]", task.error);
+                 queryStatus = 1;   //error code
+             }
+             if (task.exception) {
+                 NSLog(@"The request failed. Exception: [%@]", task.exception);
+                 queryStatus = 2;   //exception code
+             }
+             if (task.result) {
+                 Post *bufferPost = task.result;
+                 checkPost.Post_ID = bufferPost.Post_ID;
+                 checkPost.Phone = bufferPost.Phone;
+                 checkPost.End_Date = bufferPost.End_Date;
+                 checkPost.Host = bufferPost.Host;
+                 checkPost.Email = bufferPost.Email;
+                 checkPost.Address = bufferPost.Address;
+                 checkPost.Information = bufferPost.Information;
+                 checkPost.Post_Type = bufferPost.Post_Type;
+                 checkPost.Post_Status = bufferPost.Post_Status;
+                 queryStatus = 0;   //success code
+                 NSLog(@"Query Sucessful");
+             }
+             return nil;
+         }];
+    }else{
+        queryStatus = 3;
+    }
+    
+    //while ([DynamoInterface getQueryStatus] < 0) {}   //loop while waiting for database
+    
+    return checkPost;
 }
 
 +(Board*)getFilteredPosts:(NSString *)ident statFilter:(NSString*)filter{
@@ -243,6 +312,13 @@ Board *fullBoard;
 }
 
 +(void)savePost:(Post*)toBeSaved{
+    
+    if ([toBeSaved.Address isEqualToString:@""]){
+        toBeSaved.Address = @" ";
+    }
+    if ([toBeSaved.Email isEqualToString:@""]){
+        toBeSaved.Email = @" ";
+    }
     
     //aws object mapper
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];

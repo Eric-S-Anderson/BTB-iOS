@@ -53,7 +53,7 @@ CLLocationManager *locManager;
     [[NSUserDefaults standardUserDefaults] registerDefaults:hosts];
     [[NSUserDefaults standardUserDefaults] registerDefaults:types];
     
-    [DynamoInterface setCurrentBoard:@"213411"];
+    [DynamoInterface setCurrentBoard:@"000000"];
     
     return YES;
 }

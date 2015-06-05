@@ -15,6 +15,7 @@
 
 @implementation SavedBoardsListScreen
 
+NSInteger rowDex;
 NSMutableArray *boards;
 
 - (void)viewDidLoad {
@@ -65,6 +66,8 @@ NSMutableArray *boards;
 
 - (void)holdIt:(UILongPressGestureRecognizer*)gesture {
     if ( gesture.state == UIGestureRecognizerStateBegan ) {
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        rowDex = cell.tag;
         UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Delete Board"
                                                            message:@"Would you like to delete this board from your device?"
                                                           delegate:self
@@ -77,7 +80,7 @@ NSMutableArray *boards;
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1){
         
-        Board *endMe = [boards objectAtIndex:self.tblBoards.indexPathForSelectedRow.row];
+        Board *endMe = [boards objectAtIndex:rowDex];
         NSNumber *boardID = endMe.Board_ID;
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -153,6 +156,7 @@ NSMutableArray *boards;
     cell.detailTextLabel.text = cellBoard.Organization;
     UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
     [cell addGestureRecognizer:holdIt];
+    cell.tag = indexPath.row;
     return cell;
 }
 

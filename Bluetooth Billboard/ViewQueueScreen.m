@@ -78,7 +78,7 @@
     
     MFMailComposeViewController *sendMe = [[MFMailComposeViewController alloc] init];
     [sendMe setMailComposeDelegate:self];
-    if ([MFMailComposeViewController canSendMail] && self.post.Email != NULL) {
+    if ([MFMailComposeViewController canSendMail] && ![self.post.Email isEqualToString:@" "]) {
         [sendMe setToRecipients:[NSArray arrayWithObject:self.post.Email]];
         [sendMe setMessageBody:mesApproval isHTML:false];
         [sendMe setSubject:@"Your post has been approved!"];
@@ -104,7 +104,7 @@
     
     MFMailComposeViewController *sendMe = [[MFMailComposeViewController alloc] init];
     [sendMe setMailComposeDelegate:self];
-    if ([MFMailComposeViewController canSendMail] && self.post.Email != NULL) {
+    if ([MFMailComposeViewController canSendMail] && ![self.post.Email isEqualToString:@" "]) {
         [sendMe setToRecipients:[NSArray arrayWithObject:self.post.Email]];
         [sendMe setMessageBody:mesDenial isHTML:false];
         [sendMe setSubject:@"Your post has been denied!"];

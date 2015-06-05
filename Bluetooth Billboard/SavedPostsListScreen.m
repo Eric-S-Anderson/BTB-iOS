@@ -15,6 +15,7 @@
 
 @implementation SavedPostsListScreen
 
+NSInteger rowDex;
 NSMutableArray *posts;
 
 - (void)viewDidLoad {
@@ -68,6 +69,8 @@ NSMutableArray *posts;
 
 - (void)holdIt:(UILongPressGestureRecognizer*)gesture {
     if ( gesture.state == UIGestureRecognizerStateBegan ) {
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        rowDex = cell.tag;
         UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Delete Post"
                                                            message:@"Would you like to delete this post from your device?"
                                                           delegate:self
@@ -80,7 +83,7 @@ NSMutableArray *posts;
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1){
         
-        Post *endMe = [posts objectAtIndex:self.tblPosts.indexPathForSelectedRow.row];
+        Post *endMe = [posts objectAtIndex:rowDex];
         NSNumber *postID = endMe.Post_ID;
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -160,6 +163,7 @@ NSMutableArray *posts;
     cell.detailTextLabel.text = cellPost.Information;
     UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
     [cell addGestureRecognizer:holdIt];
+    cell.tag = indexPath.row;
     return cell;
 }
 

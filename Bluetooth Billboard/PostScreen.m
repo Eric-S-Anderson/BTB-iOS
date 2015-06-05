@@ -139,7 +139,7 @@
                                                  cancelButtonTitle:@"OK"
                                                  otherButtonTitles:nil];
         [botAlert show];
-    }else if (self.txtHost.text == NULL){
+    }else if ([self.txtHost.text isEqualToString:@""]){
         UIAlertView *invAlert = [[UIAlertView alloc] initWithTitle:@"No Host Name"
                                                            message:@"You must provide a host name."
                                                           delegate:self
@@ -147,7 +147,7 @@
                                                  otherButtonTitles:nil];
         [invAlert show];
         [self.txtHost becomeFirstResponder];
-    }else if (self.txtPostType.text == NULL){
+    }else if ([self.txtPostType.text isEqualToString:@""]){
         UIAlertView *invAlert = [[UIAlertView alloc] initWithTitle:@"No Type Chosen"
                                                            message:@"You must choose a post type."
                                                           delegate:self
@@ -155,7 +155,7 @@
                                                  otherButtonTitles:nil];
         [invAlert show];
         [self.txtPostType becomeFirstResponder];
-    }else if (self.txvInformation.text == NULL){
+    }else if ([self.txvInformation.text isEqualToString:@""]){
         UIAlertView *invAlert = [[UIAlertView alloc] initWithTitle:@"No Information"
                                                            message:@"You must add some information."
                                                           delegate:self
@@ -170,7 +170,7 @@
         PhoneNumber *postPhone = [[PhoneNumber alloc] initWithString:self.txtPhone.text];
         post.Phone = postPhone.value;
         post.Email = self.txtEmail.text;
-        if (self.txtDate.text == NULL){
+        if ([self.txtDate.text isEqualToString:@""]){
             NSDate *today = [[NSDate alloc] init];
             NSCalendar *gregorian = [[NSCalendar alloc]
                                      initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -186,7 +186,13 @@
         }
         post.Post_Type = self.txtPostType.text;
         post.Information = self.txvInformation.text;
-        post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //easy auto-id
+        post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //auto-id
+        Post *checker = [Post new];
+        checker = [DynamoInterface getSinglePost:[post.Post_ID intValue]];      //check if id is already in use
+        while (checker.Post_ID != nil){
+            post.Post_ID = [NSNumber numberWithInteger:arc4random_uniform(99999999)];  //get new id if a post with
+            checker = [DynamoInterface getSinglePost:[post.Post_ID intValue]];          //that id was found
+        }
         post.Post_Status = @"Queued";
 
         [DynamoInterface savePost:post];
@@ -207,7 +213,7 @@
                                                       otherButtonTitles:nil];
             [saveAlert show];
         }
-    
+        [self performSegueWithIdentifier: @"submitSegue" sender: self];
     }
     
 }

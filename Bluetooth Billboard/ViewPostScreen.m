@@ -42,7 +42,7 @@
         }
         self.txtEmail.text = self.post.Email;
         self.txvInformation.text = self.post.Information;
-    
+
         NSString *blkHost = [@"Block Host\n" stringByAppendingString:self.post.Host];
         NSString *blkType = [@"Block Type\n" stringByAppendingString:self.post.Post_Type];
     
@@ -128,10 +128,15 @@
 
 - (IBAction)touchUpSave:(id)sender {
     
+    NSString *pstID = [NSString stringWithFormat:@"%@", self.post.Post_ID];
+    NSString *brdID = [DynamoInterface getCurrentBoard];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *lngID = [formatter numberFromString:[brdID stringByAppendingString:pstID]];
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
     
     NSError *error;
     
@@ -139,14 +144,14 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context];
     [request setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postID == %@", self.post.Post_ID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postID == %@", lngID];
     [request setPredicate:predicate];
     
     NSArray *array = [context executeFetchRequest:request error:&error];
     if (array.count == 0) {
         NSManagedObject *savedPost;
         savedPost = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedPost" inManagedObjectContext:context];
-        [savedPost setValue:self.post.Post_ID forKey:@"postID"];
+        [savedPost setValue:lngID forKey:@"postID"];
         [savedPost setValue:self.post.Phone forKey:@"phone"];
         [savedPost setValue:self.post.End_Date forKey:@"end_Date"];
         [savedPost setValue:self.post.Host forKey:@"host"];
