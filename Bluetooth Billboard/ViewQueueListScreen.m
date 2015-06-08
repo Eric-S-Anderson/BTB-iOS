@@ -55,10 +55,8 @@ Board *queueBoard;
     
     Post *post = [queueBoard.Posts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.Host;
-    cell.detailTextLabel.text = post.Information;
-    // Configure the cell...
-    //[self.tblPosts reloadData];
-    
+    HTMLParser *info = [[HTMLParser alloc] initWithString:post.Information];
+    cell.detailTextLabel.text = info.textOnlyMessage;
     return cell;
 }
 

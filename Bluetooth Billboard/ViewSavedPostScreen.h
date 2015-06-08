@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "DynamoInterface.h"
+#import "HTMLParser.h"
 
-@interface ViewSavedPostScreen : UIViewController
+@interface ViewSavedPostScreen : UIViewController <UIWebViewDelegate>
 
 @property Post *post;
 

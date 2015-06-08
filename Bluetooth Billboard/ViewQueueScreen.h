@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "DynamoInterface.h"
+#import "HTMLParser.h"
 
-@interface ViewQueueScreen : UIViewController <MFMailComposeViewControllerDelegate>
+@interface ViewQueueScreen : UIViewController <MFMailComposeViewControllerDelegate, UIWebViewDelegate>
 
 @property Post *post;
 

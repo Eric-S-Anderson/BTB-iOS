@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewQueueScreen.h"
 #import "DynamoInterface.h"
+#import "HTMLParser.h"
 
 @interface ViewQueueListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

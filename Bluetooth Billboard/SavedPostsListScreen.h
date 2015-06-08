@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>
 #import "Post.h"
 #import "ViewSavedPostScreen.h"
+#import "HTMLParser.h"
 
 @interface SavedPostsListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

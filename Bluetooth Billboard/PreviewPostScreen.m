@@ -40,7 +40,16 @@
         self.txtPhone.text = [NSString stringWithFormat:@"%@",self.post.Phone];
         }
         self.txtEmail.text = self.post.Email;
-        self.txvInformation.text = self.post.Information;
+        HTMLParser *info = [[HTMLParser alloc] initWithString:self.post.Information];
+        if (info.HTML){
+            UIWebView *wbvInformation = [[UIWebView alloc] initWithFrame:self.txvInformation.frame];
+            wbvInformation.delegate=self;
+            [wbvInformation loadHTMLString:self.post.Information baseURL:nil];
+            [self.view addSubview:wbvInformation];
+            [self.view bringSubviewToFront:self.scvDetails];
+        }else{
+            self.txvInformation.text = self.post.Information;
+        }
     }
 }
 
@@ -48,6 +57,15 @@
     
     [super viewDidAppear:animated];
     self.scvDetails.contentSize = CGSizeMake(240, 250);
+}
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

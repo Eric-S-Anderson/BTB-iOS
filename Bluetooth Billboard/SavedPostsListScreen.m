@@ -157,10 +157,11 @@ NSMutableArray *posts;
     
     // Configure the cell...
     
-    Post *cellPost = [posts objectAtIndex:indexPath.row];
+    Post *post = [posts objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = cellPost.Host;
-    cell.detailTextLabel.text = cellPost.Information;
+    cell.textLabel.text = post.Host;
+    HTMLParser *info = [[HTMLParser alloc] initWithString:post.Information];
+    cell.detailTextLabel.text = info.textOnlyMessage;
     UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
     [cell addGestureRecognizer:holdIt];
     cell.tag = indexPath.row;

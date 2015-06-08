@@ -73,7 +73,9 @@
 		14C0793E1AC7345700D32B76 /* sqs-2012-11-05.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C0792F1AC7345700D32B76 /* sqs-2012-11-05.json */; };
 		14C0793F1AC7345700D32B76 /* sts-2011-06-15.json in Resources */ = {isa = PBXBuildFile; fileRef = 14C079301AC7345700D32B76 /* sts-2011-06-15.json */; };
 		14D8D2811AF53AB900D240A7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D8D2801AF53AB900D240A7 /* MessageUI.framework */; };
+		14DCD48A1B26025F00AC05BC /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DCD4891B26025F00AC05BC /* NSString_stripHtml.m */; };
 		14E379C91AD07A4800929A6F /* PreviewPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E379C81AD07A4800929A6F /* PreviewPostScreen.m */; };
+		14FB38F21B25FBF300430BE7 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FB38F11B25FBF300430BE7 /* HTMLParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,8 +170,12 @@
 		14C0792F1AC7345700D32B76 /* sqs-2012-11-05.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sqs-2012-11-05.json"; sourceTree = "<group>"; };
 		14C079301AC7345700D32B76 /* sts-2011-06-15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sts-2011-06-15.json"; sourceTree = "<group>"; };
 		14D8D2801AF53AB900D240A7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		14DCD4881B26025F00AC05BC /* NSString_stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_stripHtml.h; sourceTree = "<group>"; };
+		14DCD4891B26025F00AC05BC /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		14E379C71AD07A4800929A6F /* PreviewPostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPostScreen.h; sourceTree = "<group>"; };
 		14E379C81AD07A4800929A6F /* PreviewPostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPostScreen.m; sourceTree = "<group>"; };
+		14FB38F01B25FBF300430BE7 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		14FB38F11B25FBF300430BE7 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +239,6 @@
 				14D8D2AE1AF54B2900D240A7 /* View Controllers */,
 				14D8D28E1AF545E300D240A7 /* Interfaces */,
 				14D8D28D1AF545CD00D240A7 /* Data Classes */,
-				14D8D2AD1AF54B0100D240A7 /* Other Classes */,
 				14D8D2AF1AF54B7100D240A7 /* Application Controllers */,
 				14B60AA21AC38A2C0081D55A /* Supporting Files */,
 				14D8D28C1AF5459500D240A7 /* JSON Files */,
@@ -293,6 +298,12 @@
 				144F40501AE96A7C00DBB35D /* DynamoInterface.m */,
 				144F40521AE97DED00DBB35D /* DynamoInformation.h */,
 				144F40531AE97DEE00DBB35D /* DynamoInformation.m */,
+				14FB38F01B25FBF300430BE7 /* HTMLParser.h */,
+				14FB38F11B25FBF300430BE7 /* HTMLParser.m */,
+				14DCD4881B26025F00AC05BC /* NSString_stripHtml.h */,
+				14DCD4891B26025F00AC05BC /* NSString_stripHtml.m */,
+				144F404C1AE955C800DBB35D /* PhoneNumber.h */,
+				144F404D1AE955C800DBB35D /* PhoneNumber.m */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -327,15 +338,6 @@
 				1463FBA71AC7A45B0029E340 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		14D8D2AD1AF54B0100D240A7 /* Other Classes */ = {
-			isa = PBXGroup;
-			children = (
-				144F404C1AE955C800DBB35D /* PhoneNumber.h */,
-				144F404D1AE955C800DBB35D /* PhoneNumber.m */,
-			);
-			name = "Other Classes";
 			sourceTree = "<group>";
 		};
 		14D8D2AE1AF54B2900D240A7 /* View Controllers */ = {
@@ -492,8 +494,10 @@
 				14B60AA81AC38A2C0081D55A /* AppDelegate.m in Sources */,
 				144F404E1AE955C800DBB35D /* PhoneNumber.m in Sources */,
 				1418FB6D1AD1CDE000EFA727 /* ViewBoardListScreen.m in Sources */,
+				14FB38F21B25FBF300430BE7 /* HTMLParser.m in Sources */,
 				14A6AF691ACF291100EB4486 /* ViewPostListScreen.m in Sources */,
 				14B60AB11AC38A2C0081D55A /* ModelController.m in Sources */,
+				14DCD48A1B26025F00AC05BC /* NSString_stripHtml.m in Sources */,
 				14A6AF721ACF29C900EB4486 /* SavedBoardsListScreen.m in Sources */,
 				14B60AA51AC38A2C0081D55A /* main.m in Sources */,
 				144F40541AE97DEE00DBB35D /* DynamoInformation.m in Sources */,

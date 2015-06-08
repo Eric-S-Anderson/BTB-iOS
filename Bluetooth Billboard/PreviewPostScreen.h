@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DynamoInterface.h"
+#import "HTMLParser.h"
 
-@interface PreviewPostScreen : UIViewController
+@interface PreviewPostScreen : UIViewController <UIWebViewDelegate>
 
 @property Post *post;
 

@@ -11,8 +11,9 @@
 #import "Post.h"
 #import "AppDelegate.h"
 #import "DynamoInterface.h"
+#import "HTMLParser.h"
 
-@interface ViewPostScreen : UIViewController
+@interface ViewPostScreen : UIViewController <UIWebViewDelegate>
 
 @property Post *post;
 
