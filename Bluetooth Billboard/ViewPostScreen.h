@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "DynamoInterface.h"
 #import "HTMLParser.h"
+#import "DeviceInterface.h"
 
 @interface ViewPostScreen : UIViewController <UIWebViewDelegate>
 

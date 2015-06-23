@@ -45,43 +45,46 @@ NSString *tooMany = @"This login is no longer available.";
     if ([self.txtUser.text isEqualToString:@"Admin"] && [self.txtPass.text isEqualToString:@"12345"]){
         [DynamoInterface removeOutdated];
         [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
-    }
+    }else{
     
     /**********************End Override*********************/
-    NSLog(@"Failed attempts: %d", failed);
-    if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text] && self.swtVerify.on){
-        [DynamoInterface removeOutdated];
-        [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
-    }else{
-        if (!self.swtVerify.on){
-            UIAlertView *botAlert = [[UIAlertView alloc] initWithTitle:@"Robot"
-                                                            message:@"No Robots Allowed!"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [botAlert show];
+        NSLog(@"Failed attempts: %d", failed);
+        if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text] && self.swtVerify.on){
+            [DynamoInterface removeOutdated];
+            [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
         }else{
-            UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Invalid Login"
-                                                            message:@"The password or username you have entered is incorrect."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [saveAlert show];
+            if (!self.swtVerify.on){
+                UIAlertView *botAlert = [[UIAlertView alloc] initWithTitle:@"Robot"
+                                                                   message:@"No Robots Allowed!"
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                [botAlert show];
+            }else{
+                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Invalid Login"
+                                                                    message:@"The password or username you have entered is incorrect."
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                [saveAlert show];
+            }
+            failed++;
+            if (failed == 1){
+                self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failSEnd]];
+            }else if (failed < 5){
+                self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failMEnd]];
+            }else{
+                self.lblFailedAttempts.text = tooMany;
+                self.btnLogin.enabled = false;
+                self.btnLogin.hidden = true;
+            }
+            self.txtUser.text = @"";
+            self.txtPass.text = @"";
+            self.lblFailedAttempts.hidden = false;
         }
-        failed++;
-        if (failed == 1){
-            self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failSEnd]];
-        }else if (failed < 5){
-            self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failMEnd]];
-        }else{
-            self.lblFailedAttempts.text = tooMany;
-            self.btnLogin.enabled = false;
-            self.btnLogin.hidden = true;
-        }
-        self.txtUser.text = @"";
-        self.txtPass.text = @"";
-        self.lblFailedAttempts.hidden = false;
+        /****part of override***/
     }
+    /****end part****/
     
 }
 

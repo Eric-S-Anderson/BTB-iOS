@@ -11,6 +11,7 @@
 #import "DynamoInterface.h"
 #import "AppDelegate.h"
 #import "HTMLParser.h"
+#import "DeviceInterface.h"
 
 @interface ViewPostListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

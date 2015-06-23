@@ -30,31 +30,7 @@ NSMutableArray *boards;
     
     [super viewDidAppear:animated];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
-    
-    NSError *error;
-    NSArray *objects = [context executeFetchRequest:request error:&error];
-    
-    boards = [[NSMutableArray alloc] init];
-    
-    for (unsigned int i = 0; i < objects.count; i++){
-        NSManagedObject *aboard = [objects objectAtIndex:i];
-        Board *buffer = [Board new];
-        buffer.Board_ID = [aboard valueForKey:@"boardID"];
-        buffer.Group_ID = [aboard valueForKey:@"groupID"];
-        buffer.Moderator_ID = [aboard valueForKey:@"moderatorID"];
-        buffer.Instructions = [aboard valueForKey:@"instructions"];
-        buffer.Organization = [aboard valueForKey:@"organization"];
-        buffer.Board_Name = [aboard valueForKey:@"boardName"];
-        [boards addObject:buffer];
-    }
+    boards = [DeviceInterface getBoards];
     
     [self.tblBoards reloadData];
 }
@@ -81,52 +57,10 @@ NSMutableArray *boards;
     if (buttonIndex == 1){
         
         Board *endMe = [boards objectAtIndex:rowDex];
-        NSNumber *boardID = endMe.Board_ID;
         
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [DeviceInterface deleteBoard:endMe];
         
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        
-        NSError *error;
-        
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
-        [request setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardID == %@", boardID];
-        [request setPredicate:predicate];
-        
-        NSArray *array = [[NSArray alloc] init];
-        array = [context executeFetchRequest:request error:&error];
-        if (array.count > 0){
-            [context deleteObject:[array objectAtIndex:0]];
-            NSLog(@"Board deleted");
-        }
-        UIAlertView *delAlert = [[UIAlertView alloc] initWithTitle:@"Board Deleted"
-                                                           message:@"The board has been deleted."
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-        [delAlert show];
-        
-        NSFetchRequest *rePop = [[NSFetchRequest alloc] init];
-        [rePop setEntity:entity];
-        
-        NSArray *objects = [context executeFetchRequest:rePop error:&error];
-        
-        boards = [[NSMutableArray alloc] init];
-        
-        for (unsigned int i = 0; i < objects.count; i++){
-            NSManagedObject *aboard = [objects objectAtIndex:i];
-            Board *buffer = [Board new];
-            buffer.Board_ID = [aboard valueForKey:@"boardID"];
-            buffer.Group_ID = [aboard valueForKey:@"groupID"];
-            buffer.Moderator_ID = [aboard valueForKey:@"moderatorID"];
-            buffer.Instructions = [aboard valueForKey:@"instructions"];
-            buffer.Organization = [aboard valueForKey:@"organization"];
-            buffer.Board_Name = [aboard valueForKey:@"boardName"];
-            [boards addObject:buffer];
-        }
+        boards = [DeviceInterface getBoards];
         
         [self.tblBoards reloadData];
     }

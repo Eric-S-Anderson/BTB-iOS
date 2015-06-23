@@ -146,55 +146,7 @@
 
 - (IBAction)touchUpSave:(id)sender {
     
-    NSString *pstID = [NSString stringWithFormat:@"%@", self.post.Post_ID];
-    NSString *brdID = [DynamoInterface getCurrentBoard];
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *lngID = [formatter numberFromString:[brdID stringByAppendingString:pstID]];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSError *error;
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ManagedPost" inManagedObjectContext:context];
-    [request setEntity:entity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"postID == %@", lngID];
-    [request setPredicate:predicate];
-    
-    NSArray *array = [context executeFetchRequest:request error:&error];
-    if (array.count == 0) {
-        NSManagedObject *savedPost;
-        savedPost = [NSEntityDescription insertNewObjectForEntityForName:@"ManagedPost" inManagedObjectContext:context];
-        [savedPost setValue:lngID forKey:@"postID"];
-        [savedPost setValue:self.post.Phone forKey:@"phone"];
-        [savedPost setValue:self.post.End_Date forKey:@"end_Date"];
-        [savedPost setValue:self.post.Host forKey:@"host"];
-        [savedPost setValue:self.post.Email forKey:@"email"];
-        [savedPost setValue:self.post.Address forKey:@"address"];
-        [savedPost setValue:self.post.Information forKey:@"information"];
-        [savedPost setValue:self.post.Post_Type forKey:@"post_Type"];
-        [savedPost setValue:self.post.Post_Status forKey:@"post_Status"];
-        [context save:&error];
-        NSLog(@"Post saved");
-        UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Saved"
-                                                           message:@"You have sucessfully saved this post.  To view this post again, click the 'Saved Posts' icon on your tab bar."
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-        [saveAlert show];
-    }else{
-        NSLog(@"Post has already been saved.");
-        UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Post Already Saved"
-                                                            message:@"You had already saved this post.  To view this post again, click the 'Saved Posts' icon on your tab bar."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [saveAlert show];
-    }
+    [DeviceInterface savePost:self.post];
     
 }
 

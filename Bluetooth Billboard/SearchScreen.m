@@ -82,53 +82,8 @@ Board *infoBoard;
 
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1){
-        Board *bufferBoard = infoBoard;
         
-        if (bufferBoard.Board_ID != nil){
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
-            
-            NSError *error;
-            
-            NSFetchRequest *request = [[NSFetchRequest alloc] init];
-            NSEntityDescription *entity =
-            [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
-            [request setEntity:entity];
-            
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardID == %@", bufferBoard.Board_ID];
-            [request setPredicate:predicate];
-            
-            NSArray *array = [context executeFetchRequest:request error:&error];
-            if (array.count == 0) {
-                NSManagedObject *savedBoard;
-                savedBoard =
-                [NSEntityDescription insertNewObjectForEntityForName:@"ManagedBoard" inManagedObjectContext:context];
-                [savedBoard setValue:bufferBoard.Board_ID forKey:@"boardID"];
-                [savedBoard setValue:bufferBoard.Group_ID forKey:@"groupID"];
-                [savedBoard setValue:bufferBoard.Moderator_ID forKey:@"moderatorID"];
-                [savedBoard setValue:bufferBoard.Organization forKey:@"organization"];
-                [savedBoard setValue:bufferBoard.Instructions forKey:@"instructions"];
-                [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
-                [context save:&error];
-                NSLog(@"Board saved");
-                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Saved"
-                                                                    message:@"You have sucessfully saved the board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                [saveAlert show];
-            }else{
-                NSLog(@"Board has already been saved.");
-                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Already Saved"
-                                                                    message:@"You had already saved this board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                [saveAlert show];
-            }
-        }
-        
+        [DeviceInterface saveBoard:infoBoard];
     }
 }
 

@@ -9,39 +9,38 @@
 #import "ViewBoardListScreen.h"
 
 @interface ViewBoardListScreen ()
-@property (weak, nonatomic) IBOutlet UITableView *tblBoards;
-@property NSMutableArray *boardList;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
+@property (weak, nonatomic) IBOutlet UITableView *tblBoards;        //tableview for listing found boards
+@property NSMutableArray *boardList;                                //array that holds the found boards
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;   //displays when querying database
 
 @end
 
 @implementation ViewBoardListScreen
 
-Board *infoBoard;
+Board *infoBoard;       //will hold the selected board
 
 - (void)viewDidLoad {
+    //called when the view controller loads
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self.aivWaiting stopAnimating];
     //initializations
+    [self.aivWaiting stopAnimating];
     self.tblBoards.dataSource = self;
     self.tblBoards.delegate = self;
-    
 }
 - (void)viewDidAppear:(BOOL)animated {
-    
+    //called everytime the page appears
     [super viewDidAppear:animated];
-    
+    //load board list and get info for each board
     self.boardList = [[NSMutableArray alloc] init];
     NSArray *boardIDs = [[[NSUserDefaults standardUserDefaults] objectForKey:@"boards"]mutableCopy];
     for (unsigned int i = 0; i < boardIDs.count; i++){
         NSNumber *bufferID = [boardIDs objectAtIndex:i];
         Board *newBoard = [Board new];
         newBoard = [DynamoInterface getSingleBoardInformation:bufferID.intValue];
-        
+        //get each board's information
         while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
         [self.aivWaiting stopAnimating];
-        
+        //add each board to the main board list
         [self.boardList addObject:newBoard];
     }
     [self.tblBoards reloadData];
@@ -53,12 +52,13 @@ Board *infoBoard;
 }
 
 - (void)holdIt:(UILongPressGestureRecognizer*)gesture {
+    //called when the user long presses a table cell
     if (gesture.state == UIGestureRecognizerStateBegan ) {
         UITableViewCell *cell = (UITableViewCell *)[gesture view];
         NSInteger tagNum = cell.tag;
         infoBoard = [self.boardList objectAtIndex:tagNum];
         NSString *message = [NSString stringWithFormat:@"Organization\n %@ \n Instructions\n %@", infoBoard.Organization, infoBoard.Instructions];
-        
+        //display board info to the user, and allow them to save them board
         UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:infoBoard.Board_Name
                                                            message:message
                                                           delegate:self
@@ -69,54 +69,10 @@ Board *infoBoard;
 }
 
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //called when an alert box button is pressed
     if (buttonIndex == 1){
-        Board *bufferBoard = infoBoard;
-        
-        if (bufferBoard.Board_ID != nil){
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
-            
-            NSError *error;
-            
-            NSFetchRequest *request = [[NSFetchRequest alloc] init];
-            NSEntityDescription *entity =
-            [NSEntityDescription entityForName:@"ManagedBoard" inManagedObjectContext:context];
-            [request setEntity:entity];
-            
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"boardID == %@", bufferBoard.Board_ID];
-            [request setPredicate:predicate];
-            
-            NSArray *array = [context executeFetchRequest:request error:&error];
-            if (array.count == 0) {
-                NSManagedObject *savedBoard;
-                savedBoard =
-                [NSEntityDescription insertNewObjectForEntityForName:@"ManagedBoard" inManagedObjectContext:context];
-                [savedBoard setValue:bufferBoard.Board_ID forKey:@"boardID"];
-                [savedBoard setValue:bufferBoard.Group_ID forKey:@"groupID"];
-                [savedBoard setValue:bufferBoard.Moderator_ID forKey:@"moderatorID"];
-                [savedBoard setValue:bufferBoard.Organization forKey:@"organization"];
-                [savedBoard setValue:bufferBoard.Instructions forKey:@"instructions"];
-                [savedBoard setValue:bufferBoard.Board_Name forKey:@"boardName"];
-                [context save:&error];
-                NSLog(@"Board saved");
-                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Saved"
-                                                                    message:@"You have sucessfully saved the board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                [saveAlert show];
-            }else{
-                NSLog(@"Board has already been saved.");
-                UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Board Already Saved"
-                                                                    message:@"You had already saved this board.  To view this board again, click the 'Saved Boards' icon on your tab bar."
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                [saveAlert show];
-            }
-        }
-        
+        //save the board
+        [DeviceInterface saveBoard:infoBoard];
     }
 }
 
@@ -132,20 +88,18 @@ Board *infoBoard;
     return [self.boardList count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //get information for table cells
     UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeBoardCell" forIndexPath:indexPath];
     Board *cellBoard = [self.boardList objectAtIndex:indexPath.row];
-    
+    //populate cell information
     cell.textLabel.text = cellBoard.Board_Name;
     cell.detailTextLabel.text = cellBoard.Organization;
-    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
+    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];    //add long press gesture to each table cell
     [cell addGestureRecognizer:holdIt];
     cell.tag = indexPath.row;
     return cell;
 }
-
 
 #pragma mark - Navigation
 
@@ -159,8 +113,6 @@ Board *infoBoard;
         NSString *brdName = [NSString stringWithFormat:@"%@",bufferBoard.Board_ID];
         [DynamoInterface setCurrentBoard:brdName];
     }
-    
 }
-
 
 @end

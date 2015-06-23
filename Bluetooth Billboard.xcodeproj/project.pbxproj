@@ -75,6 +75,7 @@
 		14D8D2811AF53AB900D240A7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D8D2801AF53AB900D240A7 /* MessageUI.framework */; };
 		14DCD48A1B26025F00AC05BC /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DCD4891B26025F00AC05BC /* NSString_stripHtml.m */; };
 		14E379C91AD07A4800929A6F /* PreviewPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E379C81AD07A4800929A6F /* PreviewPostScreen.m */; };
+		14F3465E1B39DD3A00278EA0 /* DeviceInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F3465D1B39DD3A00278EA0 /* DeviceInterface.m */; };
 		14FB38F21B25FBF300430BE7 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FB38F11B25FBF300430BE7 /* HTMLParser.m */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,8 @@
 		14DCD4891B26025F00AC05BC /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		14E379C71AD07A4800929A6F /* PreviewPostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewPostScreen.h; sourceTree = "<group>"; };
 		14E379C81AD07A4800929A6F /* PreviewPostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewPostScreen.m; sourceTree = "<group>"; };
+		14F3465C1B39DD3A00278EA0 /* DeviceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInterface.h; sourceTree = "<group>"; };
+		14F3465D1B39DD3A00278EA0 /* DeviceInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInterface.m; sourceTree = "<group>"; };
 		14FB38F01B25FBF300430BE7 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
 		14FB38F11B25FBF300430BE7 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,6 +307,8 @@
 				14DCD4891B26025F00AC05BC /* NSString_stripHtml.m */,
 				144F404C1AE955C800DBB35D /* PhoneNumber.h */,
 				144F404D1AE955C800DBB35D /* PhoneNumber.m */,
+				14F3465C1B39DD3A00278EA0 /* DeviceInterface.h */,
+				14F3465D1B39DD3A00278EA0 /* DeviceInterface.m */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 				14DCD48A1B26025F00AC05BC /* NSString_stripHtml.m in Sources */,
 				14A6AF721ACF29C900EB4486 /* SavedBoardsListScreen.m in Sources */,
 				14B60AA51AC38A2C0081D55A /* main.m in Sources */,
+				14F3465E1B39DD3A00278EA0 /* DeviceInterface.m in Sources */,
 				144F40541AE97DEE00DBB35D /* DynamoInformation.m in Sources */,
 				1418FB641AD1C6BF00EFA727 /* ViewQueueListScreen.m in Sources */,
 				14B60AAB1AC38A2C0081D55A /* RootViewController.m in Sources */,

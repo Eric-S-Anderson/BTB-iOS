@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "DynamoInterface.h"
+#import "DeviceInterface.h"
 
 @interface SavedBoardsListScreen : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
