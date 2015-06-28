@@ -9,6 +9,7 @@
 #import "ViewSavedPostScreen.h"
 
 @interface ViewSavedPostScreen ()
+
 @property (weak, nonatomic) IBOutlet UILabel *lblHost;          //label that will display the host name
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;     //text field that will hold a phone number
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;     //text field that will hold an e-mail address
@@ -63,7 +64,6 @@
         [[UIApplication sharedApplication] openURL:[inRequest URL]];
         return NO;
     }
-    
     return YES;
 }
 

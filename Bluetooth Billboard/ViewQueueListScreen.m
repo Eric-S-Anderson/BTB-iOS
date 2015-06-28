@@ -10,22 +10,24 @@
 
 
 @interface ViewQueueListScreen ()
-@property (weak, nonatomic) IBOutlet UITableView *tblPosts;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
+
+@property (weak, nonatomic) IBOutlet UITableView *tblPosts;                 //table that holds the posts
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;   //activity indicator
 
 @end
 
 @implementation ViewQueueListScreen
 
-Board *queueBoard;
+Board *queueBoard;      //board that is being viewed
 
 - (void)viewDidLoad {
+    //called when the view controller loads
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    //load board information
     queueBoard = [DynamoInterface getFilteredPosts:[DynamoInterface getCurrentBoard] statFilter:@"Queued"];
     while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
-    [self.aivWaiting stopAnimating];
+    [self.aivWaiting stopAnimating];    //show activity indicator while database is querying
+    //assign delegates
     self.tblPosts.dataSource = self;
     self.tblPosts.delegate = self;
 }
@@ -38,7 +40,6 @@ Board *queueBoard;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     // Return the number of sections.
     return 1;
 }
@@ -48,11 +49,10 @@ Board *queueBoard;
     return [queueBoard.Posts count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeCell" forIndexPath:indexPath];
-    
+    //populate table cells
+    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"prototypeCell" forIndexPath:indexPath];   //storyboad prototype
+    //pust post information in the cell
     Post *post = [queueBoard.Posts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.Host;
     HTMLParser *info = [[HTMLParser alloc] initWithString:post.Information];
@@ -60,15 +60,12 @@ Board *queueBoard;
     return cell;
 }
 
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
+    //called when a table cell is selected
     if ([segue.identifier isEqualToString:@"viewQueueSegue"]) {
+        //pass the post attached to that cell to the view queue screen
         NSIndexPath *indexPath = [self.tblPosts indexPathForSelectedRow];
         ViewQueueScreen *destViewController = segue.destinationViewController;
         Post *post = [queueBoard.Posts objectAtIndex:indexPath.row];

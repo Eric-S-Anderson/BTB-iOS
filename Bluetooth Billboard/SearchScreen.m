@@ -9,30 +9,30 @@
 #import "SearchScreen.h"
 
 @interface SearchScreen ()
-@property (weak, nonatomic) IBOutlet UISearchBar *scbBoardSearch;
-@property (weak, nonatomic) IBOutlet UITableView *tblBoards;
-@property NSMutableArray *allBoards;
-@property NSMutableArray *filterBoards;
-@property BOOL isFiltered;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;
+
+@property (weak, nonatomic) IBOutlet UISearchBar *scbBoardSearch;   //search bar
+@property (weak, nonatomic) IBOutlet UITableView *tblBoards;        //table that displays search results
+@property NSMutableArray *allBoards;        //array that holds all boards
+@property NSMutableArray *filterBoards;     //array that holds boards that match the search input
+@property BOOL isFiltered;      //bool that tests whether or not the board list is filtered
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;   //activity indicator
 
 @end
 
 @implementation SearchScreen
 
-Board *infoBoard;
+Board *infoBoard;   //holds the selected board
 
 - (void)viewDidLoad {
+    //called when the view controller loads
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    //assign delegates
     self.scbBoardSearch.delegate = self;
-    self.allBoards = [[NSMutableArray alloc] init];     //initialize storage array
-
+    //initialize and populate board array
+    self.allBoards = [[NSMutableArray alloc] init];
     self.allBoards = [DynamoInterface getAllBoardInformation:self.allBoards];
     while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
-    [self.aivWaiting stopAnimating];
-
+    [self.aivWaiting stopAnimating];    //show activity indicator while database is querying
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,16 +40,16 @@ Board *infoBoard;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)searchBar:(UISearchBar *)searchBar
-    textDidChange:(NSString *)searchText{
-    
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    //called when the text in the search bar changes
     if(searchText.length == 0){
-        self.isFiltered = FALSE;
-    }
-    else{
+        //not filtered if there is no search input
+        self.isFiltered = false;
+    }else{
+        //there is search input
         self.isFiltered = true;
-        self.filterBoards = [[NSMutableArray alloc] init];
-        
+        self.filterBoards = [[NSMutableArray alloc] init];  //initialize filtered board array
+        //add boards that fit search input to filtered array
         for (Board *looper in self.allBoards){
             NSRange nameRange = [looper.Board_Name rangeOfString:searchText options:NSCaseInsensitiveSearch];
             NSRange descriptionRange = [looper.Organization rangeOfString:searchText options:NSCaseInsensitiveSearch];
@@ -58,19 +58,18 @@ Board *infoBoard;
             }
         }
     }
-    
+    //reload table with new search results
     [self.tblBoards reloadData];
-    
 }
 
 - (void)holdIt:(UILongPressGestureRecognizer*)gesture {
-    
+    //called when the user long presses a table cell
     if (gesture.state == UIGestureRecognizerStateBegan ) {
         UITableViewCell *cell = (UITableViewCell *)[gesture view];
         NSInteger tagNum = cell.tag;
         infoBoard = [self.filterBoards objectAtIndex:tagNum];
         NSString *message = [NSString stringWithFormat:@"Organization\n %@ \n Instructions\n %@", infoBoard.Organization, infoBoard.Instructions];
-        
+        //display board info to the user, and allow them to save them board
         UIAlertView *infoAlert = [[UIAlertView alloc] initWithTitle:infoBoard.Board_Name
                                                             message:message
                                                            delegate:self
@@ -81,8 +80,9 @@ Board *infoBoard;
 }
 
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //called when an alert box button is pressed
     if (buttonIndex == 1){
-        
+        //save the board
         [DeviceInterface saveBoard:infoBoard];
     }
 }
@@ -90,7 +90,6 @@ Board *infoBoard;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     // Return the number of sections.
     return 1;
 }
@@ -108,40 +107,29 @@ Board *infoBoard;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    //get information for table cells
     UITableViewCell *cell =[self.tblBoards dequeueReusableCellWithIdentifier:@"searchPrototype" ];
-    
+    //check if boards are being filtered
     Board *cellBoard;
     if(self.isFiltered){
         cellBoard = [self.filterBoards objectAtIndex:indexPath.row];
     }else{
         cellBoard = [self.allBoards objectAtIndex:indexPath.row];
     }
-
+    //populate cell information
     cell.textLabel.text = cellBoard.Board_Name;
     cell.detailTextLabel.text = cellBoard.Organization;
-    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];
+    UILongPressGestureRecognizer *holdIt = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(holdIt:)];    //add long press gesture to each table cell
     [cell addGestureRecognizer:holdIt];
     cell.tag = indexPath.row;
     return cell;
 }
  
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //set the current board to the selected board
-    //this only occurs immediately before the modal exit segue
+    //called when a table cell is selected
     Board *bufferBoard = [self.filterBoards objectAtIndex:indexPath.row];
     NSString *brdName = [NSString stringWithFormat:@"%@",bufferBoard.Board_ID];
-    [DynamoInterface setCurrentBoard:brdName];
+    [DynamoInterface setCurrentBoard:brdName];  //set the current board to the selected board
 }
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-   
-}
-
 
 @end

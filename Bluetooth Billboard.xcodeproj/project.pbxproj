@@ -45,7 +45,6 @@
 		1464C1471B1245D7009200EF /* SplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1464C1461B1245D7009200EF /* SplashScreen.xib */; };
 		147D130D1B19492A0045F386 /* ViewBanListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 147D130C1B19492A0045F386 /* ViewBanListScreen.m */; };
 		14A6AF5D1ACF1F6900EB4486 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */; };
-		14A6AF621ACF241300EB4486 /* HomeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF601ACF241300EB4486 /* HomeScreen.m */; };
 		14A6AF661ACF26AB00EB4486 /* PostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF651ACF26AB00EB4486 /* PostScreen.m */; };
 		14A6AF691ACF291100EB4486 /* ViewPostListScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF681ACF291100EB4486 /* ViewPostListScreen.m */; };
 		14A6AF6C1ACF295200EB4486 /* ViewPostScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A6AF6B1ACF295200EB4486 /* ViewPostScreen.m */; };
@@ -130,8 +129,6 @@
 		147D130B1B19492A0045F386 /* ViewBanListScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewBanListScreen.h; sourceTree = "<group>"; };
 		147D130C1B19492A0045F386 /* ViewBanListScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewBanListScreen.m; sourceTree = "<group>"; };
 		14A6AF5B1ACF1F6900EB4486 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		14A6AF5F1ACF241300EB4486 /* HomeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreen.h; sourceTree = "<group>"; };
-		14A6AF601ACF241300EB4486 /* HomeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreen.m; sourceTree = "<group>"; };
 		14A6AF641ACF26AB00EB4486 /* PostScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostScreen.h; sourceTree = "<group>"; };
 		14A6AF651ACF26AB00EB4486 /* PostScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostScreen.m; sourceTree = "<group>"; };
 		14A6AF671ACF291100EB4486 /* ViewPostListScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPostListScreen.h; sourceTree = "<group>"; };
@@ -374,8 +371,6 @@
 				14A6AF681ACF291100EB4486 /* ViewPostListScreen.m */,
 				14A6AF641ACF26AB00EB4486 /* PostScreen.h */,
 				14A6AF651ACF26AB00EB4486 /* PostScreen.m */,
-				14A6AF5F1ACF241300EB4486 /* HomeScreen.h */,
-				14A6AF601ACF241300EB4486 /* HomeScreen.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -493,7 +488,6 @@
 				147D130D1B19492A0045F386 /* ViewBanListScreen.m in Sources */,
 				144237581ADD894F0081162C /* ViewSavedPostScreen.m in Sources */,
 				14A6AF751ACF2A3800EB4486 /* SearchScreen.m in Sources */,
-				14A6AF621ACF241300EB4486 /* HomeScreen.m in Sources */,
 				14287B001AC483D3007FC7B1 /* Post.m in Sources */,
 				14A6AF6C1ACF295200EB4486 /* ViewPostScreen.m in Sources */,
 				14B60AA81AC38A2C0081D55A /* AppDelegate.m in Sources */,

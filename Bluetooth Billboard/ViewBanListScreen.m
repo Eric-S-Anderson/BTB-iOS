@@ -9,6 +9,7 @@
 #import "ViewBanListScreen.h"
 
 @interface ViewBanListScreen ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tblBanned;    //tableview that displays the bans
 @property (weak, nonatomic) IBOutlet UIButton *btnTypes;        //button that swithces between hosts and types
 - (IBAction)touchUpTypes:(id)sender;        //called when types button is pressed
@@ -28,7 +29,7 @@ NSMutableArray *banHost;    //list of banned hosts
     //assign delegates
     self.tblBanned.dataSource = self;
     self.tblBanned.delegate = self;
-    //initializa button and title labels
+    //initialize button and title labels
     [self.btnTypes setTitle:(@"Banned Types") forState:UIControlStateNormal];
     self.navigationItem.title = @"Banned Hosts";
 }

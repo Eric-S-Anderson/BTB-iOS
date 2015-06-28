@@ -5,6 +5,8 @@
 //  Created by Eric Anderson on 4/3/15.
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
+//  This screen will display a list of previously saved boards
+//      to the user.
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"

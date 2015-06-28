@@ -820,7 +820,7 @@
         <!--HomeScreen-->
         <scene sceneID="WxP-6E-dIM">
             <objects>
-                <tabBarController title="HomeScreen" id="mFS-j5-TqN" customClass="HomeScreen" sceneMemberID="viewController">
+                <tabBarController title="HomeScreen" id="mFS-j5-TqN" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="kVh-wC-iXY"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TiP-96-3tq">

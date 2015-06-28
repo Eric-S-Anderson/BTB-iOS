@@ -9,26 +9,28 @@
 #import "ModeratorLoginScreen.h"
 
 @interface ModeratorLoginScreen ()
-@property (weak, nonatomic) IBOutlet UITextField *txtUser;
-@property (weak, nonatomic) IBOutlet UITextField *txtPass;
-@property (weak, nonatomic) IBOutlet UISwitch *swtVerify;
-@property (weak, nonatomic) IBOutlet UIButton *btnLogin;
-@property (weak, nonatomic) IBOutlet UILabel *lblFailedAttempts;
+
+@property (weak, nonatomic) IBOutlet UITextField *txtUser;      //username
+@property (weak, nonatomic) IBOutlet UITextField *txtPass;      //password
+@property (weak, nonatomic) IBOutlet UISwitch *swtVerify;       //not a robot switch
+@property (weak, nonatomic) IBOutlet UIButton *btnLogin;        //login button
+@property (weak, nonatomic) IBOutlet UILabel *lblFailedAttempts;    //displays failed login attempts
 - (IBAction)touchUpLogin:(id)sender;
 
 @end
 
 @implementation ModeratorLoginScreen
 
-int failed = 0;
-NSString *failStart = @"You have failed to login ";
+int failed = 0;                                             //number of failed login attempts
+NSString *failStart = @"You have failed to login ";         //failed login messages
 NSString *failMEnd = @" times.";
 NSString *failSEnd = @" time.";
 NSString *tooMany = @"This login is no longer available.";
 
 - (void)viewDidLoad {
+    //called when the view controller loads
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //make sure failed login label is initialized and hidden
     self.lblFailedAttempts.text = failStart;
     self.lblFailedAttempts.hidden = true;
 }
@@ -39,6 +41,7 @@ NSString *tooMany = @"This login is no longer available.";
 }
 
 - (IBAction)touchUpLogin:(id)sender {
+    //called when the login button is pressed
     
     /*********************Login Override********************/
     
@@ -48,19 +51,24 @@ NSString *tooMany = @"This login is no longer available.";
     }else{
     
     /**********************End Override*********************/
+        
         NSLog(@"Failed attempts: %d", failed);
+        //check if credentials are proper and the switch is pressed
         if ([DynamoInterface verifyCredentials:self.txtUser.text pWord:self.txtPass.text] && self.swtVerify.on){
-            [DynamoInterface removeOutdated];
+            [DynamoInterface removeOutdated];   //remove outdated posts from the board
+            //login confirmed, segue to view queue list screen
             [self performSegueWithIdentifier:@"moderatorLoginSegue" sender:self.txtUser.text];
         }else{
-            if (!self.swtVerify.on){
+            if (!self.swtVerify.on){        //robot switch not pressed
+                //display alert that robots are not allowed
                 UIAlertView *botAlert = [[UIAlertView alloc] initWithTitle:@"Robot"
                                                                    message:@"No Robots Allowed!"
                                                                   delegate:self
                                                          cancelButtonTitle:@"OK"
                                                          otherButtonTitles:nil];
                 [botAlert show];
-            }else{
+            }else{      //bad login credentials
+                //display alert that login credentials were invalid
                 UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Invalid Login"
                                                                     message:@"The password or username you have entered is incorrect."
                                                                    delegate:self
@@ -68,17 +76,17 @@ NSString *tooMany = @"This login is no longer available.";
                                                           otherButtonTitles:nil];
                 [saveAlert show];
             }
-            failed++;
-            if (failed == 1){
+            failed++;       //increment number of failed attempts
+            if (failed == 1){   //display failed attempts messages
                 self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failSEnd]];
             }else if (failed < 5){
                 self.lblFailedAttempts.text = [failStart stringByAppendingString:[[NSString stringWithFormat:@"%d",failed] stringByAppendingString:failMEnd]];
-            }else{
+            }else{      //disbale login button after 5 failures
                 self.lblFailedAttempts.text = tooMany;
                 self.btnLogin.enabled = false;
                 self.btnLogin.hidden = true;
             }
-            self.txtUser.text = @"";
+            self.txtUser.text = @"";    //reset text fields
             self.txtPass.text = @"";
             self.lblFailedAttempts.hidden = false;
         }
@@ -87,17 +95,5 @@ NSString *tooMany = @"This login is no longer available.";
     /****end part****/
     
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-}
-*/
-
 
 @end

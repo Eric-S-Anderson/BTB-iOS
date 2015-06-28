@@ -5,6 +5,7 @@
 //  Created by Eric Anderson on 4/3/15.
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
+//  This screen displays a list of posts to the user.
 
 #import <UIKit/UIKit.h>
 #import "ViewPostScreen.h"

@@ -9,6 +9,7 @@
 #import "ViewBoardListScreen.h"
 
 @interface ViewBoardListScreen ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tblBoards;        //tableview for listing found boards
 @property NSMutableArray *boardList;                                //array that holds the found boards
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivWaiting;   //displays when querying database
