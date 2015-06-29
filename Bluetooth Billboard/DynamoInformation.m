@@ -10,24 +10,26 @@
 
 @implementation DynamoInformation
 
-NSString *TableName;
-NSString *HashKey;
+NSString *TableName;    //current table name
+NSString *HashKey;      //current hash key
 
 +(NSString *)getTableName{
-    
+    //return table name
     return TableName;
 }
 
 +(NSString *)getHashKey{
-    
+    //return hash key
     return HashKey;
 }
 
 +(void)setTableName:(NSString*)Name{
+    //set table name
     TableName = Name;
 }
 
 +(void)setHashKey:(NSString*)Key{
+    //set hash key
     HashKey = Key;
 }
 

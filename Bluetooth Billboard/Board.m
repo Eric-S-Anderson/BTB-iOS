@@ -11,12 +11,12 @@
 @implementation Board
 
 +(NSString *)dynamoDBTableName{
-    
+    //return table name
     return [DynamoInformation getTableName];
 }
 
 +(NSString *)hashKeyAttribute{
-    
+    //return hash key
     return [DynamoInformation getHashKey];
 }
 

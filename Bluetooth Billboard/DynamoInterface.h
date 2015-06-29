@@ -5,6 +5,8 @@
 //  Created by Eric Anderson on 4/23/15.
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
+//  This class is an interface between the application and
+//      the database.
 
 #import <Foundation/Foundation.h>
 #import <AWSDynamoDB/AWSDynamoDB.h>
@@ -26,7 +28,7 @@
 +(int)getQueryStatus;
 +(BOOL)getConnection;
 +(BOOL)isConnected;
-+(NSMutableArray*)getAllBoardInformation:(NSMutableArray*)emptyList;
++(NSMutableArray*)getAllBoardInformation;
 +(Board*)getSingleBoardInformation:(int)ident;
 +(Post*)getSinglePost:(int)ident;
 +(Board*)getFilteredPosts:(NSString *)ident statFilter:(NSString*)filter;

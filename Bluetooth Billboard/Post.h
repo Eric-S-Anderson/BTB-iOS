@@ -11,15 +11,15 @@
 
 @interface Post : AWSDynamoDBObjectModel 
 
-@property NSNumber *Post_ID;
-@property NSNumber *Phone;
-@property NSNumber *End_Date;
-@property NSString *Host;
-@property NSString *Email;
-@property NSString *Address;
-@property NSString *Information;
-@property NSString *Post_Type;
-@property NSString *Post_Status;
+@property NSNumber *Post_ID;        //identification number (unique to board)
+@property NSNumber *Phone;          //phone number (optional)
+@property NSNumber *End_Date;       //end date (default = 90 days from today)
+@property NSString *Host;           //host name
+@property NSString *Email;          //e-mail address (optional)
+@property NSString *Address;        //address (optional)
+@property NSString *Information;    //post information, actual message
+@property NSString *Post_Type;      //type of post (predefined set)
+@property NSString *Post_Status;    //status of post (posted, queued, denied)
 
 @end
 

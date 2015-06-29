@@ -30,7 +30,7 @@ Board *infoBoard;   //holds the selected board
     self.scbBoardSearch.delegate = self;
     //initialize and populate board array
     self.allBoards = [[NSMutableArray alloc] init];
-    self.allBoards = [DynamoInterface getAllBoardInformation:self.allBoards];
+    self.allBoards = [DynamoInterface getAllBoardInformation];
     while ([DynamoInterface getQueryStatus] < 0) {[self.aivWaiting startAnimating];}
     [self.aivWaiting stopAnimating];    //show activity indicator while database is querying
 }

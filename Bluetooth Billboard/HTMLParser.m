@@ -11,20 +11,20 @@
 @implementation HTMLParser
 
 -(id)initWithString:(NSString*)originalMessage{
-    
+    //initialize HTML parsed string with another string
     self.fullMessage = originalMessage;
-    self.textOnlyMessage = [originalMessage stripHtml];
-    if (![self.fullMessage isEqualToString:self.textOnlyMessage]){
+    self.textOnlyMessage = [originalMessage stripHtml]; //strip out HTML
+    //test if there is a difference between the strings
+    if (![self.fullMessage isEqualToString:self.textOnlyMessage]){  //there is a difference
         self.HTML = true;
-    }else{
+    }else{  //no difference
         self.HTML = false;
     }
-    
     return self;
 }
 
 -(id)init{
-    
+    //initialize empty HTML string
     self.HTML = false;
     self.fullMessage = nil;
     self.textOnlyMessage = nil;

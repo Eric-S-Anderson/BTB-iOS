@@ -11,8 +11,8 @@
 
 @interface Moderator : AWSDynamoDBObjectModel
 
-@property NSString *Moderator_ID;
-@property NSString *Username;
-@property NSString *Password;
+@property NSString *Moderator_ID;       //identification number (unique)
+@property NSString *Username;           //user name
+@property NSString *Password;           //password
 
 @end

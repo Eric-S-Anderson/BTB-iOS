@@ -5,6 +5,8 @@
 //  Created by Eric Anderson on 6/23/15.
 //  Copyright (c) 2015 Sargon Partners. All rights reserved.
 //
+//  This class functions as an interface between the application
+//      and the device it is being run on.
 
 #import <Foundation/Foundation.h>
 #import "Board.h"
