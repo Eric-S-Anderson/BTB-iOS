@@ -66,6 +66,18 @@ NSMutableArray *filteredPosts;  //filtered array of posts
             [filteredPosts addObject:filterMe];
         }
     }
+    if ([[DynamoInterface getCurrentBoard] isEqualToString:@"000000"] && filteredPosts.count > 1){
+        for (int i = 0; i < filteredPosts.count; i++){
+            for (int j = 0; j < filteredPosts.count - 1; j++){
+                Post *first = [filteredPosts objectAtIndex:j];
+                Post *second = [filteredPosts objectAtIndex:j + 1];
+                if (first.Post_ID > second.Post_ID){
+                    [filteredPosts replaceObjectAtIndex:j withObject:second];
+                    [filteredPosts replaceObjectAtIndex:j + 1 withObject:first];
+                }
+            }
+        }
+    }
     //reload table data
     [self.tblPosts reloadData];
     //hide save button if the device doesn't have an internet connection

@@ -253,7 +253,7 @@ Board *fullBoard;               //the current board
     AWSDynamoDBObjectMapper *dynamoDBObjectMapper = [AWSDynamoDBObjectMapper defaultDynamoDBObjectMapper];
     //aws scan expression
     AWSDynamoDBScanExpression *scanExpression = [AWSDynamoDBScanExpression new];
-    scanExpression.limit = @10;
+    //scanExpression.limit = @10;
     //initialize and set filter
     if (filter != nil){
         //set the scan expression's filter if there is one
