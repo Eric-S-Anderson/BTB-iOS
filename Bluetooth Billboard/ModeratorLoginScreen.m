@@ -30,6 +30,9 @@ NSString *tooMany = @"This login is no longer available.";
 - (void)viewDidLoad {
     //called when the view controller loads
     [super viewDidLoad];
+    //assign delegates
+    self.txtUser.delegate = self;
+    self.txtPass.delegate = self;
     //make sure failed login label is initialized and hidden
     self.lblFailedAttempts.text = failStart;
     self.lblFailedAttempts.hidden = true;
@@ -38,6 +41,11 @@ NSString *tooMany = @"This login is no longer available.";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (IBAction)touchUpLogin:(id)sender {

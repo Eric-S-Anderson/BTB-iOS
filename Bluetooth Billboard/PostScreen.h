@@ -14,6 +14,6 @@
 #import "PhoneNumber.h"
 
 @interface PostScreen : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, 
-UIGestureRecognizerDelegate>
+UIGestureRecognizerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @end

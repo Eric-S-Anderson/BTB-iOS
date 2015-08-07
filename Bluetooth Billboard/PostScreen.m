@@ -34,6 +34,15 @@
 - (void)viewDidLoad {
     //called when the view controller loads
     [super viewDidLoad];
+    //assign delegates
+    self.txtAddress.delegate = self;
+    self.txtDate.delegate = self;
+    self.txtEmail.delegate = self;
+    self.txtHost.delegate = self;
+    self.txtPhone.delegate = self;
+    self.txtPostType.delegate = self;
+    self.txvInformation.delegate = self;
+    //make sure activity indicator is not showing
     [self.aivWaiting stopAnimating];
     //initialize type array
     self.types = [[NSArray alloc] initWithObjects:@"Event", @"Announcement", @"Employment", @"Coupon", @"Sales", @"Services", @"Other", nil];
@@ -57,11 +66,24 @@
     tapDateGesture.delegate = self;
     //add gesture to date picker
     [self.dpvDate addGestureRecognizer:tapDateGesture];
+    //add click off text view gesture
+    UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self action:@selector(tap:)];
+    [self.view addGestureRecognizer: tapRec];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)tap:(UITapGestureRecognizer *)tapRec{
+    [[self view] endEditing: YES];
 }
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
