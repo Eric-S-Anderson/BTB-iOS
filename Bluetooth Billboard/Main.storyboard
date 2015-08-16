@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mFS-j5-TqN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="mFS-j5-TqN">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -1682,7 +1682,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bzN-BL-FZr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="474"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="410"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="prototypeBanCell" textLabel="t99-Qt-dH2" style="IBUITableViewCellStyleDefault" id="ZBv-VA-zPh">
@@ -1706,11 +1706,11 @@
                         <constraints>
                             <constraint firstItem="4kc-1W-Gzs" firstAttribute="bottom" secondItem="3VT-CY-YPP" secondAttribute="top" id="1gJ-eE-wk6"/>
                             <constraint firstItem="4kc-1W-Gzs" firstAttribute="leading" secondItem="76T-nl-lCY" secondAttribute="leadingMargin" constant="73" id="6dt-6i-kz3"/>
-                            <constraint firstItem="bzN-BL-FZr" firstAttribute="top" secondItem="76T-nl-lCY" secondAttribute="top" id="Ny1-5W-cwn"/>
-                            <constraint firstItem="bzN-BL-FZr" firstAttribute="leading" secondItem="76T-nl-lCY" secondAttribute="leading" id="a07-vz-eB9"/>
-                            <constraint firstItem="4kc-1W-Gzs" firstAttribute="centerX" secondItem="bzN-BL-FZr" secondAttribute="centerX" id="fIG-Nd-Wme"/>
-                            <constraint firstAttribute="trailing" secondItem="bzN-BL-FZr" secondAttribute="trailing" id="iO5-wl-Qdb"/>
-                            <constraint firstItem="4kc-1W-Gzs" firstAttribute="top" secondItem="bzN-BL-FZr" secondAttribute="bottom" id="l0s-jM-xWE"/>
+                            <constraint firstItem="bzN-BL-FZr" firstAttribute="centerX" secondItem="4kc-1W-Gzs" secondAttribute="centerX" id="S8i-e6-NRx"/>
+                            <constraint firstItem="4kc-1W-Gzs" firstAttribute="top" secondItem="bzN-BL-FZr" secondAttribute="bottom" id="Ucy-eu-cfG"/>
+                            <constraint firstItem="bzN-BL-FZr" firstAttribute="top" secondItem="jmt-A7-ZZH" secondAttribute="bottom" id="XB4-hb-5ED"/>
+                            <constraint firstAttribute="trailing" secondItem="bzN-BL-FZr" secondAttribute="trailing" id="XqQ-5i-Dw0"/>
+                            <constraint firstItem="bzN-BL-FZr" firstAttribute="leading" secondItem="76T-nl-lCY" secondAttribute="leading" id="apQ-uU-R0g"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="View Ban List" id="mgp-CK-T23"/>

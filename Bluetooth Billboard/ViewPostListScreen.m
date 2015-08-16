@@ -66,7 +66,8 @@ NSMutableArray *filteredPosts;  //filtered array of posts
             [filteredPosts addObject:filterMe];
         }
     }
-    if ([[DynamoInterface getCurrentBoard] isEqualToString:@"000000"] && filteredPosts.count > 1){
+    //sort tutorial board posts
+    if (([[DynamoInterface getCurrentBoard] isEqualToString:@"000000"] || [[DynamoInterface getCurrentBoard] isEqualToString:@"0"]) && filteredPosts.count > 1){
         for (int i = 0; i < filteredPosts.count; i++){
             for (int j = 0; j < filteredPosts.count - 1; j++){
                 Post *first = [filteredPosts objectAtIndex:j];

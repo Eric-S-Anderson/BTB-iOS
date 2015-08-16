@@ -266,6 +266,10 @@ Board *fullBoard;               //the current board
     }
     //initialize board and query status
     NSString *brdBlank = @"Board";      //create proper board name
+    if ([ident isEqualToString:@"0"]){
+        //hard coded tutorial board identification
+        ident = @"000000";
+    }
     NSString *fullBoardID = [brdBlank stringByAppendingString:(ident)];
     TableName = fullBoardID;    //set table name and key
     HashKey = @"Post_ID";
